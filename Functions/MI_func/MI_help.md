@@ -12,19 +12,16 @@ Given a dataset comprising of four different combination of control/disease data
 MI_func(Control_data, Disease_1_data, Disease_2_data, Disease_1_2_data, covariates, disease_terms, cut_off, wk_dir)
 
 ## Arguments
-```{r echo = FALSE, results = 'asis'}
-Arguments <- c("Control_data", "Disease_1_data","Disease_2_data","Disease_1_2_data","covariates","disease_terms","cut_off","wk_dir")
-Explanation<- c("A data frame of size a x n, where a is the number of healthy samples and n is the number of features","A data frame of size b x n, where b is the number of samples affected by Disease 1 and n is the number of features",
-                "A data frame of size **c x n**, where c is the number of samples affected by Disease 2 and n is the number of features","A data frame of size **d x n**, where d is the number of samples affected by both Disease 1 and 2 and n is the number of features",
-                "A character vector (of length x+2; where x is the number of co-variates in the data) containing the co-variates, along with the disease status terms. These are the names of the corresponding columns in the input dataframe",
-                "A character vector (of length 2) containing only the disease status terms. These are the names of the corresponding columns in the input dataframe",
-                "cut-off to be used for adjusted p-value","working directory to store the output of this function")
-
-
-help_df <- data.frame(Arguments,Explanation)
-library(knitr)
-kable(help_df)
-```
+|Arguments|Description|
+|---|---|
+|Control_data|A data frame of size **a x n**, where a is the number of healthy samples and n is the number of features|
+|Disease_1_data|A data frame of size **b x n**, where b is the number of samples affected by Disease 1 and n is the number of features|
+|Disease_2_data|A data frame of size **c x n**, where c is the number of samples affected by Disease 2 and n is the number of features|
+|Disease_1_2_data|A data frame of size **d x n**, where d is the number of samples affected by both Disease 1 and 2 and n is the number of features|
+|covariates|A character vector (of length x+2; where x is the number of co-variates in the data) containing the co-variates, along with the disease status terms. These are the names of the corresponding columns in the input dataframe|
+|disease_terms|A character vector (of length 2) containing only the disease status terms. These are the names of the corresponding columns in the input dataframe|
+|cut_off|cut-off to be used for adjusted p-value|
+|wk_dir|working directory to store the output of this function|
 ## Details
 
 This function performs main and interaction effect on data with four different cohorts. The four cohorts are control case, 
