@@ -5,7 +5,7 @@
 
 ## Description 
 
-Given a dataset comprising of four different combination of control/disease data (Control samples, Disease_1 only samples, Disease_2 only samples, and Disease_1_2 samples(affected by both the disease)), this function returns a list of main and interaction effect features.
+Given a dataset comprising of four different combination of control/disease data (Control samples, Disease_1 only samples, Disease_2 only samples, and Disease_1_2 samples (affected by both the disease)), this function returns a list of main and interaction effect features.
 
 ## Usage 
 
