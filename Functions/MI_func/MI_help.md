@@ -12,7 +12,7 @@ Given a dataset comprising of four different combination of control/disease data
 MI_func(Control_data, Disease_1_data, Disease_2_data, Disease_1_2_data, covariates, disease_terms, cut_off, wk_dir)
 
 ## Arguments
-```{r echo = FALSE}
+```{r echo = FALSE, results = 'asis'}
 Arguments <- c("Control_data", "Disease_1_data","Disease_2_data","Disease_1_2_data","covariates","disease_terms","cut_off","wk_dir")
 Explanation<- c("A data frame of size a x n, where a is the number of healthy samples and n is the number of features","A data frame of size b x n, where b is the number of samples affected by Disease 1 and n is the number of features",
                 "A data frame of size **c x n**, where c is the number of samples affected by Disease 2 and n is the number of features","A data frame of size **d x n**, where d is the number of samples affected by both Disease 1 and 2 and n is the number of features",
