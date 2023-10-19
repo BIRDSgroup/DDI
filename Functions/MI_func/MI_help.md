@@ -5,7 +5,7 @@
 
 ## Description 
 
-Given a dataset comprising of four different combination of control/disease data (Control samples, Disease_1 only samples, Disease_2 only samples, and Disease_1_2 samples (affected by both the disease)), this function returns a list of main and interaction effect features.
+Given a dataset comprising of four different combination of control/disease data (Control samples, Disease_1 only samples, Disease_2 only samples, and Disease_1_2 samples(affected by both the disease)), this function returns a list of main and interaction effect features.
 
 ## Usage 
 
@@ -30,47 +30,13 @@ This function performs main and interaction effect on data with four different c
 
 **MI_func** returns a list of lists. 
 
-:::::: {.columns}
-
-::: {.column width="30%"}
-
-output$features_m_df  
-</br>
-
-output$features_i_df
-</br>
-</br>
-</br>
+|Output|Description|
+|output$features_m_df|A dataframe containing the list of features, it's p value, and adjusted p value. When a cut-off (cut_off argument) is applied on the adjusted p value, **main effect** features can be filtered out|
+|output$features_i_df|A dataframe containing the list of **main effect** features, it's p value, and adjusted p value. When a cut-off (cut_off argument) is applied on the adjusted p value, **interaction effect** features can be filtered out|
+|output$Main_effect_variables|The list of **main effect features** obtained from the analysis|
+|output$Interaction_effect_variables|The list of **interaction effect features** obtained from the analysis|
 
 
-
-output$Main_effect_variables
-</br>
-
-output$Interaction_effect_variables
-</br>
-:::
-
-
-::: {.column width="70%"}
-
-A dataframe containing the list of features, it's p value, and adjusted p value. When a cut-off (cut_off argument) is applied on the adjusted p value, **main effect** features can be filtered out.
-
-
-A dataframe containing the list of **main effect** features, it's p value, and adjusted p value. When a cut-off (cut_off argument) is applied on the adjusted p value, **interaction effect** features can be filtered out.
-
-
-The list of **main effect features** obtained from the analysis.
-
-The list of **interaction effect features** obtained from the analysis.
-:::
-
-
-
-::::::
-
-
-## Example 
 
 
 
