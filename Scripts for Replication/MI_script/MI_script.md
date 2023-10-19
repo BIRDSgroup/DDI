@@ -1,4 +1,4 @@
-#Instructions to Run "MI_script.R" file
+# Instructions to run "MI_script.R" file
 ## Preface
 This R file contains the code to reproduce the results from the Main and Interaction analysis.
 Refer to the Primary_README.md file for a detailed explanation of the results obtained.
