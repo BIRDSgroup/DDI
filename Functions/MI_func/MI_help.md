@@ -31,6 +31,7 @@ This function performs main and interaction effect on data with four different c
 **MI_func** returns a list of lists. 
 
 |Output|Description|
+|---|---|
 |output$features_m_df|A dataframe containing the list of features, it's p value, and adjusted p value. When a cut-off (cut_off argument) is applied on the adjusted p value, **main effect** features can be filtered out|
 |output$features_i_df|A dataframe containing the list of **main effect** features, it's p value, and adjusted p value. When a cut-off (cut_off argument) is applied on the adjusted p value, **interaction effect** features can be filtered out|
 |output$Main_effect_variables|The list of **main effect features** obtained from the analysis|
