@@ -17,8 +17,7 @@ wd_m <- c("D:/work/DM_Hel/reproduce/data/")
 # Output from "MI_script.R"
 Running this script will generate a few results in the same folder where the validation data is stored (same working directory mentioned in the above section). 
 Here is the list of output files generated in the folder:
-1) **Validation_results.RDS**
-<br>
+1) **Validation_results.RDS**<br>
 This file contains 7 outputs.
 
 |Output|Description|
