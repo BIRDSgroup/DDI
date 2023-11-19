@@ -22,9 +22,9 @@ Here is the list of output files generated in both the folders:
 |DATA_interaction_effect|Text file containing output from interaction effect analysis|
 |DATA_coeff|Text file containing the linear model (features regressed over covariates(including Diabetes and Helminth term)) outputs: model intercept, the coefficient for Diabetes term, and the coefficient for Helminth term|
 |Coeff_terms_data|CSV containing features and their intercept, coefficient for Diabetes term, and coefficient for Helminth term from the linear model |
-|per_exp_variance_BT|RDS file containing the list of features and the percentage of variance explained by the helminth term (class), diabetes term (group), and the interaction term|
-|rela_per_exp_variance_BT|RDS file containing the features and the relative percentage of variance explained by the helminth term (class), diabetes term (group), and the interaction term|
-|BT_mi_obj|list containing the output from the main and interaction effect for before-treatment samples|
+|per_exp_variance_BT(AT)|RDS file containing the list of features and the percentage of variance explained by the helminth term (class), diabetes term (group), and the interaction term. "per_exp_variance_BT" is for before-treatment samples and "per_exp_variance_AT" is for after-treatment samples.|
+|rela_per_exp_variance_BT(AT)|RDS file containing the features and the relative percentage of variance explained by the helminth term (class), diabetes term (group), and the interaction term. "rela_per_exp_variance_BT" is for before-treatment samples and "rela_per_exp_variance_AT" is for after-treatment samples.|
+|BT(AT)_mi_obj|list containing the main and interaction effect analysis output. "BT_mi_obj" is for before-treatment samples and "AT_mi_obj" is for after-treatment samples.|
 
 
 
