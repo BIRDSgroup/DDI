@@ -35,7 +35,6 @@ Get_val_data <- function(wd){
   base::return(new_list)}
 
 ############################################ Step 3 - Get the replication results ouput
-
 # 6 input data to this function
 
 Validation_res_plots <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc){
@@ -82,12 +81,6 @@ Validation_res_plots <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc){
   De_pw_fnc <- function(ip_d){
     cvn <- c("Age", "ALT (U/L)", "AST (U/L)","Sex", "Creatinine (mg/dl)","g","h")
     cvi <- c()
-    #overall_p <- function(my_model) {
-    # f <- summary(my_model)$fstatistic
-    #p <- pf(f[1],f[2],f[3],lower.tail=F)
-    #attributes(p) <- NULL
-    #return(p)
-    #}
     for(i in 1:length(cvn))
     {
       cvi <- c(cvi, which(colnames(ip_d)==cvn[i]))
@@ -311,9 +304,6 @@ Validation_res_plots <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc){
   
   
   set.seed(2000)   # this is the seed for without nboot
-  #set.seed(3000)   # this is the seed for without nboot = 100
-  #set.seed(4000)    # this is the seed for without nboot = 1000
-  #set.seed(5000)    # this is the seed for without nboot = 10000
   stat_c_mmpp <- bp_mod_mmpp %>%
     #group_by(key) %>%
     #wilcox_test(pvalues ~ groups , alternative = "greater") %>%
@@ -335,9 +325,6 @@ Validation_res_plots <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc){
   
   
   set.seed(2001)  # this is the seed for without nboot
-  #set.seed(3001)  # this is the seed for without nboot = 100
-  #set.seed(4001)   # this is the seed for without nboot = 1000
-  #set.seed(5001)    # this is the seed for without nboot = 10000
   stat_c_mppp <- bp_mod_mppp %>%
     #group_by(key) %>%
     #wilcox_test(pvalues ~ groups , alternative = "greater") %>%
@@ -354,9 +341,6 @@ Validation_res_plots <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc){
   
   
   set.seed(2002)  # this is the seed for without nboot
-  #set.seed(3002)  # this is the seed for without nboot = 100
-  #set.seed(4002)   # this is the seed for without nboot = 1000
-  #set.seed(5002)   # this is the seed for without nboot = 10000
   stat_c_mpmm <- bp_mod_mpmm %>%
     #group_by(key) %>%
     #wilcox_test(pvalues ~ groups , alternative = "greater") %>%
@@ -410,8 +394,7 @@ Validation_res_plots <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc){
   return(some_list)}
 
 
-# Main command
-#plot_rep_fig4 <- Validation_res_plots(val_data_1,val_data_2, val_data_3, dm_m_con, dm_p_pre, dm_p_con)
+
 
 ## Main command / results generating command
 wr_dr <- c("D:/work/DM_Hel/reproduce/Validation/validation_data/")
@@ -427,10 +410,7 @@ val_data_2 <- overall_list[[2]]
 
 # Helminths no-infection and Diabetes -ve group (mm)
 val_data_3 <- overall_list[[3]]
-
-
-
-########################################### Step 2 - Get the discovery data ( same data used in main and interaction effect)
+########################################## Step 2 - Get the discovery data ( same data used in main and interaction effect)
 
 ##### Data for control-pre-T (before-treatment) and control-post-T (after-treatment)
 ###### knn imputation to remove Nas
@@ -921,8 +901,6 @@ supp_infos_val <- function(together_data, wd){
 
 #wd <- c("D:/work/DM_Hel/reproduce/Validation/")
 supp_infos_val(pvals_val_dc,wr_dr)
-
-
 
 
 
