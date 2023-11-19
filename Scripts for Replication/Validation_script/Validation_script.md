@@ -31,6 +31,7 @@ This file contains 7 outputs.
 |pvalue_validation_discovery_cohort|A data frame (35 x 7) consisting of the adjusted p values from the main effect analysis performed on the three pairs of datasets in the validation analysis. First column corresponds to the feature names, 2nd column p values from the hel-dm- vs hel+dm+ pair of groups in the validation cohort, 3rd column p values from the hel-dm- vs hel+dm+ pair of groups in the discovery cohort, 4th column p values from the hel-dm+ vs hel+dm+ pair of groups in the validation cohort, 5th column p values from the hel-dm+ vs hel+dm+ pair of groups in the discovery cohort, 6th column p values from the hel-dm+ vs hel-dm- pair of groups in the validation cohort, 7th column p values from the hel-dm+ vs hel-dm- pair of groups in the discovery cohort |
 2) **Supplementary_Figs_6_7.RDS**<br>
 This file contains 9 outputs (3 figures and 6 are Yuen's robust t-test p values associated with three pairs of groups used in the validation analysis under 0.01 and 0.05 FDR.
+
 |Output|Description|
 |---|---|
 |IL2_image| Supplementary figure 7|
