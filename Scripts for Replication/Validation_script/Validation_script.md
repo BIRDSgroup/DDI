@@ -19,12 +19,14 @@ Running this script will generate a few results in the same folder where the val
 Here is the list of output files generated in the folder:
 1) **Validation_results.RDS**
 This file contains 7 outputs.
+
 |Output|Description|
 |---|---|
 |replication_image| Figure 4A in the main paper.|
 |Robust t-test pval - hel-dm- vs hel+dm+| This contains the statistics of Yuen's robust t-test for the pair of group **hel-dm- vs hel+dm+** in the validation analysis.|
 |Robust t-test pval - hel-dm+ vs hel+dm+| This contains the statistics of Yuen's robust t-test for the pair of group **hel-dm+ vs hel+dm+** in the validation analysis.|
 |Robust t-test pval - hel-dm+ vs hel-dm-| This contains the statistics of Yuen's robust t-test for the pair of group **hel-dm+ vs hel-dm-** in the validation analysis.|
+
 2) 
 
 
