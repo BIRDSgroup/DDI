@@ -1,5 +1,6 @@
 ################################  Overall VALIDATION code to obtain final set of results/tables and figures
-
+library(WRS2)
+library(mc2d)
 ############################################ Step 1 - Get the validation data
 Get_val_data <- function(wd){
   library(readxl)
@@ -249,35 +250,47 @@ Validation_res_plots <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc){
   
   xx_hit_mmpp <- c()
   for(i in 1:length(val_dc_adj_p$Features)){
-    if(val_dc_adj_p[[2]][i] < 0.05){
-      xx_hit_mmpp <- c(xx_hit_mmpp,val_dc_adj_p[[2]][i])}}
+    if(val_dc_adj_p[[3]][i] < 0.0001){
+      xx_hit_mmpp <- c(xx_hit_mmpp,val_dc_adj_p[[2]][i])}} 
+  
+  print(paste("mmpp hits: ",length(xx_hit_mmpp))) 
   
   xx_nhit_mmpp <- c()
   for(i in 1:length(val_dc_adj_p$Features)){
-    if(val_dc_adj_p[[3]][i] > 0.05){
-      xx_nhit_mmpp <- c(xx_nhit_mmpp,val_dc_adj_p[[3]][i])}}
+    if(val_dc_adj_p[[3]][i] > 0.0001){
+      xx_nhit_mmpp <- c(xx_nhit_mmpp,val_dc_adj_p[[2]][i])}}
+  
+  print(paste("mmpp nhits: ",length(xx_nhit_mmpp)))
   
   # data_mppp
   xx_hit_mppp <- c()
   for(i in 1:length(val_dc_adj_p$Features)){
-    if(val_dc_adj_p[[4]][i] < 0.05){
+    if(val_dc_adj_p[[5]][i] < 0.0001){
       xx_hit_mppp <- c(xx_hit_mppp,val_dc_adj_p[[4]][i])}}
+  
+  print(paste("mppp hits: ",length(xx_hit_mppp)))
   
   xx_nhit_mppp <- c()
   for(i in 1:length(val_dc_adj_p$Features)){
-    if(val_dc_adj_p[[5]][i] > 0.05){
-      xx_nhit_mppp <- c(xx_nhit_mppp,val_dc_adj_p[[5]][i])}}
+    if(val_dc_adj_p[[5]][i] > 0.0001){
+      xx_nhit_mppp <- c(xx_nhit_mppp,val_dc_adj_p[[4]][i])}}
+  
+  print(paste("mppp nhits: ",length(xx_nhit_mppp)))
   
   # data_mpmm
   xx_hit_mpmm <- c()
   for(i in 1:length(val_dc_adj_p$Features)){
-    if(val_dc_adj_p[[6]][i] < 0.05){
+    if(val_dc_adj_p[[7]][i] < 0.0001){
       xx_hit_mpmm <- c(xx_hit_mpmm,val_dc_adj_p[[6]][i])}}
+  
+  print(paste("mpmm hits: ",length(xx_hit_mpmm)))
+  
   xx_nhit_mpmm <- c()
   for(i in 1:length(val_dc_adj_p$Features)){
-    if(val_dc_adj_p[[7]][i] > 0.05){
-      xx_nhit_mpmm <- c(xx_nhit_mpmm,val_dc_adj_p[[7]][i])}}
+    if(val_dc_adj_p[[7]][i] > 0.0001){
+      xx_nhit_mpmm <- c(xx_nhit_mpmm,val_dc_adj_p[[6]][i])}}
   
+  print(paste("mpmm nhits: ",length(xx_nhit_mpmm)))
   
   bp_mod <- data.frame(
     groups = rep(c("hits","non-hits","hits","non-hits","hits","non-hits"), times=c(length(xx_hit_mmpp),length(xx_nhit_mmpp),length(xx_hit_mpmm),length(xx_nhit_mpmm),length(xx_hit_mppp),length(xx_nhit_mppp))),
@@ -289,15 +302,69 @@ Validation_res_plots <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc){
   bp_mod$key <- as.factor(bp_mod$key)
   p <- ggplot2::ggplot(data = bp_mod,mapping = ggplot2::aes(x=groups, y=pvalues, group= groups))+ggplot2::geom_boxplot(ggplot2::aes(fill=groups))+ggplot2::facet_wrap(~key)+ggplot2::scale_x_discrete(labels=NULL, breaks = NULL)+ggplot2::xlab("Groups")+ggplot2::ylab("Negative log pvalue")+ggplot2::theme(text = ggplot2::element_text(size=18))+ggplot2::scale_x_discrete(guide = guide_axis(angle = 90))+theme_bw(base_size = 18)
   
+  # for mmpp
+  bp_mod_mmpp <- data.frame(
+    groups = rep(c("hits","non-hits"), times=c(length(xx_hit_mmpp),length(xx_nhit_mmpp))),
+    pvalues = c(-log10(xx_hit_mmpp),-log10(xx_nhit_mmpp))
+    )
   
-  stat_c <- bp_mod %>%
-    group_by(key) %>%
-    wilcox_test(pvalues ~ groups , alternative = "greater") %>%
-    adjust_pvalue(method = "BH") %>%
-    add_significance("p.adj") %>%
-    add_xy_position(x = "group" )
   
-  rep_p <- p+ggpubr::stat_pvalue_manual(stat_c[,-c(13,14)] , label = "p.adj")
+  
+  set.seed(2000)   # this is the seed for without nboot
+  #set.seed(3000)   # this is the seed for without nboot = 100
+  #set.seed(4000)    # this is the seed for without nboot = 1000
+  #set.seed(5000)    # this is the seed for without nboot = 10000
+  stat_c_mmpp <- bp_mod_mmpp %>%
+    #group_by(key) %>%
+    #wilcox_test(pvalues ~ groups , alternative = "greater") %>%
+    #t_test(pvalues ~ groups , alternative = "two.sided", paired = FALSE) %>%
+    yuen(formula = pvalues ~ groups, side = TRUE)
+    #yuenbt(formula = pvalues ~ groups, side = TRUE,nboot = 10000)
+   # adjust_pvalue(method = "BH") %>%
+    #add_significance("p.adj") %>%
+    #add_significance("p.value") %>%
+    #add_xy_position(x = "group" )
+  
+  
+  # for mppp
+  bp_mod_mppp <- data.frame(
+    groups = rep(c("hits","non-hits"), times=c(length(xx_hit_mppp),length(xx_nhit_mppp))),
+    pvalues = c(-log10(xx_hit_mppp),-log10(xx_nhit_mppp))
+  )
+  
+  
+  
+  set.seed(2001)  # this is the seed for without nboot
+  #set.seed(3001)  # this is the seed for without nboot = 100
+  #set.seed(4001)   # this is the seed for without nboot = 1000
+  #set.seed(5001)    # this is the seed for without nboot = 10000
+  stat_c_mppp <- bp_mod_mppp %>%
+    #group_by(key) %>%
+    #wilcox_test(pvalues ~ groups , alternative = "greater") %>%
+    #t_test(pvalues ~ groups , alternative = "two.sided", paired = FALSE) %>%
+    yuen(formula = pvalues ~ groups, side = TRUE)
+    #yuenbt(formula = pvalues ~ groups, side = TRUE,nboot = 10000)
+  
+  # for mpmm
+  bp_mod_mpmm <- data.frame(
+    groups = rep(c("hits","non-hits"), times=c(length(xx_hit_mpmm),length(xx_nhit_mpmm))),
+    pvalues = c(-log10(xx_hit_mpmm),-log10(xx_nhit_mpmm))
+  )
+  
+  
+  
+  set.seed(2002)  # this is the seed for without nboot
+  #set.seed(3002)  # this is the seed for without nboot = 100
+  #set.seed(4002)   # this is the seed for without nboot = 1000
+  #set.seed(5002)   # this is the seed for without nboot = 10000
+  stat_c_mpmm <- bp_mod_mpmm %>%
+    #group_by(key) %>%
+    #wilcox_test(pvalues ~ groups , alternative = "greater") %>%
+    #t_test(pvalues ~ groups , alternative = "two.sided", paired = FALSE) %>%
+    yuen(formula = pvalues ~ groups, side = TRUE)
+    #yuenbt(formula = pvalues ~ groups, side = TRUE,nboot = 10000)
+  
+  #rep_p <- p+ggpubr::stat_pvalue_manual(stat_c[,-c(13,14)] , label = "p.adj")
   
   
   ########## TNFa
@@ -337,8 +404,8 @@ Validation_res_plots <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc){
   colnames(IFNg_df) <- c("Labels","Groups","Key")
   
   IFNg_p <- ggplot2::ggplot(IFNg_df, ggplot2::aes(Labels, Groups))+ggplot2::geom_boxplot(ggplot2::aes(fill=Labels))+ggplot2::facet_wrap(~Key)+ggplot2::xlab("")+ggplot2::ylab("IFN-gamma (pg/ml)")+ggplot2::theme(text = ggplot2::element_text(size=20))+ggplot2::scale_x_discrete(guide = guide_axis(angle = 90))+theme_bw(base_size = 18)
-  some_list <- list(rep_p, TNFa_p, IFNg_p,val_dc_adj_p )
-  names(some_list) <- c("replication_image","TNFalpha_image","IFNgamma_image","pvalue_validation_discovery_cohort")
+  some_list <- list(p,stat_c_mmpp,stat_c_mppp,stat_c_mpmm,TNFa_p, IFNg_p,val_dc_adj_p )
+  names(some_list) <- c("replication_image","Robust t-test pval - hel-dm- vs hel+dm+","Robust t-test pval - hel-dm+ vs hel+dm+","Robust t-test pval - hel-dm+ vs hel-dm-","TNFalpha_image","IFNgamma_image","pvalue_validation_discovery_cohort")
   
   return(some_list)}
 
@@ -396,7 +463,7 @@ for(file in c('Hel+DM+', 'Hel+DM+_Post-T', 'Hel-DM+', 'Hel+DM-', 'Hel-DM-', 'Hel
 ######################################################
 
 plot_rep_fig4 <- Validation_res_plots(val_data_1,val_data_2, val_data_3, dm_m_con, dm_p_pre, dm_p_con)
-pvals_val_dc <- plot_rep_fig4[[4]]
+pvals_val_dc <- plot_rep_fig4[[7]]
 setwd(wr_dr)
 saveRDS(plot_rep_fig4, file = "validation_results.RDS")
 saveRDS(pvals_val_dc, file = "pvalues_validation_discovery_cohorts.RDS")
@@ -426,34 +493,34 @@ supp_figs_6_7 <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc, tog_val_d
   
   xx_hit_mmpp <- c()
   for(i in 1:length(tog_val_dc_pval$Features)){
-    if(tog_val_dc_pval[[2]][i] < 0.01){
+    if(tog_val_dc_pval[[3]][i] < 0.01){
       xx_hit_mmpp <- c(xx_hit_mmpp,tog_val_dc_pval[[2]][i])}}
   
   xx_nhit_mmpp <- c()
   for(i in 1:length(tog_val_dc_pval$Features)){
     if(tog_val_dc_pval[[3]][i] > 0.01){
-      xx_nhit_mmpp <- c(xx_nhit_mmpp,tog_val_dc_pval[[3]][i])}}
+      xx_nhit_mmpp <- c(xx_nhit_mmpp,tog_val_dc_pval[[2]][i])}}
   
   # data_mppp
   xx_hit_mppp <- c()
   for(i in 1:length(tog_val_dc_pval$Features)){
-    if(tog_val_dc_pval[[4]][i] < 0.01){
+    if(tog_val_dc_pval[[5]][i] < 0.01){
       xx_hit_mppp <- c(xx_hit_mppp,tog_val_dc_pval[[4]][i])}}
   
   xx_nhit_mppp <- c()
   for(i in 1:length(tog_val_dc_pval$Features)){
     if(tog_val_dc_pval[[5]][i] > 0.01){
-      xx_nhit_mppp <- c(xx_nhit_mppp,tog_val_dc_pval[[5]][i])}}
+      xx_nhit_mppp <- c(xx_nhit_mppp,tog_val_dc_pval[[4]][i])}}
   
   # data_mpmm
   xx_hit_mpmm <- c()
   for(i in 1:length(tog_val_dc_pval$Features)){
-    if(tog_val_dc_pval[[6]][i] < 0.01){
+    if(tog_val_dc_pval[[7]][i] < 0.01){
       xx_hit_mpmm <- c(xx_hit_mpmm,tog_val_dc_pval[[6]][i])}}
   xx_nhit_mpmm <- c()
   for(i in 1:length(tog_val_dc_pval$Features)){
     if(tog_val_dc_pval[[7]][i] > 0.01){
-      xx_nhit_mpmm <- c(xx_nhit_mpmm,tog_val_dc_pval[[7]][i])}}
+      xx_nhit_mpmm <- c(xx_nhit_mpmm,tog_val_dc_pval[[6]][i])}}
   bp_mod <- data.frame(
     groups = rep(c("hits","non-hits","hits","non-hits","hits","non-hits"), times=c(length(xx_hit_mmpp),length(xx_nhit_mmpp),length(xx_hit_mpmm),length(xx_nhit_mpmm),length(xx_hit_mppp),length(xx_nhit_mppp))),
     pvalues = c(-log10(xx_hit_mmpp),-log10(xx_nhit_mmpp),-log10(xx_hit_mpmm),-log10(xx_nhit_mpmm),-log10(xx_hit_mppp),-log10(xx_nhit_mppp)),
@@ -462,48 +529,118 @@ supp_figs_6_7 <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc, tog_val_d
   
   bp_mod$groups <- as.factor(bp_mod$groups)
   bp_mod$key <- as.factor(bp_mod$key)
-  p <- ggplot2::ggplot(data = bp_mod,mapping = ggplot2::aes(x=groups, y=pvalues, group= groups))+ggplot2::geom_boxplot(ggplot2::aes(fill=groups))+ggplot2::facet_wrap(~key)+ggplot2::scale_x_discrete(labels=NULL, breaks = NULL)+ggplot2::xlab("Groups")+ggplot2::ylab("Negative log pvalue")
+  p_0.01 <- ggplot2::ggplot(data = bp_mod,mapping = ggplot2::aes(x=groups, y=pvalues, group= groups))+ggplot2::geom_boxplot(ggplot2::aes(fill=groups))+ggplot2::facet_wrap(~key)+ggplot2::scale_x_discrete(labels=NULL, breaks = NULL)+ggplot2::xlab("Groups")+ggplot2::ylab("Negative log pvalue")
   
   
-  stat_c <- bp_mod %>%
-    group_by(key) %>%
-    wilcox_test(pvalues ~ groups , alternative = "greater") %>%
-    adjust_pvalue(method = "BH") %>%
-    add_significance("p.adj") %>%
-    add_xy_position(x = "group" )
+  # for mmpp
+  bp_mod_mmpp_0.01 <- data.frame(
+    groups = rep(c("hits","non-hits"), times=c(length(xx_hit_mmpp),length(xx_nhit_mmpp))),
+    pvalues = c(-log10(xx_hit_mmpp),-log10(xx_nhit_mmpp))
+  )
   
-  ss_f_rep_0.01 <- p+ggpubr::stat_pvalue_manual(stat_c[,-c(13,14)] , label = "p.adj")
+  
+  
+  set.seed(2011) # this is the seed for without nboot
+  #set.seed(3011) # this is the seed for without nboot = 100
+  #set.seed(4011)  # this is the seed for without nboot = 1000
+  #set.seed(5011)  # this is the seed for without nboot = 10000
+  stat_c_mmpp_0.01 <- bp_mod_mmpp_0.01 %>%
+    #group_by(key) %>%
+    #wilcox_test(pvalues ~ groups , alternative = "greater") %>%
+    #t_test(pvalues ~ groups , alternative = "two.sided", paired = FALSE) %>%
+    yuen(formula = pvalues ~ groups, side = TRUE)
+    #yuenbt(formula = pvalues ~ groups, side = TRUE,nboot = 10000)
+  # adjust_pvalue(method = "BH") %>%
+  #add_significance("p.adj") %>%
+  #add_significance("p.value") %>%
+  #add_xy_position(x = "group" )
+  
+  
+  # for mppp
+  bp_mod_mppp_0.01 <- data.frame(
+    groups = rep(c("hits","non-hits"), times=c(length(xx_hit_mppp),length(xx_nhit_mppp))),
+    pvalues = c(-log10(xx_hit_mppp),-log10(xx_nhit_mppp))
+  )
+  
+  
+  
+  set.seed(2012)  # this is the seed for without nboot
+  #set.seed(3012)  # this is the seed for without nboot = 100
+  #set.seed(4012)   # this is the seed for without nboot = 1000
+  #set.seed(5012)   # this is the seed for without nboot = 10000
+  stat_c_mppp_0.01 <- bp_mod_mppp_0.01 %>%
+    #group_by(key) %>%
+    #wilcox_test(pvalues ~ groups , alternative = "greater") %>%
+    #t_test(pvalues ~ groups , alternative = "two.sided", paired = FALSE) %>%
+    yuen(formula = pvalues ~ groups, side = TRUE)
+    #yuenbt(formula = pvalues ~ groups, side = TRUE,nboot = 10000)
+  
+  # for mpmm
+  bp_mod_mpmm_0.01 <- data.frame(
+    groups = rep(c("hits","non-hits"), times=c(length(xx_hit_mpmm),length(xx_nhit_mpmm))),
+    pvalues = c(-log10(xx_hit_mpmm),-log10(xx_nhit_mpmm))
+  )
+  
+  
+   
+  set.seed(2013)  # this is the seed for without nboot
+  #set.seed(3013)  # this is the seed for without nboot = 100
+  #set.seed(4013)   # this is the seed for without nboot = 1000
+  #set.seed(5013)   # this is the seed for without nboot = 10000
+  stat_c_mpmm_0.01 <- bp_mod_mpmm_0.01 %>%
+    #group_by(key) %>%
+    #wilcox_test(pvalues ~ groups , alternative = "greater") %>%
+    #t_test(pvalues ~ groups , alternative = "two.sided", paired = FALSE) %>%
+    yuen(formula = pvalues ~ groups, side = TRUE)
+    #yuenbt(formula = pvalues ~ groups, side = TRUE,nboot = 1000)
+  
+  
+  
+  
+  
+  
+  #stat_c <- bp_mod %>%
+    #group_by(key) %>%
+    #wilcox_test(pvalues ~ groups , alternative = "greater") %>%
+    #t_test(pvalues ~ groups , alternative = "two.sided", paired = FALSE) %>%
+    #set.seed(2002)
+  #yuen(pvalues ~ groups, side = TRUE) %>%
+    #adjust_pvalue(method = "BH") %>%
+    #add_significance("p.adj") %>%
+    #add_xy_position(x = "group" )
+  
+  #ss_f_rep_0.01 <- p+ggpubr::stat_pvalue_manual(stat_c[,-c(13,14)] , label = "p.adj")
   
   xx_hit_mmpp <- c()
   for(i in 1:length(tog_val_dc_pval$Features)){
-    if(tog_val_dc_pval[[2]][i] < 0.0001){
+    if(tog_val_dc_pval[[3]][i] < 0.05){
       xx_hit_mmpp <- c(xx_hit_mmpp,tog_val_dc_pval[[2]][i])}}
   
   xx_nhit_mmpp <- c()
   for(i in 1:length(tog_val_dc_pval$Features)){
-    if(tog_val_dc_pval[[3]][i] > 0.0001){
-      xx_nhit_mmpp <- c(xx_nhit_mmpp,tog_val_dc_pval[[3]][i])}}
+    if(tog_val_dc_pval[[3]][i] > 0.05){
+      xx_nhit_mmpp <- c(xx_nhit_mmpp,tog_val_dc_pval[[2]][i])}}
   
   # data_mppp
   xx_hit_mppp <- c()
   for(i in 1:length(tog_val_dc_pval$Features)){
-    if(tog_val_dc_pval[[4]][i] < 0.0001){
+    if(tog_val_dc_pval[[5]][i] < 0.05){
       xx_hit_mppp <- c(xx_hit_mppp,tog_val_dc_pval[[4]][i])}}
   
   xx_nhit_mppp <- c()
   for(i in 1:length(tog_val_dc_pval$Features)){
-    if(tog_val_dc_pval[[5]][i] > 0.0001){
-      xx_nhit_mppp <- c(xx_nhit_mppp,tog_val_dc_pval[[5]][i])}}
+    if(tog_val_dc_pval[[5]][i] > 0.05){
+      xx_nhit_mppp <- c(xx_nhit_mppp,tog_val_dc_pval[[4]][i])}}
   
   # data_mpmm
   xx_hit_mpmm <- c()
   for(i in 1:length(tog_val_dc_pval$Features)){
-    if(tog_val_dc_pval[[6]][i] < 0.0001){
+    if(tog_val_dc_pval[[7]][i] < 0.05){
       xx_hit_mpmm <- c(xx_hit_mpmm,tog_val_dc_pval[[6]][i])}}
   xx_nhit_mpmm <- c()
   for(i in 1:length(tog_val_dc_pval$Features)){
-    if(tog_val_dc_pval[[7]][i] > 0.0001){
-      xx_nhit_mpmm <- c(xx_nhit_mpmm,tog_val_dc_pval[[7]][i])}}
+    if(tog_val_dc_pval[[7]][i] > 0.05){
+      xx_nhit_mpmm <- c(xx_nhit_mpmm,tog_val_dc_pval[[6]][i])}}
   bp_mod <- data.frame(
     groups = rep(c("hits","non-hits","hits","non-hits","hits","non-hits"), times=c(length(xx_hit_mmpp),length(xx_nhit_mmpp),length(xx_hit_mpmm),length(xx_nhit_mpmm),length(xx_hit_mppp),length(xx_nhit_mppp))),
     pvalues = c(-log10(xx_hit_mmpp),-log10(xx_nhit_mmpp),-log10(xx_hit_mpmm),-log10(xx_nhit_mpmm),-log10(xx_hit_mppp),-log10(xx_nhit_mppp)),
@@ -512,21 +649,88 @@ supp_figs_6_7 <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc, tog_val_d
   
   bp_mod$groups <- as.factor(bp_mod$groups)
   bp_mod$key <- as.factor(bp_mod$key)
-  p <- ggplot2::ggplot(data = bp_mod,mapping = ggplot2::aes(x=groups, y=pvalues, group= groups))+ggplot2::geom_boxplot(ggplot2::aes(fill=groups))+ggplot2::facet_wrap(~key)+ggplot2::scale_x_discrete(labels=NULL, breaks = NULL)+ggplot2::xlab("Groups")+ggplot2::ylab("Negative log pvalue")
+  p_0.05 <- ggplot2::ggplot(data = bp_mod,mapping = ggplot2::aes(x=groups, y=pvalues, group= groups))+ggplot2::geom_boxplot(ggplot2::aes(fill=groups))+ggplot2::facet_wrap(~key)+ggplot2::scale_x_discrete(labels=NULL, breaks = NULL)+ggplot2::xlab("Groups")+ggplot2::ylab("Negative log pvalue")
+  
+  # for mmpp
+  bp_mod_mmpp_0.05 <- data.frame(
+    groups = rep(c("hits","non-hits"), times=c(length(xx_hit_mmpp),length(xx_nhit_mmpp))),
+    pvalues = c(-log10(xx_hit_mmpp),-log10(xx_nhit_mmpp))
+  )
   
   
-  stat_c <- bp_mod %>%
-    group_by(key) %>%
-    wilcox_test(pvalues ~ groups , alternative = "greater") %>%
-    adjust_pvalue(method = "BH") %>%
-    add_significance("p.adj") %>%
-    add_xy_position(x = "group" )
   
-  ss_f_rep_0.0001 <- p+ggpubr::stat_pvalue_manual(stat_c[,-c(13,14)] , label = "p.adj")
+  set.seed(2021) # this is the seed for without nboot
+  #set.seed(3021) # this is the seed for without nboot = 100
+  #set.seed(4021)  # this is the seed for without nboot = 1000
+  #set.seed(5021)  # this is the seed for without nboot = 10000
+  stat_c_mmpp_0.05 <- bp_mod_mmpp_0.05 %>%
+    #group_by(key) %>%
+    #wilcox_test(pvalues ~ groups , alternative = "greater") %>%
+    #t_test(pvalues ~ groups , alternative = "two.sided", paired = FALSE) %>%
+    yuen(formula = pvalues ~ groups, side = TRUE)
+    #yuenbt(formula = pvalues ~ groups, side = TRUE,nboot = 10000)
+  # adjust_pvalue(method = "BH") %>%
+  #add_significance("p.adj") %>%
+  #add_significance("p.value") %>%
+  #add_xy_position(x = "group" )
   
   
-  ss_somelist <- list(IL2_p,ss_f_rep_0.01,ss_f_rep_0.0001)
-  names(ss_somelist) <- c("IL2_image","Replication_image_cutoff0.01","Replication_image_cutoff0.0001")
+  # for mppp
+  bp_mod_mppp_0.05 <- data.frame(
+    groups = rep(c("hits","non-hits"), times=c(length(xx_hit_mppp),length(xx_nhit_mppp))),
+    pvalues = c(-log10(xx_hit_mppp),-log10(xx_nhit_mppp))
+  )
+  
+  
+  
+  set.seed(2022) # this is the seed for without nboot
+  #set.seed(3022)  # this is the seed for without nboot = 100
+  #set.seed(4022)  # this is the seed for without nboot = 1000
+  #set.seed(5022)  # this is the seed for without nboot = 10000
+  stat_c_mppp_0.05 <- bp_mod_mppp_0.05 %>%
+    #group_by(key) %>%
+    #wilcox_test(pvalues ~ groups , alternative = "greater") %>%
+    #t_test(pvalues ~ groups , alternative = "two.sided", paired = FALSE) %>%
+    yuen(formula = pvalues ~ groups, side = TRUE)
+    #yuenbt(formula = pvalues ~ groups, side = TRUE,nboot = 10000)
+  
+  # for mpmm
+  bp_mod_mpmm_0.05 <- data.frame(
+    groups = rep(c("hits","non-hits"), times=c(length(xx_hit_mpmm),length(xx_nhit_mpmm))),
+    pvalues = c(-log10(xx_hit_mpmm),-log10(xx_nhit_mpmm))
+  )
+  
+  
+  
+  set.seed(2023)  # this is the seed for without nboot
+  #set.seed(3023)  # this is the seed for without nboot = 100
+  #set.seed(4023)   # this is the seed for without nboot = 1000
+  #set.seed(5023)   # this is the seed for without nboot = 10000
+  stat_c_mpmm_0.05 <- bp_mod_mpmm_0.05 %>%
+    #group_by(key) %>%
+    #wilcox_test(pvalues ~ groups , alternative = "greater") %>%
+    #t_test(pvalues ~ groups , alternative = "two.sided", paired = FALSE) %>%
+    yuen(formula = pvalues ~ groups, side = TRUE)
+    #yuenbt(formula = pvalues ~ groups, side = TRUE,nboot = 10000)
+  
+  
+  
+  
+  #stat_c <- bp_mod %>%
+    #group_by(key) %>%
+    #wilcox_test(pvalues ~ groups , alternative = "greater") %>%
+    #t_test(pvalues ~ groups , alternative = "two.sided", paired = FALSE) %>%
+    #set.seed(2001)
+  #yuen(pvalues ~ groups, side = TRUE) %>%
+    #adjust_pvalue(method = "BH") %>%
+    #add_significance("p.adj") %>%
+    #add_xy_position(x = "group" )
+  
+  #ss_f_rep_0.0001 <- p+ggpubr::stat_pvalue_manual(stat_c[,-c(13,14)] , label = "p.adj")
+  
+  
+  ss_somelist <- list(IL2_p,p_0.01,stat_c_mmpp_0.01,stat_c_mppp_0.01,stat_c_mpmm_0.01,p_0.05,stat_c_mmpp_0.05,stat_c_mppp_0.05,stat_c_mpmm_0.05)
+  names(ss_somelist) <- c("IL2_image","Replication_image_cutoff0.01","rtt_pval_mmpp_0.01","rtt_pval_mppp_0.01","rtt_pval_mpmm_0.01","Replication_image_cutoff0.05","rtt_pval_mmpp_0.05","rtt_pval_mppp_0.05","rtt_pval_mpmm_0.05")
   return(ss_somelist)}
 
 
@@ -539,69 +743,177 @@ supp_infos_val <- function(together_data, wd){
   val_dc_adj_p <- together_data 
   library(stats)
   ################### Hel+DM+ vs Hel-DM-
-  mmpp_disc_names <- c()
-  mmpp_val_names <- c()
-  mmpp_cmmn_names <- c()
+  mmpp_hits_0.0001 <- c()
+  mmpp_nhits_0.0001 <- c()
+  #mmpp_cmmn_names <- c()
+  for(i in 1:length(val_dc_adj_p[[3]])){
+    if(val_dc_adj_p[[3]][i] < 0.0001){
+      mmpp_hits_0.0001 <- c(mmpp_hits_0.0001,val_dc_adj_p[[1]][i])
+    } 
+    if(val_dc_adj_p[[3]][i] > 0.0001){
+      mmpp_nhits_0.0001 <- c(mmpp_nhits_0.0001,val_dc_adj_p[[1]][i])
+    }  
+  }
+  
+  mmpp_hits_0.01 <- c()
+  mmpp_nhits_0.01 <- c()
+  #mmpp_cmmn_names <- c()
+  for(i in 1:length(val_dc_adj_p[[3]])){
+    if(val_dc_adj_p[[3]][i] < 0.01){
+      mmpp_hits_0.01 <- c(mmpp_hits_0.01,val_dc_adj_p[[1]][i])
+    } 
+    if(val_dc_adj_p[[3]][i] > 0.01){
+      mmpp_nhits_0.01 <- c(mmpp_nhits_0.01,val_dc_adj_p[[1]][i])
+    }  
+  }
+  
+  mmpp_hits_0.05 <- c()
+  mmpp_nhits_0.05 <- c()
+  #mmpp_cmmn_names <- c()
   for(i in 1:length(val_dc_adj_p[[3]])){
     if(val_dc_adj_p[[3]][i] < 0.05){
-      mmpp_disc_names <- c(mmpp_disc_names,val_dc_adj_p[[1]][i])
+      mmpp_hits_0.05 <- c(mmpp_hits_0.05,val_dc_adj_p[[1]][i])
     } 
-    if(val_dc_adj_p[[2]][i] < 0.05){
-      mmpp_val_names <- c(mmpp_val_names,val_dc_adj_p[[1]][i])
+    if(val_dc_adj_p[[3]][i] > 0.05){
+      mmpp_nhits_0.05 <- c(mmpp_nhits_0.05,val_dc_adj_p[[1]][i])
     }  
   }
-  mmpp_cmmn_names <- base::intersect(mmpp_val_names,mmpp_disc_names)
+  #mmpp_cmmn_names <- base::intersect(mmpp_val_names,mmpp_disc_names)
   #phyper(common-1,disco,total-disco,val)
-  mmpp_dic_val_phyper <- phyper(length(mmpp_cmmn_names)-1,length(mmpp_disc_names ),35-length(mmpp_disc_names),length(mmpp_val_names))
+  #mmpp_dic_val_phyper <- phyper(length(mmpp_cmmn_names)-1,length(mmpp_disc_names ),35-length(mmpp_disc_names),length(mmpp_val_names))
   
   ################### Hel-DM+ vs Hel+DM+
-  mppp_disc_names <- c()
-  mppp_val_names <- c()
-  mppp_cmmn_names <- c()
+  mppp_hits_0.0001 <- c()
+  mppp_nhits_0.0001 <- c()
+  #mmpp_cmmn_names <- c()
+  for(i in 1:length(val_dc_adj_p[[3]])){
+    if(val_dc_adj_p[[5]][i] < 0.0001){
+      mppp_hits_0.0001 <- c(mppp_hits_0.0001,val_dc_adj_p[[1]][i])
+    } 
+    if(val_dc_adj_p[[5]][i] > 0.0001){
+      mppp_nhits_0.0001 <- c(mppp_nhits_0.0001,val_dc_adj_p[[1]][i])
+    }  
+  }
+  
+  mppp_hits_0.01 <- c()
+  mppp_nhits_0.01 <- c()
+  #mmpp_cmmn_names <- c()
+  for(i in 1:length(val_dc_adj_p[[3]])){
+    if(val_dc_adj_p[[5]][i] < 0.01){
+      mppp_hits_0.01 <- c(mppp_hits_0.01,val_dc_adj_p[[1]][i])
+    } 
+    if(val_dc_adj_p[[5]][i] > 0.01){
+      mppp_nhits_0.01 <- c(mppp_nhits_0.01,val_dc_adj_p[[1]][i])
+    }  
+  }
+  
+  mppp_hits_0.05 <- c()
+  mppp_nhits_0.05 <- c()
+  #mmpp_cmmn_names <- c()
   for(i in 1:length(val_dc_adj_p[[3]])){
     if(val_dc_adj_p[[5]][i] < 0.05){
-      mppp_disc_names <- c(mppp_disc_names,val_dc_adj_p[[1]][i])
+      mppp_hits_0.05 <- c(mppp_hits_0.05,val_dc_adj_p[[1]][i])
     } 
-    if(val_dc_adj_p[[4]][i] < 0.05){
-      mppp_val_names <- c(mppp_val_names,val_dc_adj_p[[1]][i])
+    if(val_dc_adj_p[[5]][i] > 0.05){
+      mppp_nhits_0.05 <- c(mppp_nhits_0.05,val_dc_adj_p[[1]][i])
     }  
   }
-  mppp_cmmn_names <- base::intersect(mppp_val_names,mppp_disc_names)
+  
   #phyper(common-1,disco,total-disco,val)
-  mppp_dic_val_phyper <- phyper(length(mppp_cmmn_names)-1,length(mppp_disc_names ),35-length(mppp_disc_names),length(mppp_val_names))
+  #mppp_dic_val_phyper <- phyper(length(mppp_cmmn_names)-1,length(mppp_disc_names ),35-length(mppp_disc_names),length(mppp_val_names))
   
   ################### Hel-DM+ vs Hel-DM-
-  mpmm_disc_names <- c()
-  mpmm_val_names <- c()
-  mpmm_cmmn_names <- c()
+  mpmm_hits_0.0001 <- c()
+  mpmm_nhits_0.0001 <- c()
+  #mmpp_cmmn_names <- c()
   for(i in 1:length(val_dc_adj_p[[3]])){
-    if(val_dc_adj_p[[7]][i] < 0.05){
-      mpmm_disc_names <- c(mpmm_disc_names,val_dc_adj_p[[1]][i])
+    if(val_dc_adj_p[[7]][i] < 0.0001){
+      mpmm_hits_0.0001 <- c(mpmm_hits_0.0001,val_dc_adj_p[[1]][i])
     } 
-    if(val_dc_adj_p[[6]][i] < 0.05){
-      mpmm_val_names <- c(mpmm_val_names,val_dc_adj_p[[1]][i])
+    if(val_dc_adj_p[[7]][i] > 0.0001){
+      mpmm_nhits_0.0001 <- c(mpmm_nhits_0.0001,val_dc_adj_p[[1]][i])
     }  
   }
-  mpmm_cmmn_names <- base::intersect(mpmm_val_names,mpmm_disc_names)
+  
+  mpmm_hits_0.01 <- c()
+  mpmm_nhits_0.01 <- c()
+  #mmpp_cmmn_names <- c()
+  for(i in 1:length(val_dc_adj_p[[3]])){
+    if(val_dc_adj_p[[7]][i] < 0.01){
+      mpmm_hits_0.01 <- c(mpmm_hits_0.01,val_dc_adj_p[[1]][i])
+    } 
+    if(val_dc_adj_p[[7]][i] > 0.01){
+      mpmm_nhits_0.01 <- c(mpmm_nhits_0.01,val_dc_adj_p[[1]][i])
+    }  
+  }
+  
+  mpmm_hits_0.05 <- c()
+  mpmm_nhits_0.05 <- c()
+  #mmpp_cmmn_names <- c()
+  for(i in 1:length(val_dc_adj_p[[3]])){
+    if(val_dc_adj_p[[7]][i] < 0.05){
+      mpmm_hits_0.05 <- c(mpmm_hits_0.05,val_dc_adj_p[[1]][i])
+    } 
+    if(val_dc_adj_p[[7]][i] > 0.05){
+      mpmm_nhits_0.05 <- c(mpmm_nhits_0.05,val_dc_adj_p[[1]][i])
+    }  
+  }
+  #mpmm_cmmn_names <- base::intersect(mpmm_val_names,mpmm_disc_names)
   #phyper(common-1,disco,total-disco,val)
-  mpmm_dic_val_phyper <- phyper(length(mpmm_cmmn_names)-1,length(mpmm_disc_names ),35-length(mpmm_disc_names),length(mpmm_val_names))
+  #mpmm_dic_val_phyper <- phyper(length(mpmm_cmmn_names)-1,length(mpmm_disc_names ),35-length(mpmm_disc_names),length(mpmm_val_names))
   
-  mmpp_list <- list(mmpp_disc_names,mmpp_val_names,mmpp_cmmn_names,mmpp_dic_val_phyper)
-  names(mmpp_list) <- c("Discovery","Validation","Common","Phyper value")
-  mppp_list <- list(mppp_disc_names,mppp_val_names,mppp_cmmn_names,mppp_dic_val_phyper)
-  names(mppp_list) <- c("Discovery","Validation","Common","Phyper value")
-  mpmm_list <- list(mpmm_disc_names,mpmm_val_names,mpmm_cmmn_names,mpmm_dic_val_phyper)
-  names(mpmm_list) <- c("Discovery","Validation","Common","Phyper value")
+  #mmpp_list <- list(mmpp_hits_0.0001,mmpp_nhits_0.0001,mmpp_hits_0.01,mmpp_nhits_0.01,mmpp_hits_0.05,mmpp_nhits_0.05)
+  #names(mmpp_list) <- c("Hits_0.0001","Non-hits_0.0001","Hits_0.01","Non-hits_0.01","Hits_0.05","Non-hits_0.05")
+  #mppp_list <- list(mppp_hits_0.0001,mppp_nhits_0.0001,mppp_hits_0.01,mppp_nhits_0.01,mppp_hits_0.05,mppp_nhits_0.05)
+  #names(mppp_list) <- c("Hits_0.0001","Non-hits_0.0001","Hits_0.01","Non-hits_0.01","Hits_0.05","Non-hits_0.05")
+  #mpmm_list <- list(mpmm_hits_0.0001,mpmm_nhits_0.0001,mpmm_hits_0.01,mpmm_nhits_0.01,mpmm_hits_0.05,mpmm_nhits_0.05)
+  #names(mpmm_list) <- c("Hits_0.0001","Non-hits_0.0001","Hits_0.01","Non-hits_0.01","Hits_0.05","Non-hits_0.05")
   
-  setwd(wd)
-  sink("Supplementary_sheet_4.txt")
-  print("Hel+DM+ vs Hel-DM-")
-  print(mmpp_list)
-  print("Hel-DM+ vs Hel+DM+")
-  print(mppp_list)
-  print("Hel-DM+ vs Hel-DM-")
-  print(mpmm_list)
-  sink()
+  
+  
+  group_name <- c("Hel+DM+ vs Hel-DM-","Hel+DM+ vs Hel-DM-","Hel+DM+ vs Hel-DM-","Hel-DM+ vs Hel+DM+","Hel-DM+ vs Hel+DM+","Hel-DM+ vs Hel+DM+","Hel-DM+ vs Hel-DM-","Hel-DM+ vs Hel-DM-","Hel-DM+ vs Hel-DM-")
+  fdr_cut_off <- c("0.0001","0.01","0.05","0.0001","0.01","0.05","0.0001","0.01","0.05")
+  #Hits_in_rep <- list(c(mmpp_list$mmpp_hits_0.0001),c(mmpp_list$mmpp_hits_0.01),c(mmpp_list$mmpp_hits_0.05),c(mppp_list$mppp_hits_0.0001),c(mppp_list$mppp_hits_0.01),c(mppp_list$mppp_hits_0.05),c(mpmm_list$mpmm_hits_0.0001),c(mpmm_list$mpmm_hits_0.01),c(mpmm_list$mpmm_hits_0.05))
+  #nHits_in_rep <- list(c(mmpp_list$mmpp_nhits_0.0001),c(mmpp_list$mmpp_nhits_0.01),c(mmpp_list$mmpp_nhits_0.05),c(mppp_list$mppp_nhits_0.0001),c(mppp_list$mppp_nhits_0.01),c(mppp_list$mppp_nhits_0.05),c(mpmm_list$mpmm_nhits_0.0001),c(mpmm_list$mpmm_nhits_0.01),c(mpmm_list$mpmm_nhits_0.05))
+  s4_df <- matrix(0, nrow = 9, ncol = 4)
+  s4_df <- as.data.frame(s4_df)
+  #s4_df <- data.frame(group_name,fdr_cut_off,Hits_in_rep,nHits_in_rep)
+  colnames(s4_df) <- c("Pairwise groups in validation cohort", "FDR cut-offs", "Replication hits in the discovery cohort","Replication non-hits in the discovery cohort")
+  
+  s4_df[[1]] <- group_name
+  s4_df[[2]] <- fdr_cut_off
+  s4_df[[3]][1] <- list(mmpp_hits_0.0001)
+  s4_df[[3]][2] <- list(mmpp_hits_0.01)
+  s4_df[[3]][3] <- list(mmpp_hits_0.05)
+  s4_df[[3]][4] <- list(mppp_hits_0.0001)
+  s4_df[[3]][5] <- list(mppp_hits_0.01)
+  s4_df[[3]][6] <- list(mppp_hits_0.05)
+  s4_df[[3]][7] <- list(mpmm_hits_0.0001)
+  s4_df[[3]][8] <- list(mpmm_hits_0.01)
+  s4_df[[3]][9] <- list(mpmm_hits_0.05)
+  
+  s4_df[[4]][1] <- list(mmpp_nhits_0.0001)
+  s4_df[[4]][2] <- list(mmpp_nhits_0.01)
+  s4_df[[4]][3] <- list(mmpp_nhits_0.05)
+  s4_df[[4]][4] <- list(mppp_nhits_0.0001)
+  s4_df[[4]][5] <- list(mppp_nhits_0.01)
+  s4_df[[4]][6] <- list(mppp_nhits_0.05)
+  s4_df[[4]][7] <- list(mpmm_nhits_0.0001)
+  s4_df[[4]][8] <- list(mpmm_nhits_0.01)
+  s4_df[[4]][9] <- list(mpmm_nhits_0.05)
+  
+  #setwd(wd)
+  s4_df <- apply(s4_df,2,as.character)
+  write.csv(s4_df, file = paste(wd,"/Supplementary_4_table.csv", sep = ""), col.names = T)
+  
+  #sink("Supplementary_sheet_4.txt")
+  #print("Hel+DM+ vs Hel-DM-")
+  #print(mmpp_list)
+  #print("Hel-DM+ vs Hel+DM+")
+  #print(mppp_list)
+  #print("Hel-DM+ vs Hel-DM-")
+  #print(mpmm_list)
+  #sink()
   
 }
 
@@ -609,6 +921,15 @@ supp_infos_val <- function(together_data, wd){
 
 #wd <- c("D:/work/DM_Hel/reproduce/Validation/")
 supp_infos_val(pvals_val_dc,wr_dr)
+
+
+
+
+
+
+
+
+
 
 
 
