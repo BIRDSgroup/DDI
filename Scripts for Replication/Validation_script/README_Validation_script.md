@@ -1,7 +1,7 @@
 # Instructions to run "Validation_script.R" file
 ## Preface
 This R file contains the code to reproduce the results from the validation analysis.
-Refer to the Primary_README.md file for a detailed explanation of the results obtained.
+The details of the outputs generated from this script are given below.
 
 ## Instruction
 1. Modify the code at line 400 (shown below) to the working directory containing the validation data.
