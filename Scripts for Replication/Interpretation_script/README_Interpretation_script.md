@@ -1,8 +1,7 @@
 # Instructions to run "Interpretation_script.R" file
 ## Preface
 This R file contains the code to reproduce the results from the interpretation analysis.
-Refer to the Primary_README.md file for a detailed explanation of the results obtained.
-
+The details of the output generated from this script are given below.
 ## Instruction
 1. Modify the code at line 102 (shown below) to the path containing the supplementary data 1.
 ```R
