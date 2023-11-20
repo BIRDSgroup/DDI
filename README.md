@@ -18,7 +18,7 @@ This file has been separated into four sections to facilitate navigating the rep
 ## Section - 1 - Replicating the results 
 
 There are three main scripts in this section. Running these scripts with slight modifications in the working directory will replicate the results from our work.<br>
-**Details on the output generated from each of these scripts are given in each of their folders.**
+**Details on the output generated from each of these scripts are given in the README files in each of their folders.**
 1. **MI_script.R** 
 2. **Validation_script.R**
 3. **Interpretation_script.R**
