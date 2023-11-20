@@ -1,5 +1,9 @@
 # Double-disease-interaction-analysis
 
+This is the official repository of the paper "Systems analysis of multiple diabetes-helminth cohorts reveals
+markers of disease-disease interaction" by Nilesh Subramanian, Philge Philip, Anuradha Rajamanickam, Nathella Pavan
+Kumar, Subash Babu, and Manikandan Narayanan.
+
 This repository contains codes, scripts, and data to replicate the results in our paper (cite).
 We also provide a generalized function called **"MI_func"** (check the "functions" folder) which can be applied to any double disease conditions (provided necessary cohorts are available).
 
@@ -13,11 +17,12 @@ This file has been separated into four sections to facilitate navigating the rep
 
 ## Section - 1 - Replicating the results 
 
-There are three main scripts in this section. Running these scripts with slight modifications in the working directory will replicate the results from our work.
-
+There are three main scripts in this section. Running these scripts with slight modifications in the working directory will replicate the results from our work.<br>
+**Details on the output generated from each of these scripts are given in each of their folders.**
 1. **MI_script.R** 
 2. **Validation_script.R**
 3. **Interpretation_script.R**
 
+## Section - 2 - Figures, Supplementary Figures, and Supplementary Tables
 
 
