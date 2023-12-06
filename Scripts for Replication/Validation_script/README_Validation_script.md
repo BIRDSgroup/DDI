@@ -10,7 +10,7 @@ wr_dr <- c("D:/work/DM_Hel/reproduce/Validation/validation_data/")
 ```
 2. Modify the code at line 417 (shown below) to the working directory containing the main and interaction effect data (discovery cohort).
 ```R
-wd_m <- c("D:/work/DM_Hel/reproduce/data/")
+wd_dir_disco <- c("D:/work/DM_Hel/reproduce/data/")
 ```
 3. After making this adjustment, save the script and execute it.
 
