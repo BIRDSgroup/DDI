@@ -8,7 +8,7 @@ The details of the outputs generated from this script are given below.
 ```R
 wr_dr <- c("D:/work/DM_Hel/reproduce/Validation/validation_data/")
 ```
-2. Modify the code at line 400 (shown below) to the working directory containing the main and interaction effect data (discovery cohort).
+2. Modify the code at line 417 (shown below) to the working directory containing the main and interaction effect data (discovery cohort).
 ```R
 wd_m <- c("D:/work/DM_Hel/reproduce/data/")
 ```
