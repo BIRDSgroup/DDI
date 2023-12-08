@@ -4,18 +4,22 @@ This R file contains the code to reproduce the results from the validation analy
 The details of the outputs generated from this script are given below.
 
 ## Instruction
-1. Modify the code at line 400 (shown below) to the working directory containing the validation data.
+1. Modify the code at line 420 (shown below) to the working directory containing the validation data.
 ```R
 wr_dr <- c("D:/work/DM_Hel/reproduce/Validation/validation_data/")
 ```
-2. Modify the code at line 417 (shown below) to the working directory containing the main and interaction effect data (discovery cohort).
+2. Modify the code at line 440 (shown below) to the working directory containing the main and interaction effect data (discovery cohort).
 ```R
 wd_dir_disco <- c("D:/work/DM_Hel/reproduce/data/")
 ```
 3. After making this adjustment, save the script and execute it.
 
 # Output from "Validation_script.R"
-Running this script will generate a few results in the same folder where the validation data is stored (same working directory mentioned in the above section). Load these R objects in your local R studio to view the outputs.
+Running this script will generate a few results in the same folder where the validation data is stored (the working directory mentioned above). 
+
+1) Load these R objects in your local R studio to view the outputs.
+2) Two folders - **Main_figures** and **Supplementary_Figures** will be generated in the working directory where the validation data is stored. The **Main_Figures** folder will contain three JPG images that are part of the **Figure 4A** in the manuscript. The **Supplementary_Figures** folder will contain three JPG images that form **Supplementary Figure 6** and **Supplementary Figure 7** in the manuscript.
+
 Here is the list of output files generated in the folder:
 1) **Validation_results.RDS**<br>
 This file contains 7 outputs.
