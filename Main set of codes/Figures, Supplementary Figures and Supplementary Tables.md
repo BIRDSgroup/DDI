@@ -117,137 +117,36 @@ heatmap_main_fig(wd_hp)
 
 
 ### Figure 3 - Ternary plot
-Two figures in ternary plot:
+Two figures in the ternary plot:
 
 1. Before treatment 
 2. After treatment 
 
-Run the codes in **Main and Interaction effect analysis** file to obtain both the plots. Specifically the commands in **Section 4** of the mentioned file.
+Run the "MI_script.R" under the **Scripts for Replication** section. This will generate both before and after-treatment ternary plots, which are for **Figure 3**.
 
 ### Figure 4 - Replication analysis
 
-Run the code in **section 1,2 and 3** in the **Replication analysis** file to obtain Figure 4.
+Run the "Validation_script.R" under the **Scripts for Replication** section. This will generate the plots for **Figure 4**.
+Three figures in **Figure 4** (Check **Main_Figures** folder generated after running this script):
 
-### Figure 5 - Reactome pathway heatmap 
-Run the function **Fig_5()** to obtain Figure 5 in the manuscript. The inputs to this function are:
-1. Working directory of the Supplementary data 1 given in the manuscript
-2. The sheet number corresponding to the data where the p-values for the target genes of the DDI markers for the Reactome pathways is given
+1. Replication.jpg
+2. IFN-gamma.jpg
+3. TNF-alpha.jpg
+   
+### Figure 5 - Source immune cells of some of the DDI markers
 
-```r
+Run the "Interpretation_script.R" under the **Scripts for Replication** section. **Figure_5.jpg** is generated in the folder **Figure_5_and_6**.
 
-Fig_5 <- function(wd_h, s_no){
-  library(ComplexHeatmap)
-  library(RColorBrewer)
-  
-  reactome_ddi_path_matrix_pval <- readxl::read_xlsx(wd_h, col_names = TRUE, sheet = s_no)
-  
-  m <- as.matrix(reactome_ddi_path_matrix_pval[, -1])
-  rownames(m) <- reactome_ddi_path_matrix_pval$`DDI markers`
-  rownames(m) <- c("G-CSF TGs","GM-CSF TGs","IFN-gamma TGs","IL-1b TGs","IL-2 TGs","IL-4 TGs","IL-5 TGs","IL-6 TGs","IL-10 TGs","IL-12 TGs","IL-13 TGs","IL-17A TGs","IL-22 TGs","TGF-beta TGs","TNF-alpha TGs")
-  
-  for(i in 1:ncol(m)){
-    m[,i] <- -log10(m[,i])
-  }
-  
-  
-  col_letters_1 = c("G-CSF TGs" = "purple", "GM-CSF TGs"= "purple",   "IFN-gamma TGs"= "purple", "IL-1b TGs" = "purple",    "IL-2 TGs" = "purple",     "IL-4 TGs" = "purple",     "IL-5 TGs"  = "purple",    "IL-6 TGs"= "purple",      "IL-10 TGs" = "purple",     "IL-12 TGs"  = "purple",  
-                    "IL-13 TGs" = "purple",    "IL-17A TGs"  = "purple",  "IL-22 TGs" = "purple",    "TGF-beta TGs" = "purple", "TNF-alpha TGs"= "purple")
-  #col_letters_2 = c("G-CSF" = "purple", "GM-CSF"= "purple",   "IFN-gamma"= "purple", "IL-1b" = "purple",    "IL-2" = "purple",     "IL-4" = "purple",     "IL-5"  = "purple",    "IL-6"= "purple",      "I-10" = "purple",     "IL-12"  = "purple",  
-  #"IL-13" = "purple",    "IL-17a"  = "pink",  "IL-22" = "purple",    "TGF-beta" = "purple", "TNF-alpha"= "pink")
-  
-  col_letters_2 = c("G-CSF TGs" = "white", "GM-CSF TGs"= "white",   "IFN-gamma TGs"= "white", "IL-1b TGs" = "white",    "IL-2 TGs" = "white",     "IL-4 TGs" = "white",     "IL-5 TGs"  = "white",    "IL-6 TGs"= "white",      "IL-10 TGs" = "white",     "IL-12 TGs"  = "white",  
-                    "IL-13 TGs" = "white",    "IL-17A TGs"  = "purple",  "IL-22 TGs" = "white",    "TGF-beta TGs" = "white", "TNF-alpha TGs"= "purple")
-  
-  x_row_name <- rownames(m)
-  x_row_name
-  ha = rowAnnotation(
-    Before_treatmnet_DDI = x_row_name, 
-    After_treatmnet_DDI = x_row_name,
-    col = list(Before_treatmnet_DDI = col_letters_1,
-               After_treatmnet_DDI = col_letters_2
-    )
-  )
-  
-  coul <- colorRampPalette(brewer.pal(8, "YlOrRd"))(25)
-  
-  
-  Heatmap(m, name = "Enrichment", column_title = "Reactome pathways enriched for target genes (TGs) of DDI markers", 
-          column_names_max_height = unit(12, "cm"),row_names_max_width = unit(7,"cm"),
-          cluster_rows = TRUE, cluster_columns = FALSE,  row_names_side = "left", right_annotation = ha, col = coul)
-  
-}
+### Figure 6 - Reactome pathway heatmap 
 
-# Main code
-wd_h <- c("D:/work/DM_Hel/Manuscript/Extra_analysis/DDI_TGs/reactome_DDI_pathway_data.xlsx")
-s_no <- 4
-Fig_5(wd_h, s_no)
-```
-### Figure 6 - Source immune cells of some of the DDI markers
-Run the function **Fig_6()** to generate Figure 6 from the manuscript. The input to this function is the working directory to store the list of genes in the LM22 matrix (which will later be used by the function to compare the list of genes required).
+Run the "Interpretation_script.R" under the **Scripts for Replication** section. **Figure_6.jpg** is generated in the folder **Figure_5_and_6**.
 
-```r
-Fig_6 <- function(wd_h2){
-  library(ADAPTS)
-  library(ComplexHeatmap)
-  library(RColorBrewer)
-  
-  lm22 <- ADAPTS::LM22
-  list_genes_lm22 <- rownames(lm22)
-  setwd(wd_h2)
-  write.csv(list_genes_lm22, file = "Genes_in_lm22.csv", quote = FALSE)
-  
-  
-  queryset_list <- c("IFNG", "IL17A", "IL1B" , "IL4","IL5" , "TNFAIP6","CSF2")
-  
-  queryset_list_id <- c()
-  for(i in 1:length(queryset_list)){
-    someid <-  which( list_genes_lm22 %in% queryset_list[i])
-    queryset_list_id <- c(queryset_list_id, someid)
-  }
-  
-  
-  lm22_sca <- scale(t(lm22))
-  
-  some_m <- lm22_sca[,queryset_list_id]
-  
-  
-  
-  
-  some_m <- as.matrix(some_m)
-  colnames(some_m) <- c("IFN-gamma", "IL-17A", "IL-1b" , "IL-4","IL-5" , "TNF-alpha","GM-CSF")
-  row.names(some_m) <- c("B cells naive","B cells memory","Plasma cells","CD8 cells","CD4 cells naive","CD4 cells memory resting",
-                         "CD4 cells memory activated", "T cells follicular helper","T cells Regulatory","T cells gamma delta",
-                         "NK cells resting","NK cells activated","Monocytes","Macrophages M0","Macrophages M1","Macrophages M2",
-                         "Dendritic cells resting","Dendritic cells activated", "Mast cells resting","Mast cells activated",
-                         "Eosinophils", "Neutrophils")
-  
-  #some_m <- scale(t(some_m))
-  
-  
-  #rownames(some_m) <- reactome_ddi_path_matrix$`DDI markers`
-  
-  coul_ <- colorRampPalette(brewer.pal(8, "PiYG"))(25)
-  
-  Heatmap(some_m,column_names_max_height = unit(12, "cm"),row_names_max_width = unit(7,"cm"),name = "Gene Expression", column_title = "Average gene expression of some of the DDI markers in immune cells", col = coul_)
-  
-  
-  ##### Scaled data
-  #heatmap(some_m, scale = "row", cexRow = 0.2, cexCol = 0.2)
-  
-  
-}
-
-#Main code
-wd_h2 <- c("D:/work/DM_Hel/Manuscript/Extra_analysis/lm_22/")
-Fig_6(wd_h2)
-
-```
 
 ## Section 2 - Supplementary Figures
 
 ### Supplementary Figure 1 - Heatmap
 This function will output the heatmap supplementary figure 1 provided in the main text.
-The input to this function is the working directory where the data/files necessary to create this heatmap is stored (same working directory as main figure 2a).
+The input to this function is the working directory where the data/files necessary to create this heatmap are stored (same working directory as main figure 2a).
 ```r
 supp_fig_2 <- function(wd_hp){
   library(lubridate)
