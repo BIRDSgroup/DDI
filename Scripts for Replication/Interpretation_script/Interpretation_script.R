@@ -2,7 +2,7 @@
 library(ComplexHeatmap)
 library(RColorBrewer)
 
-figure_6_func <- function(wk_dir_path){
+figure_6_func <- function(wk_dir_path,wd){
   x_ <- readxl::read_xlsx(wk_dir_path)
   x_ <- as.data.frame(x_)
   x_df <- p.adjust(as.matrix(x_), method = "BH")
@@ -46,17 +46,22 @@ figure_6_func <- function(wk_dir_path){
   
   
   req_img <- Heatmap(m, name = "Negative log10 adjusted p-value", column_title = "Reactome pathways enriched for target genes (TGs) of DDI markers", 
-          column_names_max_height = unit(20, "cm"),row_names_max_width = unit(7,"cm"),
-          cluster_rows = TRUE, cluster_columns = TRUE,  row_names_side = "left", right_annotation = ha, col = coul, column_names_rot = 47)
+                     column_names_max_height = unit(20, "cm"),row_names_max_width = unit(7,"cm"),
+                     cluster_rows = TRUE, cluster_columns = TRUE,  row_names_side = "left", right_annotation = ha, col = coul, column_names_rot = 47)
   
-  
-return(req_img)}
+  #dir.create(wd,"Figure_6")
+  #setwd(paste0(wd,"Figure_6"))
+  jpeg("Figure_6.jpg",width = 1000, height = 700)
+  plot(req_img)
+  dev.off()
+  return(req_img)}
+
 ############################################## LM 22 ##################################################################
 library(ADAPTS)
 library(ComplexHeatmap)
 library(RColorBrewer)
 
-figure_5_func <- function(lm_mat){
+figure_5_func <- function(lm_mat,wd){
   
   list_genes_lm22 <- rownames(lm_mat)
   #setwd("D:/work/DM_Hel/Manuscript/Extra_analysis/lm_22/")
@@ -96,25 +101,33 @@ figure_5_func <- function(lm_mat){
   
   ri <- Heatmap(some_m,column_names_max_height = unit(12, "cm"),row_names_max_width = unit(7,"cm"),name = "Gene Expression", column_title = "Average gene expression of some of the DDI markers in immune cells", col = coul_)
   
-return(ri)}
+  dir.create(paste0(wd,"Figure_5_and_6"))
+  setwd( paste0(wd,"Figure_5_and_6"))
+  jpeg("Figure_5.jpg")
+  plot(ri)
+  dev.off()
+  
+  return(ri)}
 
 
-path_to_file <- c("D:/work/DM_Hel/Manuscript/Extra_analysis/DDI_TGs/Recatome_webgestaltR/results_from_WebGestaltR/all_pval_reactome.xlsx")
-req_img_1 <- figure_6_func(path_to_file)
-wd <- c("D:/work/DM_Hel/Manuscript/Extra_analysis/DDI_TGs/Recatome_webgestaltR/results_from_WebGestaltR")
-setwd(wd)
-saveRDS(req_img_1, file = "Figure_6.RDS")
+
+#wd <- c("D:/work/DM_Hel/Manuscript/Extra_analysis/DDI_TGs/Recatome_webgestaltR/results_from_WebGestaltR")
+#setwd(wd)
+#saveRDS(req_img_1, file = "Figure_6.RDS")
 
 
 wd_5 <- c("D:/work/DM_Hel/Manuscript/new_interpret/")
-dir.create(paste0(wd_5,"Figure_5"))
+
 library(ADAPTS)
 lm22 <- ADAPTS::LM22
 
-req_img_2 <- figure_5_func(lm22)
-lm_dir <- paste0(wd_5,"Figure_5")
-setwd(lm_dir)
-saveRDS(req_img_2, file = "Figure_5.RDS")
+req_img_2 <- figure_5_func(lm22,wd_5)
+
+path_to_file <- c("D:/work/DM_Hel/Manuscript/new_interpret/all_pval_reactome.xlsx")
+req_img_1 <- figure_6_func(path_to_file)
+
+
+
 
 
 
