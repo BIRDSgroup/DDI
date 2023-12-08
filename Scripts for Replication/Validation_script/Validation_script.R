@@ -1,6 +1,5 @@
 ################################  Overall VALIDATION code to obtain final set of results/tables and figures
 library(WRS2)
-library(mc2d)
 ############################################ Step 1 - Get the validation data
 Get_val_data <- function(wd){
   library(readxl)
@@ -37,10 +36,10 @@ Get_val_data <- function(wd){
 ############################################ Step 3 - Get the replication results ouput
 # 6 input data to this function
 
-Validation_res_plots <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc){
+Validation_res_plots <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc,wd){
   
   library(dplyr)
-  library(rstatix)
+  #library(rstatix)
   library(ggplot2)
   
   #### Step 1 - Perform pairwise DE analysis for Validation data
@@ -99,7 +98,6 @@ Validation_res_plots <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc){
     padj <- p.adjust(pval,method = "BH")
     pw_p_df <- data.frame(feature_names,pval,padj)
     return(pw_p_df)}
-  
   
   
   #### Step 2 - Perform pairwise DE analysis for Validation data
@@ -189,7 +187,6 @@ Validation_res_plots <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc){
     padj <- p.adjust(pval,method = "BH")
     pw_p_df <- data.frame(feature_names,pval,padj)
     return(pw_p_df)}
-  
   
   
   ############################################  Main set of commands within the function
@@ -293,13 +290,23 @@ Validation_res_plots <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc){
   
   bp_mod$groups <- as.factor(bp_mod$groups)
   bp_mod$key <- as.factor(bp_mod$key)
+  
+  dir.create(paste0(wd,"Main_Figures"))
+  
   p <- ggplot2::ggplot(data = bp_mod,mapping = ggplot2::aes(x=groups, y=pvalues, group= groups))+ggplot2::geom_boxplot(ggplot2::aes(fill=groups))+ggplot2::facet_wrap(~key)+ggplot2::scale_x_discrete(labels=NULL, breaks = NULL)+ggplot2::xlab("Groups")+ggplot2::ylab("Negative log pvalue")+ggplot2::theme(text = ggplot2::element_text(size=18))+ggplot2::scale_x_discrete(guide = guide_axis(angle = 90))+theme_bw(base_size = 18)
+  
+  
+  setwd(paste0(wd,"Main_Figures"))
+  jpeg("Replication.jpg")
+  plot(p)
+  dev.off()
+  
   
   # for mmpp
   bp_mod_mmpp <- data.frame(
     groups = rep(c("hits","non-hits"), times=c(length(xx_hit_mmpp),length(xx_nhit_mmpp))),
     pvalues = c(-log10(xx_hit_mmpp),-log10(xx_nhit_mmpp))
-    )
+  )
   
   
   
@@ -309,11 +316,11 @@ Validation_res_plots <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc){
     #wilcox_test(pvalues ~ groups , alternative = "greater") %>%
     #t_test(pvalues ~ groups , alternative = "two.sided", paired = FALSE) %>%
     yuen(formula = pvalues ~ groups, side = TRUE)
-    #yuenbt(formula = pvalues ~ groups, side = TRUE,nboot = 10000)
-   # adjust_pvalue(method = "BH") %>%
-    #add_significance("p.adj") %>%
-    #add_significance("p.value") %>%
-    #add_xy_position(x = "group" )
+  #yuenbt(formula = pvalues ~ groups, side = TRUE,nboot = 10000)
+  # adjust_pvalue(method = "BH") %>%
+  #add_significance("p.adj") %>%
+  #add_significance("p.value") %>%
+  #add_xy_position(x = "group" )
   
   
   # for mppp
@@ -330,7 +337,7 @@ Validation_res_plots <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc){
     #wilcox_test(pvalues ~ groups , alternative = "greater") %>%
     #t_test(pvalues ~ groups , alternative = "two.sided", paired = FALSE) %>%
     yuen(formula = pvalues ~ groups, side = TRUE)
-    #yuenbt(formula = pvalues ~ groups, side = TRUE,nboot = 10000)
+  #yuenbt(formula = pvalues ~ groups, side = TRUE,nboot = 10000)
   
   # for mpmm
   bp_mod_mpmm <- data.frame(
@@ -346,7 +353,7 @@ Validation_res_plots <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc){
     #wilcox_test(pvalues ~ groups , alternative = "greater") %>%
     #t_test(pvalues ~ groups , alternative = "two.sided", paired = FALSE) %>%
     yuen(formula = pvalues ~ groups, side = TRUE)
-    #yuenbt(formula = pvalues ~ groups, side = TRUE,nboot = 10000)
+  #yuenbt(formula = pvalues ~ groups, side = TRUE,nboot = 10000)
   
   #rep_p <- p+ggpubr::stat_pvalue_manual(stat_c[,-c(13,14)] , label = "p.adj")
   
@@ -370,6 +377,13 @@ Validation_res_plots <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc){
   
   TNFa_p <- ggplot2::ggplot(tnf_df, ggplot2::aes(Labels, Groups))+ggplot2::geom_boxplot(ggplot2::aes(fill=Labels))+ggplot2::facet_wrap(~Key)+ggplot2::xlab("")+ggplot2::ylab("TNF-alpha (pg/ml)")+ggplot2::theme(text = ggplot2::element_text(size=20))+ggplot2::theme_bw()+ggplot2::scale_x_discrete(guide = guide_axis(angle = 90))+theme_bw(base_size = 18)
   
+
+  setwd(paste0(wd,"Main_Figures"))
+  jpeg("TNF-alpha.jpg")
+  plot(TNFa_p)
+  dev.off()
+  
+  
   ########## IFNg
   IFNg_mm_val <- val_data_3$`IFNg (pg/ml)`
   IFNg_mp_val <- val_data_2$`IFNg (pg/ml)`
@@ -388,13 +402,19 @@ Validation_res_plots <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc){
   colnames(IFNg_df) <- c("Labels","Groups","Key")
   
   IFNg_p <- ggplot2::ggplot(IFNg_df, ggplot2::aes(Labels, Groups))+ggplot2::geom_boxplot(ggplot2::aes(fill=Labels))+ggplot2::facet_wrap(~Key)+ggplot2::xlab("")+ggplot2::ylab("IFN-gamma (pg/ml)")+ggplot2::theme(text = ggplot2::element_text(size=20))+ggplot2::scale_x_discrete(guide = guide_axis(angle = 90))+theme_bw(base_size = 18)
+  
+  
+  setwd(paste0(wd,"Main_Figures"))
+  jpeg("IFN-gamma.jpg")
+  plot(IFNg_p)
+  dev.off()
+  
+  
   some_list <- list(p,stat_c_mmpp,stat_c_mppp,stat_c_mpmm,TNFa_p, IFNg_p,val_dc_adj_p )
   names(some_list) <- c("replication_image","Robust t-test pval - hel-dm- vs hel+dm+","Robust t-test pval - hel-dm+ vs hel+dm+","Robust t-test pval - hel-dm+ vs hel-dm-","TNFalpha_image","IFNgamma_image","pvalue_validation_discovery_cohort")
   
+
   return(some_list)}
-
-
-
 
 ## Main command / results generating command
 wr_dr <- c("D:/work/DM_Hel/reproduce/Validation/validation_data/")
@@ -414,6 +434,9 @@ val_data_3 <- overall_list[[3]]
 
 ##### Data for control-pre-T (before-treatment) and control-post-T (after-treatment)
 ###### knn imputation to remove Nas
+
+
+
 wd_dir_disco <- c("D:/work/DM_Hel/reproduce/data/")
 library(DMwR2)
 for(file in c('Hel+DM+', 'Hel+DM+_Post-T', 'Hel-DM+', 'Hel+DM-', 'Hel-DM-', 'Hel+DM-_Post-T')){
@@ -442,7 +465,7 @@ for(file in c('Hel+DM+', 'Hel+DM+_Post-T', 'Hel-DM+', 'Hel+DM-', 'Hel-DM-', 'Hel
 
 ######################################################
 
-plot_rep_fig4 <- Validation_res_plots(val_data_1,val_data_2, val_data_3, dm_m_con, dm_p_pre, dm_p_con)
+plot_rep_fig4 <- Validation_res_plots(val_data_1,val_data_2, val_data_3, dm_m_con, dm_p_pre, dm_p_con, wr_dr)
 pvals_val_dc <- plot_rep_fig4[[7]]
 setwd(wr_dr)
 saveRDS(plot_rep_fig4, file = "validation_results.RDS")
@@ -450,7 +473,7 @@ saveRDS(pvals_val_dc, file = "pvalues_validation_discovery_cohorts.RDS")
 ########################  Supplementary figures for replication analysis 
 
 
-supp_figs_6_7 <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc, tog_val_dc_pval){
+supp_figs_6_7 <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc, tog_val_dc_pval,wd){
   ########## IL-2
   IL2_mm_val <- d3_val$`IL-2 (pg/ml)`
   IL2_mp_val <- d2_val$`IL-2 (pg/ml)`
@@ -529,7 +552,7 @@ supp_figs_6_7 <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc, tog_val_d
     #wilcox_test(pvalues ~ groups , alternative = "greater") %>%
     #t_test(pvalues ~ groups , alternative = "two.sided", paired = FALSE) %>%
     yuen(formula = pvalues ~ groups, side = TRUE)
-    #yuenbt(formula = pvalues ~ groups, side = TRUE,nboot = 10000)
+  #yuenbt(formula = pvalues ~ groups, side = TRUE,nboot = 10000)
   # adjust_pvalue(method = "BH") %>%
   #add_significance("p.adj") %>%
   #add_significance("p.value") %>%
@@ -553,7 +576,7 @@ supp_figs_6_7 <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc, tog_val_d
     #wilcox_test(pvalues ~ groups , alternative = "greater") %>%
     #t_test(pvalues ~ groups , alternative = "two.sided", paired = FALSE) %>%
     yuen(formula = pvalues ~ groups, side = TRUE)
-    #yuenbt(formula = pvalues ~ groups, side = TRUE,nboot = 10000)
+  #yuenbt(formula = pvalues ~ groups, side = TRUE,nboot = 10000)
   
   # for mpmm
   bp_mod_mpmm_0.01 <- data.frame(
@@ -562,7 +585,7 @@ supp_figs_6_7 <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc, tog_val_d
   )
   
   
-   
+  
   set.seed(2013)  # this is the seed for without nboot
   #set.seed(3013)  # this is the seed for without nboot = 100
   #set.seed(4013)   # this is the seed for without nboot = 1000
@@ -572,7 +595,7 @@ supp_figs_6_7 <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc, tog_val_d
     #wilcox_test(pvalues ~ groups , alternative = "greater") %>%
     #t_test(pvalues ~ groups , alternative = "two.sided", paired = FALSE) %>%
     yuen(formula = pvalues ~ groups, side = TRUE)
-    #yuenbt(formula = pvalues ~ groups, side = TRUE,nboot = 1000)
+  #yuenbt(formula = pvalues ~ groups, side = TRUE,nboot = 1000)
   
   
   
@@ -580,14 +603,14 @@ supp_figs_6_7 <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc, tog_val_d
   
   
   #stat_c <- bp_mod %>%
-    #group_by(key) %>%
-    #wilcox_test(pvalues ~ groups , alternative = "greater") %>%
-    #t_test(pvalues ~ groups , alternative = "two.sided", paired = FALSE) %>%
-    #set.seed(2002)
+  #group_by(key) %>%
+  #wilcox_test(pvalues ~ groups , alternative = "greater") %>%
+  #t_test(pvalues ~ groups , alternative = "two.sided", paired = FALSE) %>%
+  #set.seed(2002)
   #yuen(pvalues ~ groups, side = TRUE) %>%
-    #adjust_pvalue(method = "BH") %>%
-    #add_significance("p.adj") %>%
-    #add_xy_position(x = "group" )
+  #adjust_pvalue(method = "BH") %>%
+  #add_significance("p.adj") %>%
+  #add_xy_position(x = "group" )
   
   #ss_f_rep_0.01 <- p+ggpubr::stat_pvalue_manual(stat_c[,-c(13,14)] , label = "p.adj")
   
@@ -648,7 +671,7 @@ supp_figs_6_7 <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc, tog_val_d
     #wilcox_test(pvalues ~ groups , alternative = "greater") %>%
     #t_test(pvalues ~ groups , alternative = "two.sided", paired = FALSE) %>%
     yuen(formula = pvalues ~ groups, side = TRUE)
-    #yuenbt(formula = pvalues ~ groups, side = TRUE,nboot = 10000)
+  #yuenbt(formula = pvalues ~ groups, side = TRUE,nboot = 10000)
   # adjust_pvalue(method = "BH") %>%
   #add_significance("p.adj") %>%
   #add_significance("p.value") %>%
@@ -672,7 +695,7 @@ supp_figs_6_7 <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc, tog_val_d
     #wilcox_test(pvalues ~ groups , alternative = "greater") %>%
     #t_test(pvalues ~ groups , alternative = "two.sided", paired = FALSE) %>%
     yuen(formula = pvalues ~ groups, side = TRUE)
-    #yuenbt(formula = pvalues ~ groups, side = TRUE,nboot = 10000)
+  #yuenbt(formula = pvalues ~ groups, side = TRUE,nboot = 10000)
   
   # for mpmm
   bp_mod_mpmm_0.05 <- data.frame(
@@ -691,23 +714,34 @@ supp_figs_6_7 <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc, tog_val_d
     #wilcox_test(pvalues ~ groups , alternative = "greater") %>%
     #t_test(pvalues ~ groups , alternative = "two.sided", paired = FALSE) %>%
     yuen(formula = pvalues ~ groups, side = TRUE)
-    #yuenbt(formula = pvalues ~ groups, side = TRUE,nboot = 10000)
+  #yuenbt(formula = pvalues ~ groups, side = TRUE,nboot = 10000)
   
   
   
   
   #stat_c <- bp_mod %>%
-    #group_by(key) %>%
-    #wilcox_test(pvalues ~ groups , alternative = "greater") %>%
-    #t_test(pvalues ~ groups , alternative = "two.sided", paired = FALSE) %>%
-    #set.seed(2001)
+  #group_by(key) %>%
+  #wilcox_test(pvalues ~ groups , alternative = "greater") %>%
+  #t_test(pvalues ~ groups , alternative = "two.sided", paired = FALSE) %>%
+  #set.seed(2001)
   #yuen(pvalues ~ groups, side = TRUE) %>%
-    #adjust_pvalue(method = "BH") %>%
-    #add_significance("p.adj") %>%
-    #add_xy_position(x = "group" )
+  #adjust_pvalue(method = "BH") %>%
+  #add_significance("p.adj") %>%
+  #add_xy_position(x = "group" )
   
   #ss_f_rep_0.0001 <- p+ggpubr::stat_pvalue_manual(stat_c[,-c(13,14)] , label = "p.adj")
   
+  dir.create(paste0(wd,"Supplementary_Figures"))
+  setwd(paste0(wd,"Supplementary_Figures"))
+  jpeg("IL-2.jpg")
+  plot(IL2_p)
+  dev.off()
+  jpeg("Replication_image_cutoff0.01.jpg")
+  plot(p_0.01)
+  dev.off()
+  jpeg("Replication_image_cutoff0.05.jpg")
+  plot(p_0.05)
+  dev.off()
   
   ss_somelist <- list(IL2_p,p_0.01,stat_c_mmpp_0.01,stat_c_mppp_0.01,stat_c_mpmm_0.01,p_0.05,stat_c_mmpp_0.05,stat_c_mppp_0.05,stat_c_mpmm_0.05)
   names(ss_somelist) <- c("IL2_image","Replication_image_cutoff0.01","rtt_pval_mmpp_0.01","rtt_pval_mppp_0.01","rtt_pval_mpmm_0.01","Replication_image_cutoff0.05","rtt_pval_mmpp_0.05","rtt_pval_mppp_0.05","rtt_pval_mpmm_0.05")
@@ -715,7 +749,7 @@ supp_figs_6_7 <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc, tog_val_d
 
 
 
-supp_fig_6_7 <- supp_figs_6_7(val_data_1,val_data_2, val_data_3, dm_m_con, dm_p_pre, dm_p_con,pvals_val_dc)
+supp_fig_6_7 <- supp_figs_6_7(val_data_1,val_data_2, val_data_3, dm_m_con, dm_p_pre, dm_p_con,pvals_val_dc,wr_dr)
 setwd(wr_dr)
 saveRDS(supp_fig_6_7, "Supplementary_Figs_6_7.RDS")
 
@@ -901,15 +935,3 @@ supp_infos_val <- function(together_data, wd){
 
 #wd <- c("D:/work/DM_Hel/reproduce/Validation/")
 supp_infos_val(pvals_val_dc,wr_dr)
-
-
-
-
-
-
-
-
-
-
-
-
