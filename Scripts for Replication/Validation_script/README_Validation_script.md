@@ -15,7 +15,7 @@ wd_dir_disco <- c("D:/work/DM_Hel/reproduce/data/")
 3. After making this adjustment, save the script and execute it.
 
 # Output from "Validation_script.R"
-Running this script will generate a few results in the same folder where the validation data is stored (same working directory mentioned in the above section). 
+Running this script will generate a few results in the same folder where the validation data is stored (same working directory mentioned in the above section). Load these R objects in your local R studio to view the outputs.
 Here is the list of output files generated in the folder:
 1) **Validation_results.RDS**<br>
 This file contains 7 outputs.
