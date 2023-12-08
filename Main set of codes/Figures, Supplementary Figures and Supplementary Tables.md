@@ -3,7 +3,7 @@ There a total of 4 main figures, 7 supplementary figures, and 4 supplementary ta
 This file will provide the necessary instructions to generate the figures, supplementary figures, and sheets given in the main text.
 
 ## Section 1 - Main Figures 
-### Figure 1 - Methods Overview
+### <u>Figure 1 - Methods Overview<u>
 
 ### Figure 2 - Data Overview
 Two figures are under this section:
