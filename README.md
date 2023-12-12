@@ -20,17 +20,7 @@ This section will provide information on how to run steps 2a, 2b, and 3 in the F
 
 ![Screenshot (135)](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/assets/60778368/cfc59915-501f-4a5a-a61f-93bdebec0201)
 
-
-This repository contains codes, scripts, and data to replicate the results in our paper (cite).
-We also provide a generalized function called **"MI_func"** (check the "functions" folder) which can be applied to any double disease conditions (provided necessary cohorts are available).
-
-This file has been separated into four sections to facilitate navigating the repository.
-
-1. **Replicating the results**
-2. **Dissecting the scripts**
-3. **Figures, Supplementary Figures, and Supplementary Tables**
-4. **Functions**
-5. **Data**
+The DDI pipeline [https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/tree/3c1a88756cd6edd1706623052d16032783ec434e/DDI%20Pipeline%20] folder has scripts, read me file to navigate through this section.
 
 ## Section - 2: Application of DDI pipeline on the helminth-diabetes dataset 
 
