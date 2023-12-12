@@ -13,8 +13,8 @@ This repository contains two sections:
 ## Section 1: DDI pipeline 
 This section will provide information on how to run steps 2a, 2b, and 3 in the Figure below. step 1 will vary between the datasets used and a detailed methodology on the same in given in our paper.
 
-![Method_overview_Fig_1](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/assets/60778368/451a72fd-bb1a-4b41-9149-95b88a4140d2)
-	
+![Screenshot (135)](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/assets/60778368/cfc59915-501f-4a5a-a61f-93bdebec0201)
+
 
 This repository contains codes, scripts, and data to replicate the results in our paper (cite).
 We also provide a generalized function called **"MI_func"** (check the "functions" folder) which can be applied to any double disease conditions (provided necessary cohorts are available).
