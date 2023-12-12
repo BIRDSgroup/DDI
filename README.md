@@ -8,7 +8,7 @@ Kumar, Subash Babu, and Manikandan Narayanan.
 This repository contains two sections:
 
 1. DDI pipeline
-2. Application of our DDI pipeline on the Helminth-diabetes dataset 
+2. Application of our DDI pipeline on the helminth-diabetes dataset 
 ## License Preamble
 Copyright 2020 BIRDS Group, IIT Madras
 
@@ -32,7 +32,7 @@ This file has been separated into four sections to facilitate navigating the rep
 4. **Functions**
 5. **Data**
 
-## Section - 1 - Replicating the results 
+## Section - 2: Application of DDI pipeline on the helminth-diabetes dataset 
 
 There are three main scripts in this section. Running these scripts with slight modifications in the working directory will replicate the results from our work.<br>
 **Details on the output generated from each of these scripts are given in the README files in each of their folders.**
