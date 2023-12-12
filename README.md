@@ -11,8 +11,9 @@ This repository contains two sections:
 2. Application of our DDI pipeline on the Helminth-diabetes dataset 
 
 ## Section 1: DDI pipeline 
+This section will provide information on how to run steps 2a, 2b, and 3 in the Figure below. step 1 will vary between the datasets used and a detailed methodology on the same in given in our paper.
+[Figure_1_Method_overview.pdf](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/files/13644799/Figure_1_Method_overview.pdf)
 
-![Alt text]([image link](https://drive.google.com/file/d/14BrQo61usLij9ZXhHdzxQ_vsz2-6usIT/view?usp=drive_link))
 
 
 This repository contains codes, scripts, and data to replicate the results in our paper (cite).
