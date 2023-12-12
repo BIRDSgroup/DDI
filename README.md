@@ -4,6 +4,17 @@ This is the official repository of the paper "Systems analysis of multiple diabe
 markers of disease-disease interaction" by Nilesh Subramanian, Philge Philip, Anuradha Rajamanickam, Nathella Pavan
 Kumar, Subash Babu, and Manikandan Narayanan.
 
+
+This repository contains two sections:
+
+1. DDI pipeline
+2. Application of our DDI pipeline on the Helminth-diabetes dataset 
+
+## Section 1: DDI pipeline 
+
+![Alt text]([image link](https://drive.google.com/file/d/14BrQo61usLij9ZXhHdzxQ_vsz2-6usIT/view?usp=drive_link))
+
+
 This repository contains codes, scripts, and data to replicate the results in our paper (cite).
 We also provide a generalized function called **"MI_func"** (check the "functions" folder) which can be applied to any double disease conditions (provided necessary cohorts are available).
 
