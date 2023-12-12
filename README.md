@@ -1,4 +1,4 @@
-![Method_overview_Fig_1](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/assets/60778368/451a72fd-bb1a-4b41-9149-95b88a4140d2)# Double-disease-interaction-analysis
+# Double-disease-interaction-analysis
 
 This is the official repository of the paper "Systems analysis of multiple diabetes-helminth cohorts reveals
 markers of disease-disease interaction" by Nilesh Subramanian, Philge Philip, Anuradha Rajamanickam, Nathella Pavan
@@ -13,7 +13,7 @@ This repository contains two sections:
 ## Section 1: DDI pipeline 
 This section will provide information on how to run steps 2a, 2b, and 3 in the Figure below. step 1 will vary between the datasets used and a detailed methodology on the same in given in our paper.
 
-
+![Method_overview_Fig_1](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/assets/60778368/451a72fd-bb1a-4b41-9149-95b88a4140d2)
 	
 
 This repository contains codes, scripts, and data to replicate the results in our paper (cite).
