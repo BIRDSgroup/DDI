@@ -7,15 +7,16 @@ Kumar, Subash Babu, and Manikandan Narayanan.
 
 This repository contains two sections:
 
+
 1. Our DDI pipeline
-2. Application of our DDI pipeline on the helminth-diabetes dataset 
+2. Application of DDI pipeline on the helminth-diabetes dataset 
 ## License Preamble
 Copyright 2020 BIRDS Group, IIT Madras
 
 DDI-pipeline is a free pipeline: you can redistribute it and modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
 DDI-pipeline is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Please take a look at the GNU Lesser General Public License for more details.
-## Section 1: DDI pipeline 
+## Section 1: Our DDI pipeline 
 This section will provide information on how to run steps 2a, 2b, and 3 in the Figure below. Step 1 will vary between the datasets used and a detailed methodology on the same is given in our paper.
 
 (TODO: Split this Figure into (A) and (B) and show it in Section 1 and Section 2 respectively)
