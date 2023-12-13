@@ -109,23 +109,16 @@ figure_5_func <- function(lm_mat,wd){
   
   return(ri)}
 
-
-
-#wd <- c("D:/work/DM_Hel/Manuscript/Extra_analysis/DDI_TGs/Recatome_webgestaltR/results_from_WebGestaltR")
-#setwd(wd)
-#saveRDS(req_img_1, file = "Figure_6.RDS")
-
+library(ADAPTS)
+lm22 <- ADAPTS::LM22
 
 wd_5 <- c("D:/work/DM_Hel/Manuscript/new_interpret/")
 
-library(ADAPTS)
-lm22 <- ADAPTS::LM22
 
 req_img_2 <- figure_5_func(lm22,wd_5)
 
 path_to_file <- c("D:/work/DM_Hel/Manuscript/new_interpret/all_pval_reactome.xlsx")
 req_img_1 <- figure_6_func(path_to_file)
-
 
 
 
