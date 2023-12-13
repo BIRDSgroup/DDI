@@ -23,8 +23,7 @@ This section will provide information on how to run steps 2a, 2b, and 3 in the F
 
 The [DDI Pipeline](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/tree/3c1a88756cd6edd1706623052d16032783ec434e/DDI%20Pipeline%20) folder has scripts, read me file to navigate through this section.
 
-## Section - 2: Application of DDI pipeline on the helminth-diabetes dataset 
-
+## Section 2: Application of DDI pipeline on the helminth-diabetes dataset 
 The [Readme](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/blob/270b244e9110f44a068d97df5f05ad4f13d21e81/Application%20on%20helminth-diabetes%20data/Readme_application.md) file in the [Application on the helminth-diabetes dataset](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/tree/41f61a5753daf7002b7fd921a81f4045fe520eb6/Application%20on%20helminth-diabetes%20data) provides details on how to run the [scripts](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/tree/b5f25bd0f0b7a101896f8c12c6ba12c485faeaf9/Application%20on%20helminth-diabetes%20data/Scripts) to reproduce the results/figures from our paper.
 The [Figures, Supplementary Figure and Supplementary Tables](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/tree/b5f25bd0f0b7a101896f8c12c6ba12c485faeaf9/Application%20on%20helminth-diabetes%20data/Figures%2C%20Supplementary%20Figures%20and%20Supplementary%20Tables) folder provides details on how to reproduce each Figure, Supplementary Figure and Supplementary Figure from our paper.
 
