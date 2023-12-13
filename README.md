@@ -30,6 +30,4 @@ There are three main scripts in this section. Running these scripts with slight 
 2. **Validation_script.R**
 3. **Interpretation_script.R**
 
-## Section - 2 - Figures, Supplementary Figures, and Supplementary Tables
-
 
