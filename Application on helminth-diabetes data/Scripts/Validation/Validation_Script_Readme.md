@@ -1,4 +1,4 @@
-# Instructions to run "Validation_script.R" file
+# Instructions to run "Validation_Script.R" file
 ## Preface
 This R file contains the code to reproduce the results from the validation analysis.
 The details of the outputs generated from this script are given below.
