@@ -24,10 +24,6 @@ The [DDI Pipeline](https://github.com/BIRDSgroup/Double-disease-interaction-anal
 
 ## Section - 2: Application of DDI pipeline on the helminth-diabetes dataset 
 
-There are three main scripts in this section. Running these scripts with slight modifications in the working directory will replicate the results from our work.<br>
-**Details on the output generated from each of these scripts are given in the README files in each of their folders.**
-1. **MI_script.R** 
-2. **Validation_script.R**
-3. **Interpretation_script.R**
+The [Readme] in the [Application on the helminth-diabetes dataset] provides details on how to run the [scripts](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/tree/b5f25bd0f0b7a101896f8c12c6ba12c485faeaf9/Application%20on%20helminth-diabetes%20data/Scripts) to reproduce the results/figures from our paper.
 
 
