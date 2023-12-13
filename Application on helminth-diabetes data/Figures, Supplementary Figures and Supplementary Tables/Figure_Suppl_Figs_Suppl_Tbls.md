@@ -14,7 +14,7 @@ Two figures in the ternary plot:
 1. Before treatment 
 2. After treatment 
 
-Run the "MI_script.R" under the **Scripts for Replication** section. This will generate both before and after-treatment ternary plots, which are for **Figure 3**.
+Run the ["MI_script.R"]() under the [**Scripts**](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/tree/987bcd0ff4ecaae35eec570c552b21f13ad0b0b3/Application%20on%20helminth-diabetes%20data/Scripts) section. This will generate both before and after-treatment ternary plots, which are for **Figure 3**. Refer to the [Readme]() file on how to run this script.
 
 ### Figure 4 - Replication analysis
 
