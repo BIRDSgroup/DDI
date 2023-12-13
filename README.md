@@ -1,4 +1,4 @@
-# Double-disease-interaction-analysis
+# Disease-Disease Interaction (DDI) Pipeline/Analysis
 
 This is the official repository of the paper "Systems analysis of multiple diabetes-helminth cohorts reveals
 markers of disease-disease interaction" by Nilesh Subramanian, Philge Philip, Anuradha Rajamanickam, Nathella Pavan
@@ -7,7 +7,7 @@ Kumar, Subash Babu, and Manikandan Narayanan.
 
 This repository contains two sections:
 
-1. DDI pipeline
+1. Our DDI pipeline
 2. Application of our DDI pipeline on the helminth-diabetes dataset 
 ## License Preamble
 Copyright 2020 BIRDS Group, IIT Madras
