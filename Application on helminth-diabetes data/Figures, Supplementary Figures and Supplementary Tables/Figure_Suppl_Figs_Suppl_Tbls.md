@@ -6,7 +6,7 @@ This file will provide the necessary instructions to generate the figures, suppl
 ### Figure 1 - Methods Overview 
 
 ### Figure 2 - Data Overview
-Run the ["Heatmaps_Script.R"](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/blob/26bbae2344943f81b10cf8dfd8a9558a16a10e53/Application%20on%20helminth-diabetes%20data/Scripts/Heatmaps/Heatmaps_Script.R) under the [**Scripts**]() section. Refer to the [Readme]() file on how to run this script. This will generate **heatmap_fig2a.png** in the folder set as the working directory. 
+Run the ["Heatmaps_Script.R"](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/blob/26bbae2344943f81b10cf8dfd8a9558a16a10e53/Application%20on%20helminth-diabetes%20data/Scripts/Heatmaps/Heatmaps_Script.R) under the [**Scripts**](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/tree/987bcd0ff4ecaae35eec570c552b21f13ad0b0b3/Application%20on%20helminth-diabetes%20data/Scripts) section. Refer to the [Readme]() file on how to run this script. This will generate **heatmap_fig2a.png** in the folder set as the working directory. 
 
 ### Figure 3 - Ternary plot
 Two figures in the ternary plot:
