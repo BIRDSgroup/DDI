@@ -467,5 +467,135 @@ x_at_supp <- paste0(wd_m,"after_treatment/Supp_Figure_4")
 interp_s3(int_data_3,t ="After-treatment",x_at_supp)
 
 
+################################################ Supplementary Figure 5
+
+
+
+sup_5_fig <- function(id1, id2,bt_op, at_op){
+  cmn_bt_at_main_var <- intersect(bt_op[[3]],at_op[[3]])
+  some_at <- vector("numeric", length = nrow(id2))
+  
+  for(i in 1:nrow(id2)){
+    some_at[i] <- (100 - sum(as.numeric(id2[[2]][i]),as.numeric(id2[[3]][i]),as.numeric(id2[[4]][i])))
+  }
+  
+  
+  some_bt <- vector("numeric", length = nrow(id1))
+  
+  for(i in 1:nrow(id1)){
+    some_bt[i] <- (100 - sum(as.numeric(id1[[2]][i]),as.numeric(id1[[3]][i]),as.numeric(id1[[4]][i])))
+  }
+  
+  some_bt_at_df <- data.frame(some_bt, some_at)
+  
+  some_bt_at_df_toreturn <- some_bt_at_df
+  some_bt_at_df_toreturn[,3] <- id1[[1]]
+  
+
+  some_ids <- which(id2[[1]] %in% cmn_bt_at_main_var)
+  
+  some_bt_at_df_ <- some_bt_at_df[some_ids,]
+  
+  vari_R <- c("Adipsin","Eosinophils","G-CSF","Glucagon","HbA1c","IFNg","IgG","IL-10","IL-12","IL-13","IL-17A","IL-17F","IL-1b","IL-2","IL-4","IL-5","IL-6","IL-8","Leptin","Lymphocytes","MCHC","MCP-1","MIP-1b","Monocytes","Neutrophils","RBG","Resistin","TGF-b","TNF-a","Visfatin")
+  
+  some_bt_at_df_[,3] <- vari_R
+  
+  
+  #ggplot2::ggplot(data=some_bt_at_df, ggplot2::aes(x=some_bt,y=some_at))+ggrepel::geom_text_repel(label=vari_R, size=3)+ggplot2::theme(legend.text = element_text(size = 3))+xlab("Before Treatment Residuals")+ylab("After Treatment Residuals")+ggplot2::ylim(0,100)+ggplot2::xlim(0,100)
+  
+  
+return(some_bt_at_df_toreturn)}
+
+
+unexp_df <- sup_5_fig(rela_df_BT, rela_df_AT,m_i_bt,m_i_at)
+
+
+
+
+
+
+
+
+
+
+
+
+
+############# Supplementary table 2 and 3
+x_bt 
+
+#X <- ("D:/work/DM_Hel/reproduce/data/before_treatment/")
+data_coeff <- read.csv(paste0(x_bt ,"/Coeff_terms_data.csv"))
+data_coeff <- data_coeff[,-1]
+
+
+#X_mi_1 <- ("D:/work/DM_Hel/reproduce/data/before_treatment/")
+mi_1 <- read.csv2(paste0(x_bt ,"/Main_effect_pavls.csv"), sep = ",")  #main effect p val and adj val
+mi_1 <- mi_1[,-1]
+mi_2 <- read.csv(paste0(x_bt ,"/Interaction_effect_pavls.csv"), sep = ",") #interaction effect p val and adj val
+mi_2 <- mi_2[,-1]
+
+names_req <- mi_2$Features
+
+mi_1_s <- mi_1[mi_1$Features %in% names_req, ]
+mi_2_s <- mi_2[mi_2$Features %in% names_req, ]
+
+new_df <- cbind(names_req, mi_1_s[,c(2,3)], mi_2_s[,c(2,3)])
+#print(head(new_df))
+
+
+data_coeff_s <- data_coeff[data_coeff$colnames.m_int1. %in% names_req,]
+data_coeff_s <- data_coeff_s[,-1]
+new_df <- cbind(new_df,data_coeff_s)
+#print(head(new_df))
+
+rela_df_BT_s <- rela_df_BT[rela_df_BT$Features %in% names_req,c(5,6,7)]
+new_df <- cbind(new_df,rela_df_BT_s)
+
+unexp_df_s_bt <- unexp_df[unexp_df$V3 %in% names_req, c(1)]
+new_df <- cbind(new_df,unexp_df_s_bt)
+
+colnames(new_df) <- c("Features","Main_effect_pvalue","adjusted_main_effect_pvalue","Interaction_effect_pvalue", "adjusted_interaction_pvalue", "b0 (Intercept)", "b1 (Helminths)", "b2 (Diabetes)",	"% Helminth", "% Diabetes", 	"% Helminth:Diabetes", "Unexplained variance by the three terms")
+write.csv(new_df, file = paste0(x_bt,"/Supp_Tbl_3.csv"), col.names = TRUE, row.names = FALSE)
+
+
+
+
+x_at 
+
+#X <- ("D:/work/DM_Hel/reproduce/data/before_treatment/")
+data_coeff_ <- read.csv(paste0(x_at ,"/Coeff_terms_data.csv"))
+data_coeff_ <- data_coeff_[,-1]
+
+
+#X_mi_1 <- ("D:/work/DM_Hel/reproduce/data/before_treatment/")
+mi_1_ <- read.csv2(paste0(x_at ,"/Main_effect_pavls.csv"), sep = ",")  #main effect p val and adj val
+mi_1_ <- mi_1_[,-1]
+mi_2_ <- read.csv(paste0(x_at ,"/Interaction_effect_pavls.csv"), sep = ",") #interaction effect p val and adj val
+mi_2_ <- mi_2_[,-1]
+
+names_req <- mi_2_$Features
+
+mi_1_s_ <- mi_1_[mi_1_$Features %in% names_req, ]
+mi_2_s_ <- mi_2_[mi_2_$Features %in% names_req, ]
+
+new_df_ <- cbind(names_req, mi_1_s_[,c(2,3)], mi_2_s_[,c(2,3)])
+#print(head(new_df))
+
+
+data_coeff_s_ <- data_coeff_[data_coeff_$colnames.m_int1. %in% names_req,]
+data_coeff_s_ <- data_coeff_s_[,-1]
+new_df_ <- cbind(new_df_,data_coeff_s_)
+#print(head(new_df))
+
+rela_df_AT_s <- rela_df_AT[rela_df_AT$Features %in% names_req,c(5,6,7)]
+new_df_ <- cbind(new_df_,rela_df_AT_s)
+
+unexp_df_s_at <- unexp_df[unexp_df$V3 %in% names_req, c(2)]
+new_df_ <- cbind(new_df_,unexp_df_s_at)
+
+colnames(new_df_) <- c("Features","Main_effect_pvalue","adjusted_main_effect_pvalue","Interaction_effect_pvalue", "adjusted_interaction_pvalue", "b0 (Intercept)", "b1 (Helminths)", "b2 (Diabetes)",	"% Helminth", "% Diabetes", 	"% Helminth:Diabetes", "Unexplained variance by the three terms")
+write.csv(new_df_, file = paste0(x_at,"/Supp_Tbl_4.csv"), col.names = TRUE, row.names = FALSE)
+
 
                       
