@@ -96,45 +96,11 @@ Run the code in **Section 4** in the **Replication analysis** file to obtain sup
 
 There are 12 columns in these tables. They are **Features**, **Main effect p values**, **Main effect adjusted p values**, **Interaction effect p values**, **Interaction effect adjusted p values**, **b0 (Intercept coefficient)**, **b1 (Helminth term coefficient)**, **b2 (Diabetes term coefficient)**, **Relative explained variance (Helminth term)**, **Relative explained variance (Diabetes term)**, **Relative explained variance (Helminth:Diabetes interaction term)** and **Unexplained variance**.
 
-#### Code to get the last column in both supplementary tables 2 and 3
-Input to this function is outputs from **Section 4.2**  (*rela_df_BT* and *rela_df_AT*) in **Main and Interaction effect analysis**.
-Output of this function is a data frame with columns as features, unexplained variance (other than the helminth, diabetes and the interaction term) in before-treatment and after-treatment cases. 
-```r
-unexplained_var_sup_sheet <- function(X,Y){
-  some_at <- vector("numeric", length = nrow(Y))
-  for(i in 1:nrow(Y)){
-    some_at[i] <- (100 - sum(as.numeric(Y[[2]][i]),as.numeric(Y[[3]][i]),as.numeric(Y[[4]][i])))
-  }
-  
-  
-  some_bt <- vector("numeric", length = nrow(X))
-  
-  for(i in 1:nrow(X)){
-    some_bt[i] <- (100 - sum(as.numeric(X[[2]][i]),as.numeric(X[[3]][i]),as.numeric(X[[4]][i])))
-  }
-  
-  NEW_Df <- data.frame(X$Features,some_bt,some_at)
-  colnames(NEW_Df) <- c("Features","Unexplained_BT","Unexplained_AT") 
-return(NEW_Df)}
-
-# Call the function
-Unexp_Var_data <- unexplained_var_sup_sheet(rela_df_BT,rela_df_AT) 
-
-```
-
 #### Supplementary Table 2 
 
-1. **Main effect p values**, **Main effect adjusted p values**, **Interaction effect p values** and **Interaction effect adjusted p values** are output from **Section 3.1** in **Main and Interaction effect analysis**
-2. The values for columns **b0 (Intercept coefficient)**, **b1 (Helminth term coefficient)**, **b2 (Diabetes term coefficient)** are stored as output in a csv file (*Coeff_terms_data.csv*) in the working directory given in **Section 3.1**
-3. the values for columns **Relative explained variance (Helminth term)**, **Relative explained variance (Diabetes term)**, **Relative explained variance (Helminth:Diabetes interaction term)** are outout from **Section 4.2**
-4. Run the above code. "Unexplained_BT" in the output data frame of this function is the last column of supplementary table 2. 
 
 #### Supplementary Table 3
 
-1. **Main effect p values**, **Main effect adjusted p values**, **Interaction effect p values** and **Interaction effect adjusted p values** are output from **Section 3.2** in **Main and Interaction effect analysis**
-2. The values for  **b0 (Intercept coefficient)**, **b1 (Helminth term coefficient)**, **b2 (Diabetes term coefficient)** are stored as output in a csv file (*Coeff_terms_data.csv*) in the working directory given in **Section 3.2**
-3. the values for columns **Relative explained variance (Helminth term)**, **Relative explained variance (Diabetes term)**, **Relative explained variance (Helminth:Diabetes interaction term)** are outout from **Section 4.2**
-4. Run the above code. "Unexplained_AT" in the output data frame of this function is the last column of supplementary table 3. 
 
 ### Supplementary Table 4
 Run the code in **Section 5** in the **Replication analysis** file, to obtain a text file containing the contents in the supplementary table 4.
