@@ -407,3 +407,65 @@ write.csv(m_i_bt[[2]], file = "Interaction_effect_pavls.csv", col.names = TRUE)
 setwd(wd_at)
 write.csv(m_i_at[[1]], file = "Main_effect_pavls.csv", col.names = TRUE)
 write.csv(m_i_at[[2]], file = "Interaction_effect_pavls.csv", col.names = TRUE)
+
+##########################################################################################
+
+
+interp_s3 <- function(id,t, wds){
+  ip_name <- c("Adiponectin (pg/ml)", "IL-4 (pg/ml)", "G-CSF (pg/ml)", "IL-13 (pg/ml)", "IL-17A (pg/ml)")
+  ip_name_ids <- c()
+  for(i in 1:length(ip_name)){
+    ip_name_ids <- c(ip_name_ids, which(colnames(id)==ip_name[i]))
+  }
+  
+  ip_data <- id[,ip_name_ids]
+  
+  id$c <- factor(id$c, labels = c("No infection","Infection"))
+  id$g <- factor(id$g, labels = c("No Diabetes","Diabetes"))
+  
+  ip_data[[1]] <- as.numeric(ip_data[[1]])
+  ip_data[[2]] <- as.numeric(ip_data[[2]])
+  ip_data[[3]] <- as.numeric(ip_data[[3]])
+  ip_data[[4]] <- as.numeric(ip_data[[4]])
+  ip_data[[5]] <- as.numeric(ip_data[[5]])
+
+  #for(i in 1:length(ip_name_ids)){
+   # int_p[[i]] <- interaction.plot(x.factor = id$c, trace.factor = id$g, response = ip_data[[i]], ylab = ip_name[i], xlab = "Helminth Status", trace.label = "Diabetes Status", col = c("Red","Blue"),main=t)
+  #}
+  A <- interaction.plot(x.factor = id$c, trace.factor = id$g, response = ip_data[[1]], ylab = ip_name[1], xlab = "Helminth Status", trace.label = "Diabetes Status", col = c("Red","Blue"),main=t)
+  B <- interaction.plot(x.factor = id$c, trace.factor = id$g, response = ip_data[[2]], ylab = ip_name[2], xlab = "Helminth Status", trace.label = "Diabetes Status", col = c("Red","Blue"),main=t)
+  C <- interaction.plot(x.factor = id$c, trace.factor = id$g, response = ip_data[[3]], ylab = ip_name[3], xlab = "Helminth Status", trace.label = "Diabetes Status", col = c("Red","Blue"),main=t)
+  D <- interaction.plot(x.factor = id$c, trace.factor = id$g, response = ip_data[[4]], ylab = ip_name[4], xlab = "Helminth Status", trace.label = "Diabetes Status", col = c("Red","Blue"),main=t)
+  E  <- interaction.plot(x.factor = id$c, trace.factor = id$g, response = ip_data[[5]], ylab = ip_name[5], xlab = "Helminth Status", trace.label = "Diabetes Status", col = c("Red","Blue"),main=t)
+  
+  setwd(wds)
+  jpeg("Adiponectin.jpg")
+  interaction.plot(x.factor = id$c, trace.factor = id$g, response = ip_data[[1]], ylab = ip_name[1], xlab = "Helminth Status", trace.label = "Diabetes Status", col = c("Red","Blue"),main=t)
+  dev.off()
+  jpeg("IL-4.jpg")
+  interaction.plot(x.factor = id$c, trace.factor = id$g, response = ip_data[[2]], ylab = ip_name[2], xlab = "Helminth Status", trace.label = "Diabetes Status", col = c("Red","Blue"),main=t)
+  dev.off()
+  jpeg("G-CSF.jpg")
+  interaction.plot(x.factor = id$c, trace.factor = id$g, response = ip_data[[3]], ylab = ip_name[3], xlab = "Helminth Status", trace.label = "Diabetes Status", col = c("Red","Blue"),main=t)
+  dev.off()
+  jpeg("IL-13.jpg")
+  interaction.plot(x.factor = id$c, trace.factor = id$g, response = ip_data[[4]], ylab = ip_name[4], xlab = "Helminth Status", trace.label = "Diabetes Status", col = c("Red","Blue"),main=t)
+  dev.off()
+  jpeg("IL-17A.jpg")
+  interaction.plot(x.factor = id$c, trace.factor = id$g, response = ip_data[[5]], ylab = ip_name[5], xlab = "Helminth Status", trace.label = "Diabetes Status", col = c("Red","Blue"),main=t)
+  dev.off()
+  
+}
+
+
+dir.create(paste0(wd_m,"before_treatment/Supp_Figure_3"))
+x_bt_supp <- paste0(wd_m,"before_treatment/Supp_Figure_3")
+interp_s3(int_data_1,t ="Before-treatment", x_bt_supp)
+
+dir.create(paste0(wd_m,"after_treatment/Supp_Figure_4"))
+x_at_supp <- paste0(wd_m,"after_treatment/Supp_Figure_4")
+interp_s3(int_data_3,t ="After-treatment",x_at_supp)
+
+
+
+                      
