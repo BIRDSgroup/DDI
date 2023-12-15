@@ -20,7 +20,7 @@ DDI-pipeline is distributed in the hope that it will be useful, but WITHOUT ANY 
 ## Section 1: Our DDI pipeline 
 This section will provide information on how to run steps 2a, 2b, and 3 in the Figure below. Step 1 will vary between the datasets used and a detailed methodology on the same is given in our paper.
 
-(TODO: Split this Figure into (A) and (B) and show it in Section 1 and Section 2 respectively)
+(TODO: Split this Figure into (A) and (B) and show it in Section 1 and Section 2 respectively) (Have done this)
 ![Screenshot (136)](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/assets/60778368/1860116f-3461-43a2-9e25-33a9df1b787a)
 
 
