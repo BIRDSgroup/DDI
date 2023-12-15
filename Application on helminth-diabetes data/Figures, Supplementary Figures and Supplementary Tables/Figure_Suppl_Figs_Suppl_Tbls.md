@@ -18,7 +18,7 @@ Run the ["MI_script.R"](https://github.com/BIRDSgroup/Double-disease-interaction
 
 ### Figure 4 - Replication analysis
 
-Run the "Validation_script.R" under the **Scripts for Replication** section. This will generate the plots for **Figure 4**.
+Run the ["Validation_script.R"](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/blob/ee65c741df4c442d3dd4999b45d1d904c8fde3b6/Application%20on%20helminth-diabetes%20data/Scripts/Validation/Validation_Script.R) under the [**Script**](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/tree/987bcd0ff4ecaae35eec570c552b21f13ad0b0b3/Application%20on%20helminth-diabetes%20data/Scripts) section. This will generate the plots for **Figure 4**. Please take a look at the [Readme]() file for reference.
 Three figures in **Figure 4** (Check **Main_Figures** folder generated after running this script):
 
 1. Replication.jpg
@@ -27,11 +27,11 @@ Three figures in **Figure 4** (Check **Main_Figures** folder generated after run
    
 ### Figure 5 - Source immune cells of some of the DDI markers
 
-Run the "Interpretation_script.R" under the **Scripts for Replication** section. **Figure_5.jpg** is generated in the folder **Figure_5_and_6**.
+Run the ["Interpretation_script.R"]() under the [**Script**]() section. **Figure_5.jpg** is generated in the folder **Figure_5_and_6** after running the script. Please take a look at the [Readme]() file for reference.
 
 ### Figure 6 - Reactome pathway heatmap 
 
-Run the "Interpretation_script.R" under the **Scripts for Replication** section. **Figure_6.jpg** is generated in the folder **Figure_5_and_6**.
+Run the ["Interpretation_script.R"]() under the [**Script**]() section. **Figure_6.jpg** is generated in the folder **Figure_5_and_6** after running the script. Please take a look at the [Readme]() file for reference.
 
 
 ## Section 2 - Supplementary Figures
