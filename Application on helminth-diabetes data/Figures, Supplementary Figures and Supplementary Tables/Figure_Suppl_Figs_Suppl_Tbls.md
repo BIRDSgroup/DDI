@@ -27,133 +27,22 @@ Three figures in **Figure 4** (Check **Main_Figures** folder generated after run
    
 ### Figure 5 - Source immune cells of some of the DDI markers
 
-Run the ["Interpretation_script.R"](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/blob/a4c626f93a107d3b809e3a307fc26208423cff7f/Application%20on%20helminth-diabetes%20data/Scripts/Interpretation/Interpretation_Script.R) under the [**Script**](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/tree/987bcd0ff4ecaae35eec570c552b21f13ad0b0b3/Application%20on%20helminth-diabetes%20data/Scripts) section. **Figure_5.jpg** is generated in the folder **Figure_5_and_6** after running the script. Please take a look at the [Readme]() file for reference.
+Run the ["Interpretation_script.R"](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/blob/a4c626f93a107d3b809e3a307fc26208423cff7f/Application%20on%20helminth-diabetes%20data/Scripts/Interpretation/Interpretation_Script.R) under the [**Script**](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/tree/987bcd0ff4ecaae35eec570c552b21f13ad0b0b3/Application%20on%20helminth-diabetes%20data/Scripts) section. **Figure_5.jpg** is generated in the folder **Figure_5_and_6** after running the script. Please take a look at the [Readme](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/blob/990e3bbe91ee5311c880e2a50eebe2116d8ae170/Application%20on%20helminth-diabetes%20data/Scripts/Interpretation/Interpretation_Script_Readme.md) file for reference.
 
 ### Figure 6 - Reactome pathway heatmap 
 
-Run the ["Interpretation_script.R"](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/blob/a4c626f93a107d3b809e3a307fc26208423cff7f/Application%20on%20helminth-diabetes%20data/Scripts/Interpretation/Interpretation_Script.R) under the [**Script**](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/tree/987bcd0ff4ecaae35eec570c552b21f13ad0b0b3/Application%20on%20helminth-diabetes%20data/Scripts) section. **Figure_6.jpg** is generated in the folder **Figure_5_and_6** after running the script. Please take a look at the [Readme]() file for reference.
+Run the ["Interpretation_script.R"](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/blob/a4c626f93a107d3b809e3a307fc26208423cff7f/Application%20on%20helminth-diabetes%20data/Scripts/Interpretation/Interpretation_Script.R) under the [**Script**](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/tree/987bcd0ff4ecaae35eec570c552b21f13ad0b0b3/Application%20on%20helminth-diabetes%20data/Scripts) section. **Figure_6.jpg** is generated in the folder **Figure_5_and_6** after running the script. Please take a look at the [Readme](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/blob/990e3bbe91ee5311c880e2a50eebe2116d8ae170/Application%20on%20helminth-diabetes%20data/Scripts/Interpretation/Interpretation_Script_Readme.md) file for reference.
 
 
 ## Section 2 - Supplementary Figures
 
 ### Supplementary Figure 1 - Heatmap
-This function will output the heatmap supplementary figure 1 provided in the main text.
-The input to this function is the working directory where the data/files necessary to create this heatmap are stored (same working directory as main figure 2a).
-```r
-supp_fig_2 <- function(wd_hp){
-  library(lubridate)
-  # Day based
-  together_day <- read.table(paste(wd_hp, "Hel_DM_together_44_res_date_v1.txt", sep = ""), sep='\t', header=T, stringsAsFactors=F, check.names=FALSE)
-  Year <- together_day$Year
-  together_day <- read.table(paste(wd_hp,"Hel_DM_togetherYearAdj_44_res_year_v1.txt", sep = ""), sep='\t', header=T, stringsAsFactors=F, check.names=FALSE)
-  together_day$Year <- NULL
-  samples <- c(rep("DM+Ctl",58),rep("DM+Inf_PreT",60),rep("DM+Inf_PostT",60),rep("DM-Ctl",60),rep("DM-Inf_PreT",44),rep("DM-Inf_PostT",44))
-  together_day <- cbind(together_day, samples)
-  together_day <- cbind(together_day, Year)
-  together_day$Year <- lubridate::dmy(together_day$Year)
-  together_date <- dplyr::arrange(together_day, Year)
-  days <- c(17)
-  for(i in 2:nrow(together_date)){
-    days <- c(days, difftime(together_date[i,"Year"], together_date[1,"Year"], units = "days"))
-  }
-  years <- substring(together_date$Year,1,4)
-  together_date$Year <- NULL
-  
-  combined <- as.data.frame(t(together_date))
-  combined <- combined[c(-51),]
-  
-  
-  library(pheatmap)
-  library(RColorBrewer)
-  library(Pigengene)
-  library(seriation)
-  
-  col12 <- brewer.pal(12,"Paired")
-  
-  j <- 1
-  Day <- c()
-  for(i in unique(days)){
-    if(j==13){
-      j <- 1
-    }
-    Day <- c(Day, col12[j])
-    j <- j+1
-    
-  }
-  names(Day) <- unique(days)
-  Day
-  length(Day)
-  class(Day)
-  my_colour = list(
-    #samples=c('DMp+Ctl'="red", 'DM+Inf_PreT'="blue", 'DM+Inf_PostT'="green", 'DM-Ctl'="orange", 'DM-Inf_PreT'="pink", 'DMm-Inf_PostT'="black"),
-    Samples=c('DM+Ctl'="#1B9E77", 'DM+Inf_PreT'="#D95F02", 'DM+Inf_PostT'="#7570B3", 'DM-Ctl'="#E7298A", 'DM-Inf_PreT'="#66A61E", 'DM-Inf_PostT'="#E6AB02"),
-    #samples=brewer.pal(6,"Dark2"),
-    #year=c('2013'="red", '2014'="blue", '2015'="green", '2016'="orange"),
-    Day=Day,
-    #Day=colorRampPalette(brewer.pal(12,"Paired"))(171),
-    Year=c('2013'="#1B9E77", '2014'="#D95F02", '2015'="#7570B3", '2016'="#E7298A"),
-    Category=c('Adipocytokines'="#A6CEE3", 'Cell count  frequency'="#1F78B4", 'Other Cytokines'="#B2DF8A", 'Pancreatic hormones'="#33A02C", 'Biochemical parameters'="#FB9A99", 'Th1- cytokines'="#E31A1C", 'Th2-cytokines'="#FDBF6F", 'Th17-cytokines'="#FF7F00", 'Anthropometric parameters'="#CAB2D6", 'Batch'="#6A3D9A")
-    #category=brewer.pal(10,"Paired")
-  )
-  
-  metadata <- data.frame(row.names=colnames(combined),Samples=together_date$samples, Day=as.factor(days), Year=years)
-  meta <- data.frame(row.names=rownames(combined),Category=c('Adipocytokines', 'Adipocytokines', 'Cell count  frequency', 'Cell count  frequency', 'Other Cytokines', 'Pancreatic hormones', 'Other Cytokines', 'Biochemical parameters', 'Biochemical parameters', 'Biochemical parameters', 'Th1- cytokines', 'Biochemical parameters', 'Th2-cytokines', 'Th1- cytokines', 'Th2-cytokines', 'Th17-cytokines', 'Th17-cytokines', 'Th17-cytokines', 'Th1- cytokines', 'Th17-cytokines', 'Th2-cytokines', 'Th2-cytokines', 'Th2-cytokines', 'Other Cytokines', 'Pancreatic hormones', 'Adipocytokines', 'Cell count  frequency', 'Biochemical parameters', 'Biochemical parameters', 'Other Cytokines', 'Biochemical parameters', 'Other Cytokines', 'Cell count  frequency', 'Cell count  frequency', 'Biochemical parameters', 'Cell count  frequency', 'Biochemical parameters', 'Biochemical parameters', 'Adipocytokines', 'Other Cytokines', 'Th1- cytokines', 'Biochemical parameters', 'Adipocytokines', 'Cell count  frequency', 'Anthropometric parameters', 'Anthropometric parameters', 'Cell count  frequency', 'Cell count  frequency', 'Biochemical parameters', 'Anthropometric parameters'))
-  
-  for(i in c(1:ncol(combined))) {
-    combined[,i] <- as.numeric(as.character(combined[,i]))
-  }
-  library(ComplexHeatmap)
-  library(circlize)
-  col_fun <- colorRamp2(c(-12,-10,-8,-6,-4,-2,0,1,2,3,4,5), colorRampPalette(rev(brewer.pal(n = 9, name = "RdBu")))(12))
-  ha = HeatmapAnnotation(Samples=together_date$samples, Day=as.factor(days), Year=years, 
-                         show_legend = c(TRUE, FALSE, TRUE), col = list(Samples = 
-                                                                          c('DM+Ctl'="#1B9E77", 'DM+Inf_PreT'="#D95F02", 'DM+Inf_PostT'=
-                                                                              "#7570B3", 'DM-Ctl'="#E7298A", 'DM-Inf_PreT'="#66A61E", 
-                                                                            'DM-Inf_PostT'="#E6AB02"), Year = c('2013'="#1B9E77", '2014'="#D95F02", '2015'="#7570B3", '2016'="#E7298A")), 
-                         annotation_legend_param = list(
-                           Samples = list(
-                             title = "Samples",
-                             at = c('DM+Ctl', 'DM+Inf_PreT', 'DM+Inf_PostT',
-                                    'DM-Ctl', 'DM-Inf_PreT', 'DM-Inf_PostT'),
-                             labels = c('DM+Ctl', 'DM+Inf_PreT', 'DM+Inf_PostT',
-                                        'DM-Ctl', 'DM-Inf_PreT', 'DM-Inf_PostT')
-                           ),
-                           Year = list(
-                             title = "Year",
-                             at = c(2013, 2014, 2015, 2016),
-                             labels = c('2013', '2014', '2015', '2016')
-                           )
-                         ))
-  ha2 = rowAnnotation(Category=c('Adipocytokines', 'Adipocytokines', 'Cell count  frequency', 'Cell count  frequency', 'Other Cytokines', 'Pancreatic hormones', 'Other Cytokines', 'Biochemical parameters', 'Biochemical parameters', 'Biochemical parameters', 'Th1- cytokines', 'Biochemical parameters', 'Th2-cytokines', 'Th1- cytokines', 'Th2-cytokines', 'Th17-cytokines', 'Th17-cytokines', 'Th17-cytokines', 'Th1- cytokines', 'Th17-cytokines', 'Th2-cytokines', 'Th2-cytokines', 'Th2-cytokines', 'Other Cytokines', 'Pancreatic hormones', 'Adipocytokines', 'Cell count  frequency', 'Biochemical parameters', 'Biochemical parameters', 'Other Cytokines', 'Biochemical parameters', 'Other Cytokines', 'Cell count  frequency', 'Cell count  frequency', 'Biochemical parameters', 'Cell count  frequency', 'Biochemical parameters', 'Biochemical parameters', 'Adipocytokines', 'Other Cytokines', 'Th1- cytokines', 'Biochemical parameters', 'Adipocytokines', 'Cell count  frequency', 'Anthropometric parameters', 'Anthropometric parameters', 'Cell count  frequency', 'Cell count  frequency', 'Biochemical parameters', 'Anthropometric parameters'), 
-                      col = list(Category=c('Adipocytokines'="#A6CEE3", 'Cell count  frequency'="#1F78B4", 'Other Cytokines'="#B2DF8A", 'Pancreatic hormones'="#33A02C", 'Biochemical parameters'="#FB9A99", 'Th1- cytokines'="#E31A1C", 'Th2-cytokines'="#FDBF6F", 'Th17-cytokines'="#FF7F00", 'Anthropometric parameters'="#CAB2D6")
-                      ), 
-                      annotation_legend_param = list(
-                        Category = list(
-                          title = "Category",
-                          at = c('Adipocytokines', 'Cell count  frequency', 'Other Cytokines', 'Pancreatic hormones', 'Biochemical parameters', 'Th1- cytokines', 'Th2-cytokines', 'Th17-cytokines', 'Anthropometric parameters'),
-                          labels = c('Adipocytokines', 'Cell count  frequency', 'Other Cytokines', 'Pancreatic hormones', 'Biochemical parameters', 'Th1- cytokines', 'Th2-cytokines', 'Th17-cytokines', 'Anthropometric parameters')
-                        )
-                      ))
-  
-  ht_opt(legend_labels_gp = gpar(fontsize = 8), legend_title_gp = gpar(fontsize = 8, fontface = "bold"))
-  pph_s <- Heatmap(t(scale(t(combined))), row_names_gp = gpar(fontsize = 8), col = col_fun, 
-                   cluster_columns = FALSE,clustering_distance_rows = "euclidean", 
-                   show_column_names = FALSE, top_annotation = ha, left_annotation = ha2,
-                   heatmap_legend_param = list(title = "Variables"))
-  pph_s
-  
-  
-}
+Run the ["Heatmaps_Script.R"](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/blob/26bbae2344943f81b10cf8dfd8a9558a16a10e53/Application%20on%20helminth-diabetes%20data/Scripts/Heatmaps/Heatmaps_Script.R) under the [**Scripts**](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/tree/987bcd0ff4ecaae35eec570c552b21f13ad0b0b3/Application%20on%20helminth-diabetes%20data/Scripts) section. Refer to the [Readme](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/blob/1aaa425683109655346223341a5b75c0e83b0a63/Application%20on%20helminth-diabetes%20data/Scripts/Heatmaps/Heatmaps_Script_Readme.md) file on how to run this script. This will generate **Suppl_Fig_2.png** in the folder set as the working directory. 
 
-# Main command
-wd_hp <- c("D:/work/DM_Hel/Heatmap/data/checking/")
-supp_fig_2(wd_hp)
+### Supplementary Figure 2a and 2b - Bayesian network reconstruction
 
-```
 
-### Supplementary figure 2 
-
-### Supplementary figure 3 and 4 
+### Supplementary Figures 3 and 4 
 
 Run the commom function **interp_s3()** before running the individual codes for S3 and S4.
 
