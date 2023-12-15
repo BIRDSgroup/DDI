@@ -43,44 +43,9 @@ Run the ["Heatmaps_Script.R"](https://github.com/BIRDSgroup/Double-disease-inter
 
 
 ### Supplementary Figures 3 and 4 
+Run the ["MI_script.R"](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/blob/bc6704ea3221b41adb6e40a91735d8751d800b07/Application%20on%20helminth-diabetes%20data/Scripts/Main_and_Interaction/MI_Script.R) under the [**Scripts**](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/tree/987bcd0ff4ecaae35eec570c552b21f13ad0b0b3/Application%20on%20helminth-diabetes%20data/Scripts) section. This will generate two folders **Supp_Figure_3** and **Supp_Figure_4** which contain **.jpg** figures of the interaction plots used to obtain **Supplementary Figure 3** and **Supplementary Figure 4** from the manuscript respectively. Refer to the [Readme](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/blob/6772a411d79ad1e053ac20b7e2bb3286f29f3493/Application%20on%20helminth-diabetes%20data/Scripts/Main_and_Interaction/MI_Script_Readme.md) file on how to run this script.
 
-Run the commom function **interp_s3()** before running the individual codes for S3 and S4.
-
-```r
-interp_s3 <- function(id,t){
-  ip_name <- c("Adiponectin (pg/ml)", "IL-4 (pg/ml)", "G-CSF (pg/ml)", "IL-13 (pg/ml)", "IL-17A (pg/ml)")
-  ip_name_ids <- c()
-  for(i in 1:length(ip_name)){
-    ip_name_ids <- c(ip_name_ids, which(colnames(id)==ip_name[i]))
-  }
-  
-  ip_data <- id[,ip_name_ids]
-  
-  id$c <- factor(id$c, labels = c("No infection","Infection"))
-  id$g <- factor(id$g, labels = c("No Diabetes","Diabetes"))
-  
-  for(i in 1:length(ip_name_ids)){
-    interaction.plot(x.factor = id$c, trace.factor = id$g, response = ip_data[[i]], ylab = ip_name[i], xlab = "Helminth Status", trace.label = "Diabetes Status", col = c("Red","Blue"),main=t)
-  }
-  
-}
-
-```
-
-#### Supplementary figure 3 - Interaction plots
-Interaction plots for some of the DDI markers in the before-treatment samples like  **Adiponectin (pg/ml)**, **IL-4 (pg/ml)**, **G-CSF (pg/ml)**, **IL-13 (pg/ml)**, **IL-17A (pg/ml)**.
-```r
-bt_supp_3a <- interp_s3(int_data_1,t ="Before-treatment")
-```
-
-#### Supplementary figure 4 - Interaction plots
-Interaction plots for some of the DDI markers in the after-treatment samples like  **Adiponectin (pg/ml)**, **IL-4 (pg/ml)**, **G-CSF (pg/ml)**, **IL-13 (pg/ml)**, **IL-17A (pg/ml)**.
-```r
-at_supp_3b <- interp_s3(int_data_3,,t ="After-treatment")
-```
-
-
-### Supplementary figure 5 - Residual plots
+### Supplementary Figure 5 - Residual plots
 Run the function sup_5_fig() before implementing the code below which calls this function. The inputs to this function are the two outputs from **section 3** and **section 4.2** under **Main set of codes**.
 
 ```r
