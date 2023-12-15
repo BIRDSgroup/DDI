@@ -27,6 +27,7 @@ Here is the list of output files generated in both the folders:
 |BT_mi_obj/AT_mi_obj|list containing the main and interaction effect analysis output. "BT_mi_obj" is for before-treatment samples and "AT_mi_obj" is for after-treatment samples.|
 |Supp_Figure_3|This folder contains the **.jpg** figures of interaction plots to get Supplementary Figure 3|
 |Supp_Figure_4|This folder contains the **.jpg** figures of interaction plots to get Supplementary Figure 4|
-
+|Supp_Tbl_3|CSV file - Supplementary Table 3 from our paper|
+|Supp_Tbl_4|CSV file - Supplementary Table 4 from our paper|
 
 
