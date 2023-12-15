@@ -9,7 +9,7 @@ wd_hp <- c("D:/work/DM_Hel/Heatmap/data/checking/")
 ```
 2. After making this adjustment, save the script and execute it.
 
-# Output from "Interpretation_script.R"
+# Output from "Heatmaps_Script.R"
 Running this script will generate two Figures, **heatmap_fig2a.png** (Figure 2) and **Suppl_Fig_2.jpg** (Supplementary Figure 1) from the main paper in the same working directory mentioned above.
 
 
