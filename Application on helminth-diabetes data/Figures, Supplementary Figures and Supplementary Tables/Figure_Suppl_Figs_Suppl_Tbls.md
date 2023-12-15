@@ -27,11 +27,11 @@ Three figures in **Figure 4** (Check **Main_Figures** folder generated after run
    
 ### Figure 5 - Source immune cells of some of the DDI markers
 
-Run the ["Interpretation_script.R"]() under the [**Script**]() section. **Figure_5.jpg** is generated in the folder **Figure_5_and_6** after running the script. Please take a look at the [Readme]() file for reference.
+Run the ["Interpretation_script.R"](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/blob/a4c626f93a107d3b809e3a307fc26208423cff7f/Application%20on%20helminth-diabetes%20data/Scripts/Interpretation/Interpretation_Script.R) under the [**Script**](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/tree/987bcd0ff4ecaae35eec570c552b21f13ad0b0b3/Application%20on%20helminth-diabetes%20data/Scripts) section. **Figure_5.jpg** is generated in the folder **Figure_5_and_6** after running the script. Please take a look at the [Readme]() file for reference.
 
 ### Figure 6 - Reactome pathway heatmap 
 
-Run the ["Interpretation_script.R"]() under the [**Script**]() section. **Figure_6.jpg** is generated in the folder **Figure_5_and_6** after running the script. Please take a look at the [Readme]() file for reference.
+Run the ["Interpretation_script.R"](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/blob/a4c626f93a107d3b809e3a307fc26208423cff7f/Application%20on%20helminth-diabetes%20data/Scripts/Interpretation/Interpretation_Script.R) under the [**Script**](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/tree/987bcd0ff4ecaae35eec570c552b21f13ad0b0b3/Application%20on%20helminth-diabetes%20data/Scripts) section. **Figure_6.jpg** is generated in the folder **Figure_5_and_6** after running the script. Please take a look at the [Readme]() file for reference.
 
 
 ## Section 2 - Supplementary Figures
