@@ -94,13 +94,12 @@ Run the code in **Section 4** in the **Replication analysis** file to obtain sup
 
 ### Supplementary Table 2 (Before-Treatment analysis data) and Supplementary Table 3 (After-Treatment analysis data)
 
-There are 12 columns in these tables. They are **Features**, **Main effect p values**, **Main effect adjusted p values**, **Interaction effect p values**, **Interaction effect adjusted p values**, **b0 (Intercept coefficient)**, **b1 (Helminth term coefficient)**, **b2 (Diabetes term coefficient)**, **Relative explained variance (Helminth term)**, **Relative explained variance (Diabetes term)**, **Relative explained variance (Helminth:Diabetes interaction term)** and **Unexplained variance**.
+There are 12 columns in these tables. They are **Variables**, **Main effect p-values**, **Main effect adjusted p-values**, **Interaction effect p-values**, **Interaction effect adjusted p-values**, **b0 (Intercept coefficient)**, **b1 (Helminth term coefficient)**, **b2 (Diabetes term coefficient)**, **Relative explained variance (Helminth term)**, **Relative explained variance (Diabetes term)**, **Relative explained variance (Helminth:Diabetes interaction term)** and **Unexplained variance by the three terms**.
 
 #### Supplementary Table 2 
-
-
+Run the ["MI_script.R"](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/blob/bc6704ea3221b41adb6e40a91735d8751d800b07/Application%20on%20helminth-diabetes%20data/Scripts/Main_and_Interaction/MI_Script.R) under the [**Scripts**](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/tree/987bcd0ff4ecaae35eec570c552b21f13ad0b0b3/Application%20on%20helminth-diabetes%20data/Scripts) section. This will generate **Suppl_Tbl_2.csv** which is Supplementary Table 2 from our paper. Refer to the [Readme](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/blob/6772a411d79ad1e053ac20b7e2bb3286f29f3493/Application%20on%20helminth-diabetes%20data/Scripts/Main_and_Interaction/MI_Script_Readme.md) file on how to run this script.
 #### Supplementary Table 3
-
+Run the ["MI_script.R"](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/blob/bc6704ea3221b41adb6e40a91735d8751d800b07/Application%20on%20helminth-diabetes%20data/Scripts/Main_and_Interaction/MI_Script.R) under the [**Scripts**](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/tree/987bcd0ff4ecaae35eec570c552b21f13ad0b0b3/Application%20on%20helminth-diabetes%20data/Scripts) section. This will generate **Suppl_Tbl_3.csv** which is Supplementary Table 3 from our paper. Refer to the [Readme](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/blob/6772a411d79ad1e053ac20b7e2bb3286f29f3493/Application%20on%20helminth-diabetes%20data/Scripts/Main_and_Interaction/MI_Script_Readme.md) file on how to run this script.
 
 ### Supplementary Table 4
 Run the code in **Section 5** in the **Replication analysis** file, to obtain a text file containing the contents in the supplementary table 4.
