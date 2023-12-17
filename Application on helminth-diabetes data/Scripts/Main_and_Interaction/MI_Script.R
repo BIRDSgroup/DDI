@@ -84,7 +84,6 @@ AT_data_preprocess <- function(dm_m_con,dm_m_post, dm_p_con, dm_p_post){
 
 ###################################################### Main and Interaction function 
 
-
 MI_func <- function(input_data, covariates, disease_terms, cut_off, wk_dir){
   ipd <- input_data
   c_ls <- covariates
@@ -168,39 +167,68 @@ MI_func <- function(input_data, covariates, disease_terms, cut_off, wk_dir){
   }
   sink()
   ######################################################################################
-  ############################################### to write the coefficients of the model - intercept, diabetes and helminth terms (supplementary sheet 2 and 3)
+  ############################################### to write the coefficients of the main effect model - intercept, diabetes and helminth terms (supplementary sheet 2 and 3)
   #install.packages("jtools")
   library(jtools)
   library(writexl)
   intercep_model <- c()
   cterm_model <- c()
   gterm_model <- c()
-  sink("DATA_coeff.txt")
+  sink("Main_eff_DATA_coeff.txt")
   for (i in 1:ncol(m_int1)) {
     f1 <- lm(m_int1[[i]]~ ., data = ipd[c_ids])
     ss <- jtools::summ(f1)
+    ss$coeftable <- as.data.frame(ss$coeftable)
     intercep_model <- c(intercep_model,ss$coeftable[1,1])
-    cterm_model <- c(cterm_model,ss$coeftable[11,1])
-    gterm_model <- c(gterm_model,ss$coeftable[12,1])
+    cterm_model <- c(cterm_model,ss$coeftable$Est.[9])
+    gterm_model <- c(gterm_model,ss$coeftable$Est.[8])
   }
   new_list_coeff <- list(colnames(m_int1), intercep_model, cterm_model,gterm_model )
   print(new_list_coeff)
+  #print(row.names(ss$coeftable))
   sink()
   new_df <- data.frame(colnames(m_int1), intercep_model, cterm_model,gterm_model)
   #writexl::write_xlsx(new_df, path = tempfile(fileext = paste(wk_dir,"/COEFF_terms_data.xlsx" , sep = "")))
   setwd(wk_dir)
-  write.csv(new_df, file = "Coeff_terms_data.csv")
+  write.csv(new_df, file = "Main_eff_coeff_terms_data.csv")
   ######################################################################################
+  
+  
+  ############################################### to write the coefficients of the interaction model - intercept, diabetes and helminth terms (supplementary sheet 2 and 3)
+  #install.packages("jtools")
+  library(jtools)
+  library(writexl)
+  intercep_model_i <- c()
+  cterm_model_i <- c()
+  gterm_model_i <- c()
+  c_g_interaction <- c()
+  sink("Int_eff_DATA_coeff.txt")
+  for (i in 1:ncol(i_int1)) {
+    f1_ <- lm(i_int1[[i]]~ ., data = cpy_id1[cov_int])
+    ss_i <- jtools::summ(f1_)
+    ss_i$coeftable <- as.data.frame(ss_i$coeftable)
+    intercep_model_i <- c(intercep_model_i,ss_i$coeftable[1,1])
+    cterm_model_i <- c(cterm_model_i,ss_i$coeftable$Est.[9])
+    gterm_model_i <- c(gterm_model_i,ss_i$coeftable$Est.[8])
+    c_g_interaction <- c(c_g_interaction,ss_i$coeftable$Est.[13])
+  }
+  new_list_coeff_i <- list(colnames(i_int1), intercep_model_i, cterm_model_i,gterm_model_i,c_g_interaction)
+  print(new_list_coeff_i)
+  #print(row.names(ss_i$coeftable))
+  sink()
+  new_df_i <- data.frame(colnames(i_int1), intercep_model_i, cterm_model_i,gterm_model_i,c_g_interaction)
+  #writexl::write_xlsx(new_df, path = tempfile(fileext = paste(wk_dir,"/COEFF_terms_data.xlsx" , sep = "")))
+  setwd(wk_dir)
+  write.csv(new_df_i, file = "Int_eff_coeff_terms_data.csv")
+  
+  
   
   mi_op_list <- list(int1_m_df,m_df_1,main_eff_var,inter_eff_var)
   names(mi_op_list) <- c("features_m_df", "features_i_df", "Main_effect_variables", "Interaction_effect_variables")
   
   
   return(mi_op_list)}
-
-
-
-######### To calculate percentage explained of class, group and interaction term on the features ###############################################################
+######### To calculate the percentage explained of class, group, and interaction term on the features ###############################################################
 
 
 per_exp <- function(ip_data){
@@ -511,21 +539,11 @@ unexp_df <- sup_5_fig(rela_df_BT, rela_df_AT,m_i_bt,m_i_at)
 
 
 
-
-
-
-
-
-
-
-
-
-
 ############# Supplementary table 2 and 3
-x_bt 
+#x_bt 
 
 #X <- ("D:/work/DM_Hel/reproduce/data/before_treatment/")
-data_coeff <- read.csv(paste0(x_bt ,"/Coeff_terms_data.csv"))
+data_coeff <- read.csv(paste0(x_bt ,"/Main_eff_coeff_terms_data.csv"))
 data_coeff <- data_coeff[,-1]
 
 
@@ -555,16 +573,21 @@ new_df <- cbind(new_df,rela_df_BT_s)
 unexp_df_s_bt <- unexp_df[unexp_df$V3 %in% names_req, c(1)]
 new_df <- cbind(new_df,unexp_df_s_bt)
 
-colnames(new_df) <- c("Features","Main_effect_pvalue","adjusted_main_effect_pvalue","Interaction_effect_pvalue", "adjusted_interaction_pvalue", "b0 (Intercept)", "b1 (Helminths)", "b2 (Diabetes)",	"% Helminth", "% Diabetes", 	"% Helminth:Diabetes", "Unexplained variance by the three terms")
-write.csv(new_df, file = paste0(x_bt,"/Supp_Tbl_3.csv"), col.names = TRUE, row.names = FALSE)
+data_coeff_i <- read.csv(paste0(x_bt ,"/Int_eff_coeff_terms_data.csv"))
+data_coeff_i <- data_coeff_i[,-c(1,2)]
+
+new_df <- cbind(new_df,data_coeff_i)
+
+colnames(new_df) <- c("Variables","Main effect p-values","Main effect adjusted p-values","Interaction effect p-values", "Interaction effect adjusted p-values", "Main effect model - b0 (Intercept term coefficient)", "Main effect model - b1 (Helminth term coefficient)", "Main effect model - b2 (Diabetes term coefficient)",	"Relative explained variance (Helminth term)", "Relative explained variance (Diabetes term)", 	"Relative explained variance (Helminth:Diabetes interaction term)", "Unexplained variance by the three terms", "Interaction effect model - c0 (Intercept term coefficient)", "Interaction effect model - c1 (Helminth term coefficient)", "Interaction effect model - c2 (Diabetes term coefficient)","Interaction effect model - c3 (Helminth:Diabetes interaction term coefficient)")
+write.csv(new_df, file = paste0(x_bt,"/Supp_Tbl_2.csv"), col.names = TRUE, row.names = FALSE)
 
 
 
 
-x_at 
+#  x_at 
 
 #X <- ("D:/work/DM_Hel/reproduce/data/before_treatment/")
-data_coeff_ <- read.csv(paste0(x_at ,"/Coeff_terms_data.csv"))
+data_coeff_ <- read.csv(paste0(x_at ,"/Main_eff_coeff_terms_data.csv"))
 data_coeff_ <- data_coeff_[,-1]
 
 
@@ -594,8 +617,26 @@ new_df_ <- cbind(new_df_,rela_df_AT_s)
 unexp_df_s_at <- unexp_df[unexp_df$V3 %in% names_req, c(2)]
 new_df_ <- cbind(new_df_,unexp_df_s_at)
 
-colnames(new_df_) <- c("Features","Main_effect_pvalue","adjusted_main_effect_pvalue","Interaction_effect_pvalue", "adjusted_interaction_pvalue", "b0 (Intercept)", "b1 (Helminths)", "b2 (Diabetes)",	"% Helminth", "% Diabetes", 	"% Helminth:Diabetes", "Unexplained variance by the three terms")
-write.csv(new_df_, file = paste0(x_at,"/Supp_Tbl_4.csv"), col.names = TRUE, row.names = FALSE)
+data_coeff_i_ <- read.csv(paste0(x_at ,"/Int_eff_coeff_terms_data.csv"))
+data_coeff_i_ <- data_coeff_i_[,-c(1,2)]
+
+new_df_ <- cbind(new_df_,data_coeff_i_)
+
+colnames(new_df_) <- c("Variables","Main effect p-values","Main effect adjusted p-values","Interaction effect p-values", "Interaction effect adjusted p-values", "Main effect model - b0 (Intercept term coefficient)", "Main effect model - b1 (Helminth term coefficient)", "Main effect model - b2 (Diabetes term coefficient)",	"Relative explained variance (Helminth term)", "Relative explained variance (Diabetes term)", 	"Relative explained variance (Helminth:Diabetes interaction term)", "Unexplained variance by the three terms","Interaction effect model - c0 (Intercept term coefficient)", "Interaction effect model - c1 (Helminth term coefficient)", "Interaction effect model - c2 (Diabetes term coefficient)","Interaction effect model - c3 (Helminth:Diabetes interaction term coefficient)")
+write.csv(new_df_, file = paste0(x_at,"/Supp_Tbl_3.csv"), col.names = TRUE, row.names = FALSE)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
                       
