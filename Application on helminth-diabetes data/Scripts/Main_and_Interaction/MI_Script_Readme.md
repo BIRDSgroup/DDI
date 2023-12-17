@@ -4,7 +4,7 @@ This R file contains the code to reproduce the results from the Main and Interac
 The details of the outputs generated from this script are given below.
 
 ## Instruction
-1. Modify the code at line 300 (shown below) to the working directory containing the main and interaction effect data.
+1. Modify the code at line 325 (shown below) to the working directory containing the main and interaction effect data.
 ```R
 wd_m <- c("D:/work/DM_Hel/reproduce/data/")
 ```
