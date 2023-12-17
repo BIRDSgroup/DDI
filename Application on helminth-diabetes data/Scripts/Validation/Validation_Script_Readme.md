@@ -47,7 +47,7 @@ This file contains 14 outputs (8 figures and 6 are Yuen's robust t-test p values
 |Replication_image_cutoff0.01| Supplementary figure 7|
 |Replication_image_cutoff0.05| Supplementary figure 7|
 
-
+3) Supplementary Table 4 - CSV file
 
 
 
