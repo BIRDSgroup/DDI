@@ -87,6 +87,8 @@ sup_5_fig(rela_df_BT, rela_df_AT,BT_main_inter,AT_main_inter)
 
 ### Supplementary figure 6 and 7
 
+Run the ["Validation_script.R"](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/blob/ee65c741df4c442d3dd4999b45d1d904c8fde3b6/Application%20on%20helminth-diabetes%20data/Scripts/Validation/Validation_Script.R) under the [**Script**](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/tree/987bcd0ff4ecaae35eec570c552b21f13ad0b0b3/Application%20on%20helminth-diabetes%20data/Scripts) section. This will generate the plots for **Supplementary Figure 6** and **Supplementary Figure 7** in the folder **Supplementary Figures**. Please take a look at the [Readme](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/blob/321c1f03f647dfc5596a123997a580f5c261f8d2/Application%20on%20helminth-diabetes%20data/Scripts/Validation/Validation_Script_Readme.md) file on instructions to run the script.
+
 Run the code in **Section 4** in the **Replication analysis** file to obtain supplementary figures 6 and 7.
 
  
@@ -103,7 +105,7 @@ Run the ["MI_script.R"](https://github.com/BIRDSgroup/Double-disease-interaction
 Run the ["MI_script.R"](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/blob/bc6704ea3221b41adb6e40a91735d8751d800b07/Application%20on%20helminth-diabetes%20data/Scripts/Main_and_Interaction/MI_Script.R) under the [**Scripts**](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/tree/987bcd0ff4ecaae35eec570c552b21f13ad0b0b3/Application%20on%20helminth-diabetes%20data/Scripts) section. This will generate **Suppl_Tbl_3.csv** which is Supplementary Table 3 from our paper. Refer to the [Readme](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/blob/6772a411d79ad1e053ac20b7e2bb3286f29f3493/Application%20on%20helminth-diabetes%20data/Scripts/Main_and_Interaction/MI_Script_Readme.md) file on how to run this script.
 
 ### Supplementary Table 4
-Run the code in **Section 5** in the **Replication analysis** file, to obtain a text file containing the contents in the supplementary table 4.
+Run the ["Validation_script.R"](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/blob/ee65c741df4c442d3dd4999b45d1d904c8fde3b6/Application%20on%20helminth-diabetes%20data/Scripts/Validation/Validation_Script.R) under the [**Script**](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/tree/987bcd0ff4ecaae35eec570c552b21f13ad0b0b3/Application%20on%20helminth-diabetes%20data/Scripts) section. This will generate the CSV file for **Supplementary Table 4**. Please take a look at the [Readme](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/blob/321c1f03f647dfc5596a123997a580f5c261f8d2/Application%20on%20helminth-diabetes%20data/Scripts/Validation/Validation_Script_Readme.md) file for reference.
 
 
 
