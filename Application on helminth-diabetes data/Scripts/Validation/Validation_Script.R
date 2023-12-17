@@ -358,62 +358,87 @@ Validation_res_plots <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc,wd)
   #rep_p <- p+ggpubr::stat_pvalue_manual(stat_c[,-c(13,14)] , label = "p.adj")
   
   
-  ########## TNFa
-  tnf_mm_val <- val_data_3$`TNF-a (pg/ml)`
-  tnf_mp_val <- val_data_2$`TNF-a (pg/ml)`
-  tnf_pp_val <- val_data_1$`TNF-a (pg/ml)`
+  tnfa_mm_val <- val_data_3$`TNF-a (pg/ml)`
+  tnfa_mp_val <- val_data_2$`TNF-a (pg/ml)`
+  tnfa_pp_val <- val_data_1$`TNF-a (pg/ml)`
   
-  tnf_mm_dis <- dm_m_con$`TNF-a (pg/ml)`
-  tnf_mp_dis <- dm_p_con$`TNF-a (pg/ml)`
-  tnf_pp_dis <- dm_p_pre$`TNF-a (pg/ml)`
+  tnfa_mm_dis <- dm_m_con$`TNF-a (pg/ml)`
+  tnfa_mp_dis <- dm_p_con$`TNF-a (pg/ml)`
+  tnfa_pp_dis <- dm_p_pre$`TNF-a (pg/ml)`
   
-  tnf_df <- data.frame(
-    label <- rep(c("Hel-DM-","Hel-DM+","Hel+DM+","Hel-DM-","Hel-DM+","Hel+DM+"),times=c(length(tnf_mm_val),length(tnf_mp_val),length(tnf_pp_val),length(tnf_mm_dis),length( tnf_mp_dis), length( tnf_pp_dis))),
-    Groups <- c(tnf_mm_val,tnf_mp_val,tnf_pp_val,tnf_mm_dis,tnf_mp_dis,tnf_pp_dis),
-    key <- rep(c("Validation cohort", "Discovery cohort"), times=c(length(c(tnf_mm_val,tnf_mp_val,tnf_pp_val)),length(c(tnf_mm_dis,tnf_mp_dis,tnf_pp_dis))))
+  tnfa_df <- data.frame(
+    label <- rep(c("Hel-DM-","Hel-DM+","Hel+DM+","Hel-DM-","Hel-DM+","Hel+DM+"),times=c(length(tnfa_mm_val),length(tnfa_mp_val),length(tnfa_pp_val),length(tnfa_mm_dis),length(tnfa_mp_dis), length(tnfa_pp_dis))),
+    Groups <- c(log10(tnfa_mm_val),log10(tnfa_mp_val),log10(tnfa_pp_val),log10(tnfa_mm_dis),log10(tnfa_mp_dis),log10(tnfa_pp_dis)),
+    key <- rep(c("Validation cohort", "Discovery cohort"), times=c(length(c(tnfa_mm_val,tnfa_mp_val,tnfa_pp_val)),length(c(tnfa_mm_dis,tnfa_mp_dis,tnfa_pp_dis))))
   )
   
-  colnames(tnf_df) <- c("Labels","Groups","Key")
+  colnames(tnfa_df) <- c("Labels","Groups","Key")
   
-  TNFa_p <- ggplot2::ggplot(tnf_df, ggplot2::aes(Labels, Groups))+ggplot2::geom_boxplot(ggplot2::aes(fill=Labels))+ggplot2::facet_wrap(~Key)+ggplot2::xlab("")+ggplot2::ylab("TNF-alpha (pg/ml)")+ggplot2::theme(text = ggplot2::element_text(size=20))+ggplot2::theme_bw()+ggplot2::scale_x_discrete(guide = guide_axis(angle = 90))+theme_bw(base_size = 18)
+  tnfa_p <- ggplot2::ggplot(tnfa_df, ggplot2::aes(Labels, Groups))+ggplot2::geom_boxplot(ggplot2::aes(fill=Labels))+ggplot2::facet_wrap(~Key)+ggplot2::xlab("")+ggplot2::ylab("TNF-alpha in log scale")+ggplot2::theme(text = ggplot2::element_text(size=20))+ggplot2::scale_x_discrete(guide = guide_axis(angle = 90))+theme_bw(base_size = 18)
   
-
+  
+  
+  
+  ifng_mm_val <- val_data_3$`IFNg (pg/ml)`
+  ifng_mp_val <- val_data_2$`IFNg (pg/ml)`
+  ifng_pp_val <- val_data_1$`IFNg (pg/ml)`
+  
+  ifng_mm_dis <- dm_m_con$`IFNg (pg/ml)`
+  ifng_mp_dis <- dm_p_con$`IFNg (pg/ml)`
+  ifng_pp_dis <- dm_p_pre$`IFNg (pg/ml)`
+  
+  ifng_df <- data.frame(
+    label <- rep(c("Hel-DM-","Hel-DM+","Hel+DM+","Hel-DM-","Hel-DM+","Hel+DM+"),times=c(length(ifng_mm_val),length(ifng_mp_val),length(ifng_pp_val),length(ifng_mm_dis),length(ifng_mp_dis), length(ifng_pp_dis))),
+    Groups <- c(log10(ifng_mm_val),log10(ifng_mp_val),log10(ifng_pp_val),log10(ifng_mm_dis),log10(ifng_mp_dis),log10(ifng_pp_dis)),
+    key <- rep(c("Validation cohort", "Discovery cohort"), times=c(length(c(ifng_mm_val,ifng_mp_val,ifng_pp_val)),length(c(ifng_mm_dis,ifng_mp_dis,ifng_pp_dis))))
+  )
+  
+  colnames(ifng_df) <- c("Labels","Groups","Key")
+  
+  ifng_p <- ggplot2::ggplot(ifng_df, ggplot2::aes(Labels, Groups))+ggplot2::geom_boxplot(ggplot2::aes(fill=Labels))+ggplot2::facet_wrap(~Key)+ggplot2::xlab("")+ggplot2::ylab("IFN-gamma in log scale")+ggplot2::theme(text = ggplot2::element_text(size=20))+ggplot2::scale_x_discrete(guide = guide_axis(angle = 90))+theme_bw(base_size = 18)
+  
+  
+  il2_mm_val <- val_data_3$`IL-2 (pg/ml)`
+  il2_mp_val <- val_data_2$`IL-2 (pg/ml)`
+  il2_pp_val <- val_data_1$`IL-2 (pg/ml)`
+  
+  il2_mm_dis <- dm_m_con$`IL-2 (pg/ml)`
+  il2_mp_dis <- dm_p_con$`IL-2 (pg/ml)`
+  il2_pp_dis <- dm_p_pre$`IL-2 (pg/ml)`
+  
+  il2_df <- data.frame(
+    label <- rep(c("Hel-DM-","Hel-DM+","Hel+DM+","Hel-DM-","Hel-DM+","Hel+DM+"),times=c(length(il2_mm_val),length(il2_mp_val),length(il2_pp_val),length(il2_mm_dis),length(il2_mp_dis), length(il2_pp_dis))),
+    Groups <- c(log10(il2_mm_val),log10(il2_mp_val),log10(il2_pp_val),log10(il2_mm_dis),log10(il2_mp_dis),log10(il2_pp_dis)),
+    key <- rep(c("Validation cohort", "Discovery cohort"), times=c(length(c(il2_mm_val,il2_mp_val,il2_pp_val)),length(c(il2_mm_dis,il2_mp_dis,il2_pp_dis))))
+  )
+  
+  colnames(il2_df) <- c("Labels","Groups","Key")
+  
+  il2_p <- ggplot2::ggplot(il2_df, ggplot2::aes(Labels, Groups))+ggplot2::geom_boxplot(ggplot2::aes(fill=Labels))+ggplot2::facet_wrap(~Key)+ggplot2::xlab("")+ggplot2::ylab("IL-2 in log scale")+ggplot2::theme(text = ggplot2::element_text(size=20))+ggplot2::scale_x_discrete(guide = guide_axis(angle = 90))+theme_bw(base_size = 18)
+  
+  
+ 
+  
   setwd(paste0(wd,"Main_Figures"))
   jpeg("TNF-alpha.jpg")
-  plot(TNFa_p)
+  plot(tnfa_p)
   dev.off()
-  
-  
-  ########## IFNg
-  IFNg_mm_val <- val_data_3$`IFNg (pg/ml)`
-  IFNg_mp_val <- val_data_2$`IFNg (pg/ml)`
-  IFNg_pp_val <- val_data_1$`IFNg (pg/ml)`
-  
-  IFNg_mm_dis <- dm_m_con$`IFNg (pg/ml)`
-  IFNg_mp_dis <- dm_p_con$`IFNg (pg/ml)`
-  IFNg_pp_dis <- dm_p_pre$`IFNg (pg/ml)`
-  
-  IFNg_df <- data.frame(
-    label <- rep(c("Hel-DM-","Hel-DM+","Hel+DM+","Hel-DM-","Hel-DM+","Hel+DM+"),times=c(length(IFNg_mm_val),length(IFNg_mp_val),length(IFNg_pp_val),length(IFNg_mm_dis),length( IFNg_mp_dis), length( IFNg_pp_dis))),
-    Groups <- c(IFNg_mm_val,IFNg_mp_val,IFNg_pp_val,IFNg_mm_dis,IFNg_mp_dis,IFNg_pp_dis),
-    key <- rep(c("Validation cohort", "Discovery cohort"), times=c(length(c(IFNg_mm_val,IFNg_mp_val,IFNg_pp_val)),length(c(IFNg_mm_dis,IFNg_mp_dis,IFNg_pp_dis))))
-  )
-  
-  colnames(IFNg_df) <- c("Labels","Groups","Key")
-  
-  IFNg_p <- ggplot2::ggplot(IFNg_df, ggplot2::aes(Labels, Groups))+ggplot2::geom_boxplot(ggplot2::aes(fill=Labels))+ggplot2::facet_wrap(~Key)+ggplot2::xlab("")+ggplot2::ylab("IFN-gamma (pg/ml)")+ggplot2::theme(text = ggplot2::element_text(size=20))+ggplot2::scale_x_discrete(guide = guide_axis(angle = 90))+theme_bw(base_size = 18)
   
   
   setwd(paste0(wd,"Main_Figures"))
   jpeg("IFN-gamma.jpg")
-  plot(IFNg_p)
+  plot(ifng_p)
   dev.off()
   
+  setwd(paste0(wd,"Main_Figures"))
+  jpeg("IL-2.jpg")
+  plot(il2_p)
+  dev.off()
   
-  some_list <- list(p,stat_c_mmpp,stat_c_mppp,stat_c_mpmm,TNFa_p, IFNg_p,val_dc_adj_p )
-  names(some_list) <- c("replication_image","Robust t-test pval - hel-dm- vs hel+dm+","Robust t-test pval - hel-dm+ vs hel+dm+","Robust t-test pval - hel-dm+ vs hel-dm-","TNFalpha_image","IFNgamma_image","pvalue_validation_discovery_cohort")
+  some_list <- list(p,stat_c_mmpp,stat_c_mppp,stat_c_mpmm,tnfa_p, ifng_p,il2_p,val_dc_adj_p )
+  names(some_list) <- c("replication_image","Robust t-test pval - hel-dm- vs hel+dm+","Robust t-test pval - hel-dm+ vs hel+dm+","Robust t-test pval - hel-dm+ vs hel-dm-","TNFalpha_image","IFNgamma_image","IL2_image","pvalue_validation_discovery_cohort")
   
-
+  
   return(some_list)}
 
 ## Main command / results generating command
@@ -466,7 +491,7 @@ for(file in c('Hel+DM+', 'Hel+DM+_Post-T', 'Hel-DM+', 'Hel+DM-', 'Hel-DM-', 'Hel
 ######################################################
 
 plot_rep_fig4 <- Validation_res_plots(val_data_1,val_data_2, val_data_3, dm_m_con, dm_p_pre, dm_p_con, wr_dr)
-pvals_val_dc <- plot_rep_fig4[[7]]
+pvals_val_dc <- plot_rep_fig4[[8]]
 setwd(wr_dr)
 saveRDS(plot_rep_fig4, file = "validation_results.RDS")
 saveRDS(pvals_val_dc, file = "pvalues_validation_discovery_cohorts.RDS")
@@ -474,24 +499,109 @@ saveRDS(pvals_val_dc, file = "pvalues_validation_discovery_cohorts.RDS")
 
 
 supp_figs_6_7 <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc, tog_val_dc_pval,wd){
-  ########## IL-2
-  IL2_mm_val <- d3_val$`IL-2 (pg/ml)`
-  IL2_mp_val <- d2_val$`IL-2 (pg/ml)`
-  IL2_pp_val <- d1_val$`IL-2 (pg/ml)`
+  ########## IL-17a
   
-  IL2_mm_dis <- d1_dc$`IL-2 (pg/ml)`
-  IL2_mp_dis <- d3_dc$`IL-2 (pg/ml)`
-  IL2_pp_dis <- d2_dc$`IL-2 (pg/ml)`
+  il17a_mm_val <- d3_val$`IL-17A (pg/ml)`
+  il17a_mp_val <- d2_val$`IL-17A (pg/ml)`
+  il17a_pp_val <- d1_val$`IL-17A (pg/ml)`
   
-  IL2_df <- data.frame(
-    label <- rep(c("Hel-DM-","Hel-DM+","Hel+DM+","Hel-DM-","Hel-DM+","Hel+DM+"),times=c(length(IL2_mm_val),length(IL2_mp_val),length(IL2_pp_val),length(IL2_mm_dis),length( IL2_mp_dis), length( IL2_pp_dis))),
-    Groups <- c(IL2_mm_val,IL2_mp_val,IL2_pp_val,IL2_mm_dis,IL2_mp_dis,IL2_pp_dis),
-    key <- rep(c("Validation cohort", "Discovery cohort"), times=c(length(c(IL2_mm_val,IL2_mp_val,IL2_pp_val)),length(c(IL2_mm_dis,IL2_mp_dis,IL2_pp_dis))))
+  il17a_mm_dis <- dm_m_con$`IL-17A (pg/ml)`
+  il17a_mp_dis <- dm_p_con$`IL-17A (pg/ml)`
+  il17a_pp_dis <- dm_p_pre$`IL-17A (pg/ml)`
+  
+  il17a_df_log10_m <- data.frame(
+    label <- rep(c("Hel-DM-","Hel-DM+","Hel+DM+","Hel-DM-","Hel-DM+","Hel+DM+"),times=c(length(il17a_mm_val),length(il17a_mp_val),length(il17a_pp_val),length(il17a_mm_dis),length(il17a_mp_dis), length(il17a_pp_dis))),
+    Groups <- c(log10(il17a_mm_val),log10(il17a_mp_val),log10(il17a_pp_val),log10(il17a_mm_dis),log10(il17a_mp_dis),log10(il17a_pp_dis)),
+    key <- rep(c("Validation cohort", "Discovery cohort"), times=c(length(c(il17a_mm_val,il17a_mp_val,il17a_pp_val)),length(c(il17a_mm_dis,il17a_mp_dis,il17a_pp_dis))))
   )
   
-  colnames(IL2_df) <- c("Labels","Groups","Key")
+  colnames(il17a_df_log10_m) <- c("Labels","Groups","Key")
   
-  IL2_p <- ggplot2::ggplot(IL2_df, ggplot2::aes(Labels, Groups))+ggplot2::geom_boxplot(ggplot2::aes(fill=Labels))+ggplot2::facet_wrap(~Key)+ggplot2::xlab("")+ggplot2::ylab("IL-2(pg/ml)")
+  il17a_p_log10 <- ggplot2::ggplot(il17a_df_log10_m, ggplot2::aes(Labels, Groups))+ggplot2::geom_boxplot(ggplot2::aes(fill=Labels))+ggplot2::facet_wrap(~Key)+ggplot2::xlab("")+ggplot2::ylab("IL-17A in log scale")+ggplot2::theme(text = ggplot2::element_text(size=20))+ggplot2::scale_x_discrete(guide = guide_axis(angle = 90))+theme_bw(base_size = 18)
+  
+  ### Visfatin
+  vis_mm_val <- d3_val$`Visfatin (pg/ml)`
+  vis_mp_val <- d2_val$`Visfatin (pg/ml)`
+  vis_pp_val <- d1_val$`Visfatin (pg/ml)`
+  
+  vis_mm_dis <- dm_m_con$`Visfatin (pg/ml)`
+  vis_mp_dis <- dm_p_con$`Visfatin (pg/ml)`
+  vis_pp_dis <- dm_p_pre$`Visfatin (pg/ml)`
+  
+  
+  vis_df_log10_m <- data.frame(
+    label <- rep(c("Hel-DM-","Hel-DM+","Hel+DM+","Hel-DM-","Hel-DM+","Hel+DM+"),times=c(length(vis_mm_val),length(vis_mp_val),length(vis_pp_val),length(vis_mm_dis),length(vis_mp_dis), length(vis_pp_dis))),
+    Groups <- c(log10(vis_mm_val),log10(vis_mp_val),log10(vis_pp_val),log10(vis_mm_dis),log10(vis_mp_dis),log10(vis_pp_dis)),
+    key <- rep(c("Validation cohort", "Discovery cohort"), times=c(length(c(vis_mm_val,vis_mp_val,vis_pp_val)),length(c(vis_mm_dis,vis_mp_dis,vis_pp_dis))))
+  )
+  
+  colnames(vis_df_log10_m) <- c("Labels","Groups","Key")
+  
+  vis_p_log10 <- ggplot2::ggplot(vis_df_log10_m, ggplot2::aes(Labels, Groups))+ggplot2::geom_boxplot(ggplot2::aes(fill=Labels))+ggplot2::facet_wrap(~Key)+ggplot2::xlab("")+ggplot2::ylab("Visfatin in log scale")+ggplot2::theme(text = ggplot2::element_text(size=20))+ggplot2::scale_x_discrete(guide = guide_axis(angle = 90))+theme_bw(base_size = 18)
+  
+  ### Il-4
+  il4_mm_val <- d3_val$`IL-4 (pg/ml)`
+  il4_mp_val <- d2_val$`IL-4 (pg/ml)`
+  il4_pp_val <- d1_val$`IL-4 (pg/ml)`
+  
+  il4_mm_dis <- dm_m_con$`IL-4 (pg/ml)`
+  il4_mp_dis <- dm_p_con$`IL-4 (pg/ml)`
+  il4_pp_dis <- dm_p_pre$`IL-4 (pg/ml)`
+  
+  
+  il4_df_log <- data.frame(
+    label <- rep(c("Hel-DM-","Hel-DM+","Hel+DM+","Hel-DM-","Hel-DM+","Hel+DM+"),times=c(length(il4_mm_val),length(il4_mp_val),length(il4_pp_val),length(il4_mm_dis),length(il4_mp_dis), length(il4_pp_dis))),
+    Groups <- c(log10(il4_mm_val+0.5),log10(il4_mp_val+0.5),log10(il4_pp_val+0.5),log10(il4_mm_dis+0.5),log10(il4_mp_dis+0.5),log10(il4_pp_dis+0.5)),
+    key <- rep(c("Validation cohort", "Discovery cohort"), times=c(length(c(il4_mm_val,il4_mp_val,il4_pp_val)),length(c(il4_mm_dis,il4_mp_dis,il4_pp_dis))))
+  )
+  
+  colnames(il4_df_log) <- c("Labels","Groups","Key")
+  
+  il4_p_log <- ggplot2::ggplot(il4_df_log, ggplot2::aes(Labels, Groups))+ggplot2::geom_boxplot(ggplot2::aes(fill=Labels))+ggplot2::facet_wrap(~Key)+ggplot2::xlab("")+ggplot2::ylab("IL-4 in log scale")+ggplot2::theme(text = ggplot2::element_text(size=20))+ggplot2::scale_x_discrete(guide = guide_axis(angle = 90))+theme_bw(base_size = 18)
+  
+  
+  
+  ### Il-10
+  
+  il10_mm_val <- d3_val$`IL-10 (pg/ml)`
+  il10_mp_val <- d2_val$`IL-10 (pg/ml)`
+  il10_pp_val <- d1_val$`IL-10 (pg/ml)`
+  
+  il10_mm_dis <- dm_m_con$`IL-10 (pg/ml)`
+  il10_mp_dis <- dm_p_con$`IL-10 (pg/ml)`
+  il10_pp_dis <- dm_p_pre$`IL-10 (pg/ml)`
+  
+  il10_df_log <- data.frame(
+    label <- rep(c("Hel-DM-","Hel-DM+","Hel+DM+","Hel-DM-","Hel-DM+","Hel+DM+"),times=c(length(il10_mm_val),length(il10_mp_val),length(il10_pp_val),length(il5_mm_dis),length(il10_mp_dis), length(il10_pp_dis))),
+    Groups <- c(log10(il10_mm_val),log10(il10_mp_val),log10(il10_pp_val),log10(il10_mm_dis),log10(il10_mp_dis),log10(il10_pp_dis)),
+    key <- rep(c("Validation cohort", "Discovery cohort"), times=c(length(c(il10_mm_val,il10_mp_val,il10_pp_val)),length(c(il10_mm_dis,il10_mp_dis,il10_pp_dis))))
+  )
+  
+  colnames(il10_df_log) <- c("Labels","Groups","Key")
+  
+  il10_p_log <- ggplot2::ggplot(il10_df_log, ggplot2::aes(Labels, Groups))+ggplot2::geom_boxplot(ggplot2::aes(fill=Labels))+ggplot2::facet_wrap(~Key)+ggplot2::xlab("")+ggplot2::ylab("IL-10 in log scale")+ggplot2::theme(text = ggplot2::element_text(size=20))+ggplot2::scale_x_discrete(guide = guide_axis(angle = 90))+theme_bw(base_size = 18)
+  
+  
+  ### Il-5
+  il5_mm_val <- d3_val$`IL-5 (pg/ml)`
+  il5_mp_val <- d2_val$`IL-5 (pg/ml)`
+  il5_pp_val <- d1_val$`IL-5 (pg/ml)`
+  
+  il5_mm_dis <- dm_m_con$`IL-5 (pg/ml)`
+  il5_mp_dis <- dm_p_con$`IL-5 (pg/ml)`
+  il5_pp_dis <- dm_p_pre$`IL-5 (pg/ml)`
+  
+  il5_df_log <- data.frame(
+    label <- rep(c("Hel-DM-","Hel-DM+","Hel+DM+","Hel-DM-","Hel-DM+","Hel+DM+"),times=c(length(il5_mm_val),length(il5_mp_val),length(il5_pp_val),length(il5_mm_dis),length(il5_mp_dis), length(il5_pp_dis))),
+    Groups <- c(log10(il5_mm_val),log10(il5_mp_val),log10(il5_pp_val),log10(il5_mm_dis),log10(il5_mp_dis),log10(il5_pp_dis)),
+    key <- rep(c("Validation cohort", "Discovery cohort"), times=c(length(c(il5_mm_val,il5_mp_val,il5_pp_val)),length(c(il5_mm_dis,il5_mp_dis,il5_pp_dis))))
+  )
+  
+  colnames(il5_df_log) <- c("Labels","Groups","Key")
+  
+  il5_p_log <- ggplot2::ggplot(il5_df_log, ggplot2::aes(Labels, Groups))+ggplot2::geom_boxplot(ggplot2::aes(fill=Labels))+ggplot2::facet_wrap(~Key)+ggplot2::xlab("")+ggplot2::ylab("IL-5 in log scale")+ggplot2::theme(text = ggplot2::element_text(size=20))+ggplot2::scale_x_discrete(guide = guide_axis(angle = 90))+theme_bw(base_size = 18)
+  
+  
   
   
   xx_hit_mmpp <- c()
@@ -733,8 +843,20 @@ supp_figs_6_7 <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc, tog_val_d
   
   dir.create(paste0(wd,"Supplementary_Figures"))
   setwd(paste0(wd,"Supplementary_Figures"))
-  jpeg("IL-2.jpg")
-  plot(IL2_p)
+  jpeg("IL-4.jpg")
+  plot(il4_p_log)
+  dev.off()
+  jpeg("IL-5.jpg")
+  plot(il5_p_log)
+  dev.off()
+  jpeg("IL-10.jpg")
+  plot(il10_p_log)
+  dev.off()
+  jpeg("IL-17A.jpg")
+  plot(il17a_p_log10)
+  dev.off()
+  jpeg("Visfatin.jpg")
+  plot(vis_p_log10)
   dev.off()
   jpeg("Replication_image_cutoff0.01.jpg")
   plot(p_0.01)
@@ -743,8 +865,8 @@ supp_figs_6_7 <- function(d1_val, d2_val, d3_val, d1_dc, d2_dc, d3_dc, tog_val_d
   plot(p_0.05)
   dev.off()
   
-  ss_somelist <- list(IL2_p,p_0.01,stat_c_mmpp_0.01,stat_c_mppp_0.01,stat_c_mpmm_0.01,p_0.05,stat_c_mmpp_0.05,stat_c_mppp_0.05,stat_c_mpmm_0.05)
-  names(ss_somelist) <- c("IL2_image","Replication_image_cutoff0.01","rtt_pval_mmpp_0.01","rtt_pval_mppp_0.01","rtt_pval_mpmm_0.01","Replication_image_cutoff0.05","rtt_pval_mmpp_0.05","rtt_pval_mppp_0.05","rtt_pval_mpmm_0.05")
+  ss_somelist <- list(il4_p_log,il5_p_log,il10_p_log,il17a_p_log10,vis_p_log10,p_0.01,stat_c_mmpp_0.01,stat_c_mppp_0.01,stat_c_mpmm_0.01,p_0.05,stat_c_mmpp_0.05,stat_c_mppp_0.05,stat_c_mpmm_0.05)
+  names(ss_somelist) <- c("IL4_image","IL5_image","IL10_image","IL17a_image","Visfatin_image","Replication_image_cutoff0.01","rtt_pval_mmpp_0.01","rtt_pval_mppp_0.01","rtt_pval_mpmm_0.01","Replication_image_cutoff0.05","rtt_pval_mmpp_0.05","rtt_pval_mppp_0.05","rtt_pval_mpmm_0.05")
   return(ss_somelist)}
 
 
