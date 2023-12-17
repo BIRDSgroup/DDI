@@ -4,9 +4,6 @@
 ################## proper set of codes for Main & Interaction effects (Refer to readme file for more clear instructions/explanation)
 
 ####################################      Functions      #########################################################################
-
-
-
 ##################        To do the pre-process and obtain two datasets      ############################################
 
 BT_data_preprocess <- function(dm_m_con,dm_m_pre, dm_p_con, dm_p_pre){
