@@ -11,7 +11,7 @@ wd_5_6 <- c("D:/work/DM_Hel/Manuscript/new_interpret")
 2. After making this adjustment, save the script and execute it.
 
 # Output from "Interpretation_Script.R"
-Running this script will generate two Figures, 5 and 6 from the main paper in the folder **Figure_5_and_6**. 
+Running this script will generate Figures 5 and 6 from the main paper in the folder **Figure_5_and_6**. 
 
 
 
