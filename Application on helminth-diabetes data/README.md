@@ -11,7 +11,7 @@ The codes were developed/run on R Studio -  R version 4.2.1 (2022-06-23 ucrt).
 There are a total of 6 main figures, 7 supplementary figures, and 4 supplementary tables. 
 This file will provide the necessary instructions to generate the figures, supplementary figures, and sheets given in the main text.
 
-## Section 1 - Main Figures 
+## Section 2.1: Main Figures 
 ### Figure 1 - Methods Overview 
 
 ### Figure 2 - Data Overview
@@ -43,7 +43,7 @@ Run the ["Interpretation_Script.R"](Scripts/Interpretation/Interpretation_Script
 Run the ["Interpretation_Script.R"](Scripts/Interpretation/Interpretation_Script.R) under the **Script** section. **Figure_6.jpg** is generated in the folder **Figure_5_and_6** after running the script. Please take a look at the [README](Scripts/Interpretation/README.md) file for reference.
 
 
-## Section 2 - Supplementary Figures
+## Section 2.2: Supplementary Figures
 
 ### Supplementary Figure 1 - Overview of adjusted data
 Run the ["Heatmaps_Script.R"](Scripts/Heatmaps/Heatmaps_Script.R) under the **Scripts** section. Refer to the [README](Scripts/Heatmaps/README.md) file on how to run this script. This will generate **Suppl_Fig_2.png** in the folder set as the working directory. 
@@ -67,7 +67,7 @@ Run the code in **Section 4** in the **Replication analysis** file to obtain sup
 
  
 
-## Section 3 - Supplementary tables
+## Section 2.3: Supplementary tables
 
 ### Supplementary Table 2 (Before-Treatment analysis data) and Supplementary Table 3 (After-Treatment analysis data)
 
