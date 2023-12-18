@@ -20,7 +20,7 @@ DDI-pipeline is distributed in the hope that it will be useful, but WITHOUT ANY 
 ## Section 1: Our DDI pipeline 
 This section will provide information on how to run steps 2a and 2b in the Figure below. Steps 1 and 3 will vary between the datasets used (hence it is not provided here) and a detailed methodology on the same is given in our paper.
 
-![part_A](Application%20on%20helminth-diabetes%20data/part_A.pdf)
+![part_A](Application%20on%20helminth-diabetes%20data/part_A.png)
 
 
 The [DDI Pipeline](DDI%20Pipeline%20) folder has scripts, read me file to navigate through this section.
