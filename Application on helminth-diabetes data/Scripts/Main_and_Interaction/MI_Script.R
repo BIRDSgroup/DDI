@@ -494,7 +494,7 @@ interp_s3(int_data_3,t ="After-treatment",x_at_supp)
 
 ################################################ Supplementary Figure 5
 
-
+dir.create(paste0(wd_m,"/Supp_Figure_5"))
 
 sup_5_fig <- function(id1, id2,bt_op, at_op){
   cmn_bt_at_main_var <- intersect(bt_op[[3]],at_op[[3]])
@@ -526,7 +526,12 @@ sup_5_fig <- function(id1, id2,bt_op, at_op){
   some_bt_at_df_[,3] <- vari_R
   
   
-  #ggplot2::ggplot(data=some_bt_at_df, ggplot2::aes(x=some_bt,y=some_at))+ggrepel::geom_text_repel(label=vari_R, size=3)+ggplot2::theme(legend.text = element_text(size = 3))+xlab("Before Treatment Residuals")+ylab("After Treatment Residuals")+ggplot2::ylim(0,100)+ggplot2::xlim(0,100)
+  setwd(paste0(wd_m,"/Supp_Figure_5"))
+  
+  s5p <- ggplot2::ggplot(data=some_bt_at_df_, ggplot2::aes(x=some_bt,y=some_at))+ggrepel::geom_text_repel(label=vari_R, size=3)+ggplot2::theme(legend.text = ggplot2::element_text(size = 3))+ggplot2::xlab("Before Treatment Residuals")+ggplot2::ylab("After Treatment Residuals")+ggplot2::ylim(0,100)+ggplot2::xlim(0,100)
+  jpeg("S5.jpg")
+  plot(s5p)
+  dev.off()
   
   
 return(some_bt_at_df_toreturn)}
