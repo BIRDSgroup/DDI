@@ -26,7 +26,7 @@ This section will provide information on how to run steps 2a and 2b in the Figur
 The [DDI Pipeline](DDI%20Pipeline%20) folder has scripts, read me file to navigate through this section.
 
 ## Section 2: Application of DDI pipeline on the helminth-diabetes dataset 
-![Screenshot (137)](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/assets/60778368/e30e8ae9-257b-4b11-afce-8da9c6111684)
+![part_B](Application%20on%20helminth-diabetes%20data/part_B.png)
 
 The  [Application on the helminth-diabetes dataset](Application%20on%20helminth-diabetes%20data) provides details on how to run the code to reproduce  the Main Figures, Supplementary Figures, and Supplementary Tables from our paper.
 
