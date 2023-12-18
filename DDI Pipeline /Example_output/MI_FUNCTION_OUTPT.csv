@@ -1,0 +1,5 @@
+Variables,Main effect p-values,Main effect adjusted p-values,Interaction effect p-values,Interaction effect p-values,Main effect model - bo (Intercept term coefficient),Main effect model - b1 (Disease 1 term coefficient),Main effect model - b2 (Disease 2 term coefficient),Interaction effect model - co (Intercept term coefficient),Interaction effect model - c1 (Disease 1 term coefficient),Interaction effect model - c2 (Disease 2 term coefficient),Interaction effect model - c3 (Disease 1:Disease 2 interaction term)
+A,7.68E-08,7.68E-08,3.84E-24,1.53E-23,299.5869982,-1.330797473,141.0279074,211.5299896,-1.774253023,353.9398662,-195.1660416
+B,1.45E-15,2.90E-15,1.87E-16,3.74E-16,194.6599256,-1.340361861,318.8648974,82.8279399,-1.903548319,589.2620812,-219.5020117
+C,2.64E-14,3.52E-14,2.11E-14,2.81E-14,78.31435834,1.651613835,89.57690081,9.842965307,1.306791546,255.1330404,16.87096034
+E,1.91E-73,7.64E-73,0.759999876,0.759999876,7.984926822,-0.018891729,-0.065167568,7.957470344,-0.01903,0.001219113,-6.552379402
