@@ -2,7 +2,7 @@
 library(ComplexHeatmap)
 library(RColorBrewer)
 
-figure_6_func <- function(csv_dt){
+figure_6_func <- function(csv_dt, wd){
   x_ <- csv_dt
   x_ <- as.data.frame(x_)
   x_df <- p.adjust(as.matrix(x_), method = "BH")
@@ -50,7 +50,7 @@ figure_6_func <- function(csv_dt){
                      cluster_rows = TRUE, cluster_columns = TRUE,  row_names_side = "left", right_annotation = ha, col = coul, column_names_rot = 47)
   
   #dir.create(wd,"Figure_6")
-  #setwd(paste0(wd,"Figure_6"))
+  setwd( paste0(wd,"/Figure_5_and_6"))
   jpeg("Figure_6.jpg",width = 1000, height = 700)
   plot(req_img)
   dev.off()
@@ -101,8 +101,8 @@ figure_5_func <- function(lm_mat,wd){
   
   ri <- Heatmap(some_m,column_names_max_height = unit(12, "cm"),row_names_max_width = unit(7,"cm"),name = "Gene Expression", column_title = "Average gene expression of some of the DDI markers in immune cells", col = coul_)
   
-  dir.create(paste0(wd,"Figure_5_and_6"))
-  setwd( paste0(wd,"Figure_5_and_6"))
+  dir.create(paste0(wd,"/Figure_5_and_6"))
+  setwd( paste0(wd,"/Figure_5_and_6"))
   jpeg("Figure_5.jpg")
   plot(ri)
   dev.off()
@@ -112,14 +112,14 @@ figure_5_func <- function(lm_mat,wd){
 library(ADAPTS)
 lm22 <- ADAPTS::LM22
 
-wd_5 <- c("D:/work/DM_Hel/Manuscript/new_interpret/")
+wd_5_6 <- c("D:/work/DM_Hel/Manuscript/new_interpret")
 
 
-req_img_2 <- figure_5_func(lm22,wd_5)
+req_img_2 <- figure_5_func(lm22,wd_5_6)
 
-setwd("D:/work/DM_Hel/Manuscript/new_interpret")
+setwd(wd_5_6)
 csv_d <- read.csv("S1_File.csv", header = TRUE)
-req_img_1 <- figure_6_func(csv_d)
+req_img_1 <- figure_6_func(csv_d, wd_5_6)
 
 
 
