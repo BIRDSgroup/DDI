@@ -4,7 +4,7 @@
 This folder contains  R codes to run the various analyses that are mentioned in our paper.
 
 ### R Studio
-The codes were developed/run on R Studio -  R version 4.2.1 (2022-06-23 ucrt). Please refer to session_info.txt for details on various packages and their versions used to run the 
+The codes were developed/run on R Studio -  R version 4.2.1 (2022-06-23 ucrt). Please refer to session_info.txt for details on various packages and their versions used to run the analyses in the study.
 
 ## Section 2: Main Figures, Supplementary Figures and Supplementary Tables
 ### Instructions to get the Main Figures, Supplementary Figures, and Supplementary Tables
