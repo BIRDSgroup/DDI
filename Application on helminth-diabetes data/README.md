@@ -34,14 +34,9 @@ Three figures in **Figure 4** (Check **Main_Figures** folder generated after run
 2. IFN-gamma.jpg
 3. TNF-alpha.jpg
    
-### Figure 5: Source immune cells of some of the DDI markers
+### Figures 5 and 6: Source immune cells of some of the DDI markers and Reactome pathway heatmap 
 
-Run the ["Interpretation_Script.R"](Scripts/Interpretation/Interpretation_Script.R) under the **Script** section. **Figure_5.jpg** is generated in the folder **Figure_5_and_6** after running the script. Please take a look at the [README](Scripts/Interpretation/README.md) file for reference.
-
-### Figure 6: Reactome pathway heatmap 
-
-Run the ["Interpretation_Script.R"](Scripts/Interpretation/Interpretation_Script.R) under the **Script** section. **Figure_6.jpg** is generated in the folder **Figure_5_and_6** after running the script. Please take a look at the [README](Scripts/Interpretation/README.md) file for reference.
-
+Run the ["Interpretation_Script.R"](Scripts/Interpretation/Interpretation_Script.R) under the **Script** section. **Figure_5.jpg** and **Figure_6.jpg** is generated in the folder **Figure_5_and_6** after running the script. Please take a look at the [README](Scripts/Interpretation/README.md) file for reference.
 
 ## Section 2.2: Supplementary Figures
 
