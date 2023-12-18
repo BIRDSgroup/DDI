@@ -28,7 +28,9 @@ This function performs main and interaction effects on data with four different 
 ## Value
 
 **MI_FUNCTION** returns a list of lists and generates output file **MI_FUNCTION_OUTPT** in the working directory provided. 
+
 1. Contents of the returned list:
+   
 |Output|Description|
 |---|---|
 |output$features_m_df|A data frame containing the list of features, its p-value, and adjusted p-value. When a cut-off (cut_off argument) is applied on the adjusted p-value, **main effect** features can be filtered out|
@@ -37,7 +39,9 @@ This function performs main and interaction effects on data with four different 
 |output$Interaction_effect_variables|The list of **interaction effect features** obtained from the analysis|
 
 2. Output files generated in the working directory:
+
 |Output|Description|
+|---|---|
 |MI_FUNCTION_OUTPT|CSV file containing 12 columns: Variables, Main effect p-values, Main effect adjusted p-values, Interaction effect p-values, Interaction effect adjusted p-values, coefficients from the main effect model
 (Intercept term (b0), Disease 1 term coefficient (b1), and Disease 2 term coefficient (b2)), and coefficients from the interaction effect model (Intercept term (c0), Disease 1 term coefficient (c1), Disease 2 term coefficient (c2),
 and Disease 1:Disease 2 interaction term(c3)) |
