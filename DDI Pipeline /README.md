@@ -21,7 +21,7 @@ Running the DDI pipeline on the sample cohorts would output:
 
 1. "A", "B", "C", and "E" as main effect variables. 
 2. "A", "B", and "C" ad interaction effect variables.
-3. **MI_FUNCTION_OUTPUT.csv** generated for this example is provided.
+3. **MI_FUNCTION_OUTPUT.csv** generated for this example is provided in [Example_output](Example_output).
 
 
 
