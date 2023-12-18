@@ -4,7 +4,7 @@
 This file will provide a walk-through of our DDI pipeline using sample datasets.
 
 ### Sample datasets
-1. There are four CSV files provided corresponding to the Control case, Disease 1 (say disease "x") only, Disease 2 (say disease "y") only, and both Disease 1 and 2 occurring together.
+1. There are four CSV files provided in the [Example_samples](Example_samples) corresponding to the Control case, Disease 1 (say disease "x") only, Disease 2 (say disease "y") only, and both Disease 1 and 2 occurring together.
 2. Each of the sample cohorts is of dimensions 50 (samples) X 7 (variables; "A", "B", "C", "D", "E", "S_x" and "S_y").   
 3. "A", "B", "C", "D", and "E" are continuous variables, and "D" is a covariate.
 4.  "S_x" and "S_y" denote the status of each disease (x and y) in the sample cohorts. They are discrete variables that take 1 or 0 indicating the presence or absence of the disease.
