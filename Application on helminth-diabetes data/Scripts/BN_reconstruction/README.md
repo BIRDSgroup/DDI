@@ -10,7 +10,7 @@ wd_hp <- c("D:/work/DM_Hel/Heatmap/data/checking/")
 2. After making this adjustment, save the script and execute it.
 
 # Output from "BN_reconstruction_Script.R"
-Running this script will generate two CSV files, "**BT_BN_reconstruction_arcs.csv**" and "**AT_BN_reconstruction_arcs.csv**"  the folder **Supplementary_Figures_2a_and_2b** created in the working directory mentioned above. 
+Running this script will generate two CSV files, "**BT_BN_reconstruction_arcs.csv**" and "**AT_BN_reconstruction_arcs.csv**" in the folder **Supplementary_Figures_2a_and_2b** created in the working directory mentioned above. 
 
 # Supplemntary Figure 2a and 2b
 Load the two CSV files separately into the **Cytoscape** app (version: 3.9.1) to visualize the reconstructions of the Bayesian networks.
