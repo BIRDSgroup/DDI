@@ -2,8 +2,8 @@
 library(ComplexHeatmap)
 library(RColorBrewer)
 
-figure_6_func <- function(wk_dir_path,wd){
-  x_ <- readxl::read_xlsx(wk_dir_path)
+figure_6_func <- function(csv_dt){
+  x_ <- csv_dt
   x_ <- as.data.frame(x_)
   x_df <- p.adjust(as.matrix(x_), method = "BH")
   
@@ -117,8 +117,9 @@ wd_5 <- c("D:/work/DM_Hel/Manuscript/new_interpret/")
 
 req_img_2 <- figure_5_func(lm22,wd_5)
 
-path_to_file <- c("D:/work/DM_Hel/Manuscript/new_interpret/all_pval_reactome.xlsx")
-req_img_1 <- figure_6_func(path_to_file)
+setwd("D:/work/DM_Hel/Manuscript/new_interpret")
+csv_d <- read.csv("S1_File.csv", header = TRUE)
+req_img_1 <- figure_6_func(csv_d)
 
 
 
