@@ -6,7 +6,7 @@ This file will provide the necessary instructions to generate the figures, suppl
 ### Figure 1 - Methods Overview 
 
 ### Figure 2 - Data Overview
-Run the ["Heatmaps_Script.R"](Heatmaps_Script.R) under the **Scripts** section. Refer to the [README](Application%20on%20helminth-diabetes%20data/Scripts/Heatmaps/Heatmaps_Script_Readme.md) file on how to run this script. This will generate **heatmap_fig2a.png** in the folder set as the working directory. 
+Run the ["Heatmaps_Script.R"](Scripts/Heatmaps_Script.R) under the **Scripts** section. Refer to the [README](Application%20on%20helminth-diabetes%20data/Scripts/Heatmaps/Heatmaps_Script_Readme.md) file on how to run this script. This will generate **heatmap_fig2a.png** in the folder set as the working directory. 
 
 ### Figure 3 - Ternary plot
 Two figures in the ternary plot:
