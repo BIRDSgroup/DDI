@@ -11,7 +11,7 @@ wd_m <- c("D:/work/DM_Hel/reproduce/data/")
 2. After making this adjustment, save the script and execute it.
 
 # Output from "MI_Script.R"
-Running this script will generate two folders **before_treatment** and **after_treatment** folders in the working directory that you have specified in the above section.
+Running this script will generate two folders **before_treatment** and **after_treatment** in the working directory that you have specified in the above section.
 Here is the list of output files generated in both the folders:
 |Output|Description|
 |---|---|
