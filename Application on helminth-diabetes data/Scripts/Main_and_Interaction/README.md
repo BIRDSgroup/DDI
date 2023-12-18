@@ -1,4 +1,4 @@
-# Instructions to run "MI_script.R" file
+# Instructions to run "MI_Script.R" file
 ## Preface
 This R file contains the code to reproduce the results from the Main and Interaction analysis.
 The details of the outputs generated from this script are given below.
@@ -10,7 +10,7 @@ wd_m <- c("D:/work/DM_Hel/reproduce/data/")
 ```
 2. After making this adjustment, save the script and execute it.
 
-# Output from "MI_script.R"
+# Output from "MI_Script.R"
 Running this script will generate two folders **before_treatment** and **after_treatment** folders in the working directory that you have specified in the above section.
 Here is the list of output files generated in both the folders:
 |Output|Description|
