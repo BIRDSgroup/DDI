@@ -23,11 +23,11 @@ Two figures in the ternary plot:
 1. Before treatment 
 2. After treatment 
 
-Run the ["MI_Script.R"](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/blob/bc6704ea3221b41adb6e40a91735d8751d800b07/Application%20on%20helminth-diabetes%20data/Scripts/Main_and_Interaction/MI_Script.R) under the [**Scripts**](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/tree/987bcd0ff4ecaae35eec570c552b21f13ad0b0b3/Application%20on%20helminth-diabetes%20data/Scripts) section. This will generate both before and after-treatment ternary plots, which are for **Figure 3**. Refer to the [Readme](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/blob/6772a411d79ad1e053ac20b7e2bb3286f29f3493/Application%20on%20helminth-diabetes%20data/Scripts/Main_and_Interaction/MI_Script_Readme.md) file on how to run this script.
+Run the ["MI_Script.R"](Scripts/Main_and_Interaction/MI_Script.R) under the **Scripts** section. This will generate both before and after-treatment ternary plots, which are for **Figure 3**. Refer to the [README](Scripts/Main_and_Interaction/README.md) file on how to run this script.
 
 ### Figure 4 - Replication analysis
 
-Run the ["Validation_Script.R"](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/blob/ee65c741df4c442d3dd4999b45d1d904c8fde3b6/Application%20on%20helminth-diabetes%20data/Scripts/Validation/Validation_Script.R) under the [**Script**](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/tree/987bcd0ff4ecaae35eec570c552b21f13ad0b0b3/Application%20on%20helminth-diabetes%20data/Scripts) section. This will generate the plots for **Figure 4**. Please take a look at the [Readme](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/blob/321c1f03f647dfc5596a123997a580f5c261f8d2/Application%20on%20helminth-diabetes%20data/Scripts/Validation/Validation_Script_Readme.md) file for reference.
+Run the ["Validation_Script.R"](Scripts/Validation/Validation_Script.R) under the **Script** section. This will generate the plots for **Figure 4**. Please take a look at the [README](Scripts/Validation/README.md) file for reference.
 Three figures in **Figure 4** (Check **Main_Figures** folder generated after running this script):
 
 1. Replication.jpg
@@ -36,11 +36,11 @@ Three figures in **Figure 4** (Check **Main_Figures** folder generated after run
    
 ### Figure 5 - Source immune cells of some of the DDI markers
 
-Run the ["Interpretation_Script.R"](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/blob/a4c626f93a107d3b809e3a307fc26208423cff7f/Application%20on%20helminth-diabetes%20data/Scripts/Interpretation/Interpretation_Script.R) under the [**Script**](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/tree/987bcd0ff4ecaae35eec570c552b21f13ad0b0b3/Application%20on%20helminth-diabetes%20data/Scripts) section. **Figure_5.jpg** is generated in the folder **Figure_5_and_6** after running the script. Please take a look at the [Readme](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/blob/990e3bbe91ee5311c880e2a50eebe2116d8ae170/Application%20on%20helminth-diabetes%20data/Scripts/Interpretation/Interpretation_Script_Readme.md) file for reference.
+Run the ["Interpretation_Script.R"](Scripts/Interpretation/Interpretation_Script.R) under the **Script** section. **Figure_5.jpg** is generated in the folder **Figure_5_and_6** after running the script. Please take a look at the [README](Scripts/Interpretation/README.md) file for reference.
 
 ### Figure 6 - Reactome pathway heatmap 
 
-Run the ["Interpretation_Script.R"](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/blob/a4c626f93a107d3b809e3a307fc26208423cff7f/Application%20on%20helminth-diabetes%20data/Scripts/Interpretation/Interpretation_Script.R) under the [**Script**](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/tree/987bcd0ff4ecaae35eec570c552b21f13ad0b0b3/Application%20on%20helminth-diabetes%20data/Scripts) section. **Figure_6.jpg** is generated in the folder **Figure_5_and_6** after running the script. Please take a look at the [Readme](https://github.com/BIRDSgroup/Double-disease-interaction-analysis-/blob/990e3bbe91ee5311c880e2a50eebe2116d8ae170/Application%20on%20helminth-diabetes%20data/Scripts/Interpretation/Interpretation_Script_Readme.md) file for reference.
+Run the ["Interpretation_Script.R"](Scripts/Interpretation/Interpretation_Script.R) under the **Script** section. **Figure_6.jpg** is generated in the folder **Figure_5_and_6** after running the script. Please take a look at the [README](Scripts/Interpretation/README.md) file for reference.
 
 
 ## Section 2 - Supplementary Figures
