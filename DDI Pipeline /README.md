@@ -17,7 +17,7 @@ MI_samples <- MI_function(Control_data = Sample_Control, Disease_1_data = Sample
 
 ```
 ### Outputs
-Running the DDi pipeline on the sample cohorts would output:
+Running the DDI pipeline on the sample cohorts would output:
 
 1. "A", "B", "C", and "E" as main effect variables. 
 2. "A", "B", and "C" ad interaction effect variables.
