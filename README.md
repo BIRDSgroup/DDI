@@ -11,7 +11,6 @@ This repository contains two sections:
 1. DDI pipeline
 2. Application of DDI pipeline on the helminth-diabetes dataset 
 ## License Preamble
-(TODO: Change to 2023 everywhere)
 Copyright 2023 BIRDS Group, IIT Madras
 
 DDI-pipeline is a free pipeline: you can redistribute it and modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
