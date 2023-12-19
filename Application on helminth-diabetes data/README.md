@@ -28,11 +28,12 @@ Run the ["MI_Script.R"](Scripts/Main_and_Interaction/MI_Script.R) under the **Sc
 ### Figure 4: Replication analysis
 
 Run the ["Validation_Script.R"](Scripts/Validation/Validation_Script.R) under the **Script** section. This will generate the plots for **Figure 4**. Please take a look at the [README](Scripts/Validation/README.md) file for reference.
-Three figures in **Figure 4** (Check **Main_Figures** folder generated after running this script):
+Four figures in **Figure 4** (Check **Main_Figures** folder generated after running this script):
 
-1. Replication.jpg
-2. IFN-gamma.jpg
-3. TNF-alpha.jpg
+1. IFN-gamma.jpg
+2. TNF-alpha.jpg
+3. IL-2.jpg
+4. Replication.jpg
    
 ### Figures 5 and 6: Source immune cells of some of the DDI markers and Reactome pathway heatmap 
 
