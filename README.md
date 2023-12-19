@@ -8,7 +8,7 @@ Kumar, Subash Babu, and Manikandan Narayanan.
 This repository contains two sections:
 
 
-1. Our DDI pipeline
+1. DDI pipeline
 2. Application of DDI pipeline on the helminth-diabetes dataset 
 ## License Preamble
 (TODO: Change to 2023 everywhere)
