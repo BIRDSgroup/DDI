@@ -46,7 +46,7 @@ Run the ["BN_reconstruction_Script.R"](Scripts/BN_reconstruction/BN_reconstructi
 Run the ["MI_Script.R"](Scripts/Main_and_Interaction/MI_Script.R) under the **Scripts** section. This will generate two folders **Supp_Figure_3** and **Supp_Figure_4** which contain **.jpg** figures of the interaction plots used to obtain **Supplementary Figure 4** and **Supplementary Figure 5** from the manuscript respectively. Refer to the [README](Scripts/Main_and_Interaction/README.md) file on how to run this script.
 
 ### Supplementary Figure 6: Unexplained variance plot
-Run the ["MI_Script.R"](Scripts/Main_and_Interaction/MI_Script.R) under the **Scripts** section. This will generate two folders **Supp_Figure_3** and **Supp_Figure_4** which contain **.jpg** figures of the interaction plots used to obtain **Supplementary Figure 3** and **Supplementary Figure 4** from the manuscript respectively. Refer to the [README](Scripts/Main_and_Interaction/README.md) file on how to run this script.
+Run the ["MI_Script.R"](Scripts/Main_and_Interaction/MI_Script.R) under the **Scripts** section. This will generate the required supplementary figure. Refer to the [README](Scripts/Main_and_Interaction/README.md) file on how to run this script.
 
 
 ### Supplementary Figures 7 and 8: Additional replication results/Boxplots from replication analysis
