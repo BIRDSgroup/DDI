@@ -36,36 +36,36 @@ Run the ["Interpretation_Script.R"](Scripts/Interpretation/Interpretation_Script
 ## Section 2.2: Supplementary Figures
 
 ### Supplementary Figure 1: Overview of adjusted data
-Run the ["Heatmaps_Script.R"](Scripts/Heatmaps/Heatmaps_Script.R) under the **Scripts** section. Refer to the [README](Scripts/Heatmaps/README.md) file on how to run this script. This will generate **Suppl_Fig_2.png** in the folder set as the working directory. 
+Run the ["Heatmaps_Script.R"](Scripts/Heatmaps/Heatmaps_Script.R) under the **Scripts** section. Refer to the [README](Scripts/Heatmaps/README.md) file on how to run this script. This will generate **Suppl_Fig_1.png** in the folder set as the working directory. 
 
-### Supplementary Figure 2a and 2b: Bayesian network reconstruction
+### Supplementary Figure 2 and 3: Bayesian network reconstruction
 
 Run the ["BN_reconstruction_Script.R"](Scripts/BN_reconstruction/BN_reconstruction_Script.R) under the **Scripts** section. The [README](Scripts/BN_reconstruction/README.md) file provides instructions to run the script and visualize the Bayesian network reconstructions corresponding to supplementary figures 2a and 2b.
 
-### Supplementary Figures 3 and 4: Interaction plots
+### Supplementary Figures 4 and 5: Interaction plots
+Run the ["MI_Script.R"](Scripts/Main_and_Interaction/MI_Script.R) under the **Scripts** section. This will generate two folders **Supp_Figure_3** and **Supp_Figure_4** which contain **.jpg** figures of the interaction plots used to obtain **Supplementary Figure 4** and **Supplementary Figure 5** from the manuscript respectively. Refer to the [README](Scripts/Main_and_Interaction/README.md) file on how to run this script.
+
+### Supplementary Figure 6: Unexplained variance plot
 Run the ["MI_Script.R"](Scripts/Main_and_Interaction/MI_Script.R) under the **Scripts** section. This will generate two folders **Supp_Figure_3** and **Supp_Figure_4** which contain **.jpg** figures of the interaction plots used to obtain **Supplementary Figure 3** and **Supplementary Figure 4** from the manuscript respectively. Refer to the [README](Scripts/Main_and_Interaction/README.md) file on how to run this script.
 
-### Supplementary Figure 5: Unexplained variance plot
-Run the ["MI_Script.R"](Scripts/Main_and_Interaction/MI_Script.R) under the **Scripts** section. This will generate two folders **Supp_Figure_3** and **Supp_Figure_4** which contain **.jpg** figures of the interaction plots used to obtain **Supplementary Figure 3** and **Supplementary Figure 4** from the manuscript respectively. Refer to the [README](Scripts/Main_and_Interaction/README.md) file on how to run this script.
 
+### Supplementary Figures 7 and 8: Additional replication results/Boxplots from replication analysis
 
-### Supplementary Figures 6 and 7: Additional replication results/Boxplots from replication analysis
-
-Run the ["Validation_Script.R"](Scripts/Validation/Validation_Script.R) under the **Script** section. This will generate the plots for **Supplementary Figure 6** and **Supplementary Figure 7** in the folder **Supplementary Figures**. Please take a look at the [README](Scripts/Validation/README.md) file for instructions to run the script.
+Run the ["Validation_Script.R"](Scripts/Validation/Validation_Script.R) under the **Script** section. This will generate the plots for **Supplementary Figure 7** and **Supplementary Figure 8** in the folder **Supplementary Figures**. Please take a look at the [README](Scripts/Validation/README.md) file for instructions to run the script.
  
 
-## Section 2.3: Supplementary tables
+## Section 2.3: Supplementary Files/Data
 
-### Supplementary Table 2 (Before-Treatment analysis data) and Supplementary Table 3 (After-Treatment analysis data)
+### Supplementary File D2 (Before-Treatment analysis data) and Supplementary File D3 (After-Treatment analysis data)
 
 There are 16 columns in these tables. They are **Variables**, **Main effect p-values**, **Main effect adjusted p-values**, **Interaction effect p-values**, **Interaction effect adjusted p-values**, **Main effect model - b0 (Intercept coefficient)**, **Main effect model - b1 (Helminth term coefficient)**, **Main effect model - b2 (Diabetes term coefficient)**, **Relative explained variance (Helminth term)**, **Relative explained variance (Diabetes term)**, **Relative explained variance (Helminth:Diabetes interaction term)**, **Unexplained variance by the three terms**, **Interaction effect model - c0 (Intercept coefficient)**, **Interaction effect model - c1 (Helminth term coefficient)**, **Interaction effect model - c2 (Diabetes term coefficient)**, and **Interaction effect model - c3 (Helminth:Diabetes interaction term coefficient)**.
 
-#### Supplementary Table 2 
+#### Supplementary File D2
 Run the ["MI_Script.R"](Scripts/Main_and_Interaction/MI_Script.R) under the **Scripts** section. This will generate **Suppl_Tbl_2.csv** which is Supplementary Table 2 from our paper. Refer to the [README](Scripts/Main_and_Interaction/README.md) file on how to run this script.
-#### Supplementary Table 3
+#### Supplementary File D3
 Run the ["MI_Script.R"](Scripts/Main_and_Interaction/MI_Script.R) under the **Scripts** section. This will generate **Suppl_Tbl_3.csv** which is Supplementary Table 3 from our paper. Refer to the [README](Scripts/Main_and_Interaction/README.md) file on how to run this script.
 
-### Supplementary Table 4 
+### Supplementary File D4
 Run the ["Validation_Script.R"](Scripts/Validation/Validation_Script.R) under the **Script** section. This will generate the CSV file for **Supplementary Table 4**. Please take a look at the [README](Scripts/Validation/README.md) file for reference.
 
 
