@@ -16,7 +16,7 @@ wd_dir_disco <- c("D:/work/DM_Hel/reproduce/data/")
 
 # Output from "Validation_script.R"
 1) Running this script will generate a few results (R objects) in the same folder where the validation data is stored (the working directory mentioned above). Load these R objects in your local R studio to view the outputs.
-2) Two folders - **Main_figures** and **Supplementary_Figures** will be generated in the working directory where the validation data is stored. The **Main_Figures** folder will contain four JPG images that are part of the **Figure 4** in the manuscript. The **Supplementary_Figures** folder will contain eight JPG images that form **Supplementary Figure 6** and **Supplementary Figure 7** in the manuscript.
+2) Two folders - **Main_figures** and **Supplementary_Figures** will be generated in the working directory where the validation data is stored. The **Main_Figures** folder will contain four JPG images that are part of the **Figure 4** in the manuscript. The **Supplementary_Figures** folder will contain eight JPG images that form **Supplementary Figure 7** and **Supplementary Figure 8** in the manuscript.
 
 Here is the list of output files generated in the folder:
 1) **Validation_results.RDS**<br>
