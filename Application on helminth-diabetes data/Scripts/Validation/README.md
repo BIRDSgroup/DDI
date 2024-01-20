@@ -37,15 +37,15 @@ This file contains 14 outputs (8 figures and 6 are Yuen's robust t-test p-values
 
 |Output|Description|
 |---|---|
-|IL4_image| Supplementary figure 6|
-|IL5_image| Supplementary figure 6|
-|IL10_image| Supplementary figure 6|
-|IL17a_image| Supplementary figure 6|
-|Visfatin_image| Supplementary figure 6|
-|Replication_image_cutoff0.01| Supplementary figure 7|
-|Replication_image_cutoff0.05| Supplementary figure 7|
+|IL4_image| Supplementary figure 7|
+|IL5_image| Supplementary figure 7|
+|IL10_image| Supplementary figure 7|
+|IL17a_image| Supplementary figure 7|
+|Visfatin_image| Supplementary figure 7|
+|Replication_image_cutoff0.01| Supplementary figure 8|
+|Replication_image_cutoff0.05| Supplementary figure 8|
 
-3) Supplementary Table 4 - CSV file
+3) Supplementary File D4 - CSV file
 
 
 
