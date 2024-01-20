@@ -1,6 +1,6 @@
 # Instructions to run "BN_reconstruction_Script.R" file
 ## Preface
-This R file contains the code to reproduce the Bayesian network reconstruction done for before- and after-treatment cohorts (Supplementary Figures 2a and 2b).
+This R file contains the code to reproduce the Bayesian network reconstruction done for before- and after-treatment cohorts (Supplementary Figures 2 and 3).
 The details of the output generated from this script are given below.
 ## Instruction
 1. Modify the code at line 1 (shown below) to the folder containing the main and interaction effect analysis data.
