@@ -40,10 +40,10 @@ Run the ["Heatmaps_Script.R"](Scripts/Heatmaps/Heatmaps_Script.R) under the **Sc
 
 ### Supplementary Figure 2 and 3: Bayesian network reconstruction
 
-Run the ["BN_reconstruction_Script.R"](Scripts/BN_reconstruction/BN_reconstruction_Script.R) under the **Scripts** section. The [README](Scripts/BN_reconstruction/README.md) file provides instructions to run the script and visualize the Bayesian network reconstructions corresponding to supplementary figures 2a and 2b.
+Run the ["BN_reconstruction_Script.R"](Scripts/BN_reconstruction/BN_reconstruction_Script.R) under the **Scripts** section. The [README](Scripts/BN_reconstruction/README.md) file provides instructions to run the script and visualize the Bayesian network reconstructions corresponding to supplementary figures 2 and 3.
 
 ### Supplementary Figures 4 and 5: Interaction plots
-Run the ["MI_Script.R"](Scripts/Main_and_Interaction/MI_Script.R) under the **Scripts** section. This will generate two folders **Supp_Figure_3** and **Supp_Figure_4** which contain **.jpg** figures of the interaction plots used to obtain **Supplementary Figure 4** and **Supplementary Figure 5** from the manuscript respectively. Refer to the [README](Scripts/Main_and_Interaction/README.md) file on how to run this script.
+Run the ["MI_Script.R"](Scripts/Main_and_Interaction/MI_Script.R) under the **Scripts** section. This will generate two folders which contain **.jpg** figures of the interaction plots used to obtain **Supplementary Figure 4** and **Supplementary Figure 5** from the manuscript respectively. Refer to the [README](Scripts/Main_and_Interaction/README.md) file on how to run this script.
 
 ### Supplementary Figure 6: Unexplained variance plot
 Run the ["MI_Script.R"](Scripts/Main_and_Interaction/MI_Script.R) under the **Scripts** section. This will generate the required supplementary figure. Refer to the [README](Scripts/Main_and_Interaction/README.md) file on how to run this script.
